@@ -150,7 +150,7 @@
         active ? `Sort by ${labels[key]}, ${direction}` : `Sort by ${labels[key]}`
       );
       const arrow = button.querySelector(".sort-arrow");
-      if (arrow) arrow.textContent = active ? (state.sortDir === "asc" ? "↑" : "↓") : "↕";
+      if (arrow) arrow.textContent = active ? (state.sortDir === "asc" ? "↑" : "↓") : "";
     });
   }
 

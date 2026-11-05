@@ -346,6 +346,8 @@ test("the page has a trailing-window control and no sort, trend, search, or deta
   assert.equal(indexHtml.includes('id="sort"'), false);
   assert.match(indexHtml, /data-sort="share"/);
   assert.match(indexHtml, /data-sort="winRate"/);
+  assert.equal(indexHtml.includes("↕"), false);
+  assert.equal(appJs.includes("↕"), false);
   assert.match(indexHtml, /id="metagame-heading">Metagame Breakdown/);
   assert.ok(
     indexHtml.indexOf('id="window-note"') < indexHtml.indexOf('class="window-wrap"')

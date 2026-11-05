@@ -264,10 +264,12 @@ body {
   padding: 0;
 }
 
+.sort-header .sort-arrow:empty {
+  display: none;
+}
+
 .sort-header .sort-arrow {
   font-size: 0.75rem;
-  opacity: 0.4;
-  min-width: 0.7rem;
 }
 
 th[aria-sort="ascending"] .sort-arrow,
