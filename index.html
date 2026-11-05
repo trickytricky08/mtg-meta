@@ -40,8 +40,16 @@
         <thead>
           <tr>
             <th scope="col">Archetype</th>
-            <th scope="col" class="num">Share</th>
-            <th scope="col" class="num">Win rate</th>
+            <th scope="col" class="num" aria-sort="descending">
+              <button type="button" class="sort-header" data-sort="share" aria-pressed="true" aria-label="Sort by share, descending">
+                Share <span class="sort-arrow" aria-hidden="true">↓</span>
+              </button>
+            </th>
+            <th scope="col" class="num" aria-sort="none">
+              <button type="button" class="sort-header" data-sort="winRate" aria-pressed="false" aria-label="Sort by win rate">
+                Win rate <span class="sort-arrow" aria-hidden="true">↕</span>
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody id="archetype-body">
@@ -56,7 +64,7 @@
         <p class="matchup-legend">
           Each cell is the <strong>row</strong> deck's win rate against the <strong>column</strong> deck.
           Diagonal cells are <strong>mirrors</strong>.
-          The grid lists the same decks as the table, ordered by meta share for the selected window.
+          Share and Win rate sort the table and this grid together. Rows and columns use that same order. Each row label includes that deck's overall win rate.
           <span class="matchup-demo">Sample window rates — not historical tournament results.</span>
         </p>
         <ul class="matchup-key" aria-label="Cell color key">

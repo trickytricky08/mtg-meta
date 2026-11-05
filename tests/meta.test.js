@@ -4,6 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const {
   buildMatchupGrid,
+  orderArchetypes,
   chooseWindow,
   visibleArchetypes,
   renderArchetypeRows,
@@ -266,6 +267,44 @@ test("win-rate bands still match the legend", () => {
   assert.equal(formatWinRate(46.5), "46.5%");
 });
 
+test("share and win rate ordering drives both the table and the square grid", () => {
+  const decks = [
+    { id: "a", name: "Alpha", share: 10, winRate: 49 },
+    { id: "b", name: "Beta", share: 20, winRate: 55 },
+    { id: "c", name: "Cedar", share: 15, winRate: 55 },
+  ];
+  assert.deepEqual(
+    orderArchetypes(decks, { key: "share", dir: "desc" }).map((deck) => deck.id),
+    ["b", "c", "a"]
+  );
+  assert.deepEqual(
+    orderArchetypes(decks, { key: "share", dir: "asc" }).map((deck) => deck.id),
+    ["a", "c", "b"]
+  );
+  assert.deepEqual(
+    orderArchetypes(decks, { key: "winRate", dir: "desc" }).map((deck) => deck.id),
+    ["b", "c", "a"]
+  );
+  assert.deepEqual(
+    orderArchetypes(decks, { key: "winRate", dir: "asc" }).map((deck) => deck.id),
+    ["a", "b", "c"]
+  );
+
+  const ordered = orderArchetypes(shown("pioneer", 30), { key: "winRate", dir: "desc" });
+  const grid = buildMatchupGrid(ordered);
+  assert.deepEqual(
+    grid.decks.map((deck) => deck.id),
+    ordered.map((deck) => deck.id)
+  );
+  assert.equal(grid.cells[0][1].colId, ordered[1].id);
+  assert.equal(grid.cells[1][0].rowId, ordered[1].id);
+  const html = renderMatchupTable(ordered);
+  assert.match(html, new RegExp(`${ordered[0].name}[\\s\\S]*${ordered[0].winRate.toFixed(1)}%`));
+  assert.match(html, /class="matchup-rowrate/);
+  const names = [...html.matchAll(/class="matchup-col"[^>]*><span>([^<]+)<\/span>/g)].map((match) => match[1]);
+  assert.deepEqual(names, ordered.map((deck) => deck.name));
+});
+
 test("the page has a trailing-window control and no sort, trend, search, or detail", () => {
   assert.match(indexHtml, /Show data for the last/);
   assert.match(indexHtml, /id="window"/);
@@ -274,10 +313,15 @@ test("the page has a trailing-window control and no sort, trend, search, or deta
   assert.match(indexHtml, /<option value="30" selected>30 days<\/option>/);
   assert.match(indexHtml, /<option value="90">90 days<\/option>/);
   assert.equal(indexHtml.includes('id="sort"'), false);
+  assert.match(indexHtml, /data-sort="share"/);
+  assert.match(indexHtml, /data-sort="winRate"/);
+  assert.equal(indexHtml.includes("<select id=\"sort\""), false);
+  assert.match(appJs, /sortKey/);
+  assert.match(appJs, /orderArchetypes/);
   assert.equal(indexHtml.includes('id="search"'), false);
   assert.equal(indexHtml.includes('id="detail"'), false);
   assert.equal(indexHtml.includes(">Trend<"), false);
-  assert.equal(appJs.includes("state.sort"), false);
+  assert.equal(appJs.includes("els.sort"), false);
   assert.equal(appJs.includes("renderDetail"), false);
   assert.equal(appJs.includes("windowDays"), true);
 });

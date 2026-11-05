@@ -237,6 +237,39 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+.sort-header {
+  appearance: none;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0;
+}
+
+.sort-header .sort-arrow {
+  font-size: 0.75rem;
+  opacity: 0.4;
+  min-width: 0.7rem;
+}
+
+th[aria-sort="ascending"] .sort-arrow,
+th[aria-sort="descending"] .sort-arrow {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.sort-header:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
 .meta-table tbody tr {
   border-bottom: 1px solid var(--border);
 }
@@ -431,7 +464,7 @@ a.arch-name:focus-visible {
   left: 0;
   z-index: 2;
   text-align: left;
-  min-width: 11.5rem;
+  min-width: 14rem;
   background: #141a2e;
   box-shadow: 1px 0 0 var(--border);
 }
@@ -485,9 +518,32 @@ a.arch-name:focus-visible {
   color: var(--text-muted);
 }
 
+.matchup-rowlabel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
 .matchup-rowname {
   font-weight: 600;
   color: var(--text);
+}
+
+.matchup-rowrate {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.matchup-rowrate.hot {
+  color: var(--success);
+}
+
+.matchup-rowrate.cold {
+  color: var(--danger);
 }
 
 .matchup-cell {
@@ -563,12 +619,27 @@ a.arch-name:focus-visible {
 /* Card-style fallback for very narrow screens */
 @media (max-width: 520px) {
   .meta-table thead {
+    display: block;
+  }
+
+  .meta-table thead tr {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.85rem;
+  }
+
+  .meta-table thead th:first-child {
     display: none;
+  }
+
+  .meta-table thead th {
+    border-bottom: 0;
+    padding-bottom: 0.35rem;
   }
 
   .meta-table,
   .meta-table tbody,
-  .meta-table tr,
+  .meta-table tbody tr,
   .meta-table td {
     display: block;
     width: 100%;
@@ -601,7 +672,7 @@ a.arch-name:focus-visible {
 
   .matchup-corner,
   .matchup-rowhead {
-    min-width: 8.75rem;
+    min-width: 11.5rem;
   }
 
   .matchup-col {

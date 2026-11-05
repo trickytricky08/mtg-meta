@@ -40,9 +40,9 @@ npm test
 
 1. **Format picker** — Standard, Modern, and Pioneer
 2. **Trailing window** — “Show data for the last” 7, 14, 30, or 90 days. The default is 30 days. Changing the window updates the archetype table and the matchup grid together. The same window is kept when you switch formats.
-3. **Meta table** — archetype name, share, and win rate, ordered by meta share (high to low). Names are plain text links. There is no search box, sort control, trend column, color pips, or deck summary.
-4. **Share cutoff** — a deck is shown only when its sample share is at least 1.2%. At most 15 decks are shown, the largest shares first. The matchup grid uses that same list.
-5. **Matchup grid** — each cell is the **row** deck's sample win rate against the **column** deck. Diagonal cells are mirrors.
+3. **Meta table** — archetype name, share, and win rate. Names are plain text links. The Share and Win rate headers sort the table. The default is share, high to low. Click the active header to flip direction, or the other header to sort by that metric (starting high to low). There is no separate sort menu, search box, trend column, color pips, or deck summary.
+4. **Share cutoff** — a deck is included only when its sample share is at least 1.2%. At most 15 decks are included, the largest shares first. Header sorting reorders that set; it does not change which decks qualify.
+5. **Matchup grid** — each cell is the **row** deck's sample win rate against the **column** deck. Diagonal cells are mirrors. Rows and columns use the same order as the table. Each row label shows the deck name and that deck's overall win rate for the selected window.
 6. **MTGGoldfish links** — each archetype name opens that deck's Goldfish archetype or decklist page in a new tab.
 
 ## Project layout
@@ -50,8 +50,8 @@ npm test
 ```
 index.html         # App shell
 css/styles.css     # Dark Magic-inspired UI
-js/app.js          # Format and trailing-window selection
-js/matchup.js      # Share cutoff, table rows, matchup grid
+js/app.js          # Format, trailing window, and shared sort
+js/matchup.js      # Share cutoff, ordering, table rows, matchup grid
 data/meta.json     # Sample windows
 tests/meta.test.js # Data integrity, cutoff, and grid tests
 README.md          # This file

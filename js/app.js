@@ -3,7 +3,8 @@
  * Loads data/meta.json and shows one trailing sample window at a time.
  * Archetype names link out to MTGGoldfish. The table and matchup grid use
  * the same decks: meta share of at least the configured minimum, capped
- * at the configured maximum, ordered by share.
+ * at the configured maximum. Share and Win rate headers order both the
+ * table and the matchup grid. Default order is share, high to low.
  */
 
 (() => {
@@ -13,6 +14,8 @@
     data: null,
     formatId: null,
     windowDays: 30,
+    sortKey: "share",
+    sortDir: "desc",
   };
 
   const els = {
@@ -60,6 +63,19 @@
       state.windowDays = Number(els.window.value);
       render();
     });
+
+    els.tableWrap.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-sort]");
+      if (!button) return;
+      const key = button.dataset.sort;
+      if (state.sortKey === key) {
+        state.sortDir = state.sortDir === "desc" ? "asc" : "desc";
+      } else {
+        state.sortKey = key;
+        state.sortDir = "desc";
+      }
+      render();
+    });
   }
 
   function currentFormat() {
@@ -71,10 +87,14 @@
   }
 
   function shownArchetypes(win) {
-    return globalThis.MTGMetaMatchup.visibleArchetypes(
+    const visible = globalThis.MTGMetaMatchup.visibleArchetypes(
       win?.archetypes,
       state.data.display
     );
+    return globalThis.MTGMetaMatchup.orderArchetypes(visible, {
+      key: state.sortKey,
+      dir: state.sortDir,
+    });
   }
 
   function renderFormatBar() {
@@ -103,10 +123,32 @@
     if (els.window) els.window.value = String(win.days);
     els.formatDesc.textContent = fmt.description || "";
     const shown = shownArchetypes(win);
+    renderSortHeaders();
     renderNote(win, shown);
     renderStats(shown);
     renderList(shown, win);
     renderMatchups(shown, win);
+  }
+
+  function renderSortHeaders() {
+    const labels = { share: "share", winRate: "win rate" };
+    document.querySelectorAll(".sort-header").forEach((button) => {
+      const key = button.dataset.sort;
+      const active = key === state.sortKey;
+      const th = button.closest("th");
+      th.setAttribute(
+        "aria-sort",
+        active ? (state.sortDir === "asc" ? "ascending" : "descending") : "none"
+      );
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+      const direction = state.sortDir === "asc" ? "ascending" : "descending";
+      button.setAttribute(
+        "aria-label",
+        active ? `Sort by ${labels[key]}, ${direction}` : `Sort by ${labels[key]}`
+      );
+      const arrow = button.querySelector(".sort-arrow");
+      if (arrow) arrow.textContent = active ? (state.sortDir === "asc" ? "↑" : "↓") : "↕";
+    });
   }
 
   function renderNote(win, shown) {

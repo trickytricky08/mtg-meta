@@ -16,12 +16,18 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
 
-  function buildMatchupGrid(archetypes) {
-    const decks = [...(archetypes || [])].sort((a, b) => {
-      const shareDelta = Number(b.share || 0) - Number(a.share || 0);
-      if (shareDelta !== 0) return shareDelta;
+  function orderArchetypes(archetypes, sort) {
+    const key = sort?.key === "winRate" ? "winRate" : "share";
+    const dir = sort?.dir === "asc" ? 1 : -1;
+    return [...(archetypes || [])].sort((a, b) => {
+      const delta = (Number(a[key]) - Number(b[key])) * dir;
+      if (delta !== 0) return delta;
       return String(a.name || "").localeCompare(String(b.name || ""));
     });
+  }
+
+  function buildMatchupGrid(archetypes) {
+    const decks = [...(archetypes || [])];
 
     const cells = decks.map((row) =>
       decks.map((col) => {
@@ -129,8 +135,15 @@
       .map((row, index) => {
         const deck = decks[index];
         const cellsHtml = row.map(renderCell).join("");
+        const wrClass = deck.winRate >= 53 ? " hot" : deck.winRate < 51 ? " cold" : "";
+        const rate = deck.winRate == null ? "" : formatWinRate(deck.winRate);
         return `<tr>
-          <th scope="row" class="matchup-rowhead"><span class="matchup-rowname">${escapeHtml(deck.name)}</span></th>
+          <th scope="row" class="matchup-rowhead">
+            <span class="matchup-rowlabel">
+              <span class="matchup-rowname">${escapeHtml(deck.name)}</span>
+              <span class="matchup-rowrate${wrClass}">${rate}</span>
+            </span>
+          </th>
           ${cellsHtml}
         </tr>`;
       })
@@ -177,6 +190,7 @@
 
   return {
     buildMatchupGrid,
+    orderArchetypes,
     chooseWindow,
     visibleArchetypes,
     renderArchetypeRows,
