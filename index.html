@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MTG Meta — Format Browser</title>
+  <meta name="description" content="Browse Magic: The Gathering format metas — archetypes, popularity, win rates, and sample lists." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="brand">
+        <h1>MTG Meta</h1>
+        <p class="subtitle">Format archetype browser · sample prototype</p>
+      </div>
+      <div class="meta-stamp" id="meta-stamp"></div>
+    </header>
+
+    <nav class="format-bar" id="format-bar" aria-label="Formats"></nav>
+    <p class="format-desc" id="format-desc"></p>
+
+    <div class="controls">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" />
+        </svg>
+        <input
+          type="search"
+          id="search"
+          placeholder="Search archetypes…"
+          autocomplete="off"
+          aria-label="Search archetypes"
+        />
+      </div>
+      <div class="sort-wrap">
+        <label for="sort">Sort</label>
+        <select id="sort" aria-label="Sort archetypes">
+          <option value="share-desc">Popularity (high → low)</option>
+          <option value="share-asc">Popularity (low → high)</option>
+          <option value="winRate-desc">Win rate (high → low)</option>
+          <option value="winRate-asc">Win rate (low → high)</option>
+          <option value="name-asc">Name (A → Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="stats-row" id="stats" aria-live="polite"></div>
+
+    <div class="table-wrap" id="table-wrap">
+      <table class="meta-table" aria-label="Archetype meta table">
+        <thead>
+          <tr>
+            <th scope="col">Archetype</th>
+            <th scope="col" class="num">Share</th>
+            <th scope="col" class="num">Win rate</th>
+            <th scope="col">Trend</th>
+            <th scope="col" class="num" aria-hidden="true"></th>
+          </tr>
+        </thead>
+        <tbody id="archetype-body">
+          <tr><td colspan="5"><div class="empty">Loading meta data…</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section class="detail" id="detail" aria-live="polite"></section>
+
+    <footer class="footer">
+      Demo stats only — not live tournament data.
+      Run locally with <code>python3 -m http.server</code> from this folder.
+    </footer>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
