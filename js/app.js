@@ -67,13 +67,12 @@
     els.tableWrap.addEventListener("click", (event) => {
       const button = event.target.closest("[data-sort]");
       if (!button) return;
-      const key = button.dataset.sort;
-      if (state.sortKey === key) {
-        state.sortDir = state.sortDir === "desc" ? "asc" : "desc";
-      } else {
-        state.sortKey = key;
-        state.sortDir = "desc";
-      }
+      const next = globalThis.MTGMetaMatchup.nextSort(
+        { key: state.sortKey, dir: state.sortDir },
+        button.dataset.sort
+      );
+      state.sortKey = next.key;
+      state.sortDir = next.dir;
       render();
     });
   }
@@ -91,10 +90,13 @@
       win?.archetypes,
       state.data.display
     );
-    return globalThis.MTGMetaMatchup.orderArchetypes(visible, {
-      key: state.sortKey,
-      dir: state.sortDir,
-    });
+    return globalThis.MTGMetaMatchup.orderArchetypes(
+      visible,
+      globalThis.MTGMetaMatchup.effectiveSort({
+        key: state.sortKey,
+        dir: state.sortDir,
+      })
+    );
   }
 
   function renderFormatBar() {
@@ -134,7 +136,8 @@
     const labels = { share: "share", winRate: "win rate" };
     document.querySelectorAll(".sort-header").forEach((button) => {
       const key = button.dataset.sort;
-      const active = key === state.sortKey;
+      const active =
+        key === state.sortKey && (state.sortDir === "asc" || state.sortDir === "desc");
       const th = button.closest("th");
       th.setAttribute(
         "aria-sort",

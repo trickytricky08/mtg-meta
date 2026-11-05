@@ -16,6 +16,24 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
 
+  function nextSort(current, clickedKey) {
+    const key = clickedKey === "winRate" ? "winRate" : "share";
+    const active = current?.key === key && (current.dir === "asc" || current.dir === "desc");
+    if (!active) return { key, dir: "desc" };
+    if (current.dir === "desc") return { key, dir: "asc" };
+    return { key: null, dir: null };
+  }
+
+  function effectiveSort(sort) {
+    if (sort?.key === "winRate" && (sort.dir === "asc" || sort.dir === "desc")) {
+      return { key: "winRate", dir: sort.dir };
+    }
+    if (sort?.key === "share" && (sort.dir === "asc" || sort.dir === "desc")) {
+      return { key: "share", dir: sort.dir };
+    }
+    return { key: "share", dir: "desc" };
+  }
+
   function orderArchetypes(archetypes, sort) {
     const key = sort?.key === "winRate" ? "winRate" : "share";
     const dir = sort?.dir === "asc" ? 1 : -1;
@@ -190,6 +208,8 @@
 
   return {
     buildMatchupGrid,
+    nextSort,
+    effectiveSort,
     orderArchetypes,
     chooseWindow,
     visibleArchetypes,

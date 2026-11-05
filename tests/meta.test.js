@@ -4,6 +4,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 const {
   buildMatchupGrid,
+  nextSort,
+  effectiveSort,
   orderArchetypes,
   chooseWindow,
   visibleArchetypes,
@@ -267,6 +269,35 @@ test("win-rate bands still match the legend", () => {
   assert.equal(formatWinRate(46.5), "46.5%");
 });
 
+test("one header is active, and a third click clears back to share descending", () => {
+  let sort = { key: "share", dir: "desc" };
+  sort = nextSort(sort, "share");
+  assert.deepEqual(sort, { key: "share", dir: "asc" });
+  sort = nextSort(sort, "share");
+  assert.deepEqual(sort, { key: null, dir: null });
+  assert.deepEqual(effectiveSort(sort), { key: "share", dir: "desc" });
+  sort = nextSort(sort, "winRate");
+  assert.deepEqual(sort, { key: "winRate", dir: "desc" });
+  sort = nextSort(sort, "share");
+  assert.deepEqual(sort, { key: "share", dir: "desc" });
+  sort = nextSort(sort, "winRate");
+  sort = nextSort(sort, "winRate");
+  sort = nextSort(sort, "winRate");
+  assert.deepEqual(sort, { key: null, dir: null });
+  const decks = [
+    { id: "a", name: "Alpha", share: 10, winRate: 60 },
+    { id: "b", name: "Beta", share: 20, winRate: 48 },
+  ];
+  assert.deepEqual(
+    orderArchetypes(decks, effectiveSort(sort)).map((deck) => deck.id),
+    ["b", "a"]
+  );
+  const winRateOrder = orderArchetypes(decks, effectiveSort(nextSort(sort, "winRate"))).map(
+    (deck) => deck.id
+  );
+  assert.deepEqual(winRateOrder, ["a", "b"]);
+});
+
 test("share and win rate ordering drives both the table and the square grid", () => {
   const decks = [
     { id: "a", name: "Alpha", share: 10, winRate: 49 },
@@ -315,6 +346,11 @@ test("the page has a trailing-window control and no sort, trend, search, or deta
   assert.equal(indexHtml.includes('id="sort"'), false);
   assert.match(indexHtml, /data-sort="share"/);
   assert.match(indexHtml, /data-sort="winRate"/);
+  assert.match(indexHtml, /id="metagame-heading">Metagame Breakdown/);
+  assert.ok(
+    indexHtml.indexOf('id="window-note"') < indexHtml.indexOf('class="window-wrap"')
+  );
+  assert.match(fs.readFileSync(path.join(__dirname, "../css/styles.css"), "utf8"), /window-wrap[\s\S]*margin-left:\s*auto/);
   assert.equal(indexHtml.includes("<select id=\"sort\""), false);
   assert.match(appJs, /sortKey/);
   assert.match(appJs, /orderArchetypes/);
