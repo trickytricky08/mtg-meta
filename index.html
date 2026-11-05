@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MTG Meta — Format Browser</title>
-  <meta name="description" content="Browse sample Magic: The Gathering format metas — Standard, Modern, and Pioneer archetypes, plus a row-versus-column matchup grid." />
+  <meta name="description" content="Browse sample Magic: The Gathering format snapshots — Standard, Modern, and Pioneer archetypes, Goldfish links, and a row-versus-column matchup grid." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
     <header class="header">
       <div class="brand">
         <h1>MTG Meta</h1>
-        <p class="subtitle">Archetype browser and sample matchup grids · demo prototype</p>
+        <p class="subtitle">Sample format snapshots and matchup grids · demo prototype</p>
       </div>
       <div class="meta-stamp" id="meta-stamp"></div>
     </header>
@@ -21,18 +21,11 @@
     <p class="format-desc" id="format-desc"></p>
 
     <div class="controls">
-      <div class="search-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" />
-        </svg>
-        <input
-          type="search"
-          id="search"
-          placeholder="Search archetypes…"
-          autocomplete="off"
-          aria-label="Search archetypes"
-        />
+      <div class="sort-wrap">
+        <label for="snapshot">Date</label>
+        <select id="snapshot" aria-label="Sample snapshot date"></select>
       </div>
+      <p class="snapshot-note" id="snapshot-note">Sample snapshots — not historical tournament results.</p>
       <div class="sort-wrap">
         <label for="sort">Sort</label>
         <select id="sort" aria-label="Sort archetypes">
@@ -55,11 +48,10 @@
             <th scope="col" class="num">Share</th>
             <th scope="col" class="num">Win rate</th>
             <th scope="col">Trend</th>
-            <th scope="col" class="num" aria-hidden="true"></th>
           </tr>
         </thead>
         <tbody id="archetype-body">
-          <tr><td colspan="5"><div class="empty">Loading meta data…</div></td></tr>
+          <tr><td colspan="4"><div class="empty">Loading meta data…</div></td></tr>
         </tbody>
       </table>
     </div>
@@ -70,8 +62,8 @@
         <p class="matchup-legend">
           Each cell is the <strong>row</strong> deck's win rate against the <strong>column</strong> deck.
           Diagonal cells are <strong>mirrors</strong>.
-          Decks stay ordered by meta share. Search and sort apply to the table above, not this grid.
-          <span class="matchup-demo">Sample demo rates — not live tournament results.</span>
+          The grid lists every deck in the selected sample snapshot, ordered by meta share. Sorting the table does not reorder the grid.
+          <span class="matchup-demo">Sample snapshot rates — not historical tournament results.</span>
         </p>
         <ul class="matchup-key" aria-label="Cell color key">
           <li><span class="swatch wr-high"></span> 56%+ favored</li>
@@ -87,10 +79,8 @@
       </div>
     </section>
 
-    <section class="detail" id="detail" aria-live="polite"></section>
-
     <footer class="footer">
-      Demo stats only — not live tournament data. Matchup cells read row versus column.
+      Sample snapshots only — not historical tournament results. Archetype names open MTGGoldfish in a new tab. Matchup cells read row versus column.
       Run locally with <code>python3 -m http.server</code> from this folder.
     </footer>
   </div>
