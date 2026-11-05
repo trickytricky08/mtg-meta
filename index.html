@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MTG Meta — Format Browser</title>
-  <meta name="description" content="Browse Magic: The Gathering format metas — archetypes, popularity, win rates, and sample lists." />
+  <meta name="description" content="Browse sample Magic: The Gathering format windows — Standard, Modern, and Pioneer archetypes, Goldfish links, and a row-versus-column matchup grid." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
     <header class="header">
       <div class="brand">
         <h1>MTG Meta</h1>
-        <p class="subtitle">Format archetype browser · sample prototype</p>
+        <p class="subtitle">Sample format windows and matchup grids · demo prototype</p>
       </div>
       <div class="meta-stamp" id="meta-stamp"></div>
     </header>
@@ -21,57 +21,76 @@
     <p class="format-desc" id="format-desc"></p>
 
     <div class="controls">
-      <div class="search-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" />
-        </svg>
-        <input
-          type="search"
-          id="search"
-          placeholder="Search archetypes…"
-          autocomplete="off"
-          aria-label="Search archetypes"
-        />
-      </div>
-      <div class="sort-wrap">
-        <label for="sort">Sort</label>
-        <select id="sort" aria-label="Sort archetypes">
-          <option value="share-desc">Popularity (high → low)</option>
-          <option value="share-asc">Popularity (low → high)</option>
-          <option value="winRate-desc">Win rate (high → low)</option>
-          <option value="winRate-asc">Win rate (low → high)</option>
-          <option value="name-asc">Name (A → Z)</option>
+      <p class="window-note" id="window-note">Sample windows — not historical tournament results.</p>
+      <div class="window-wrap">
+        <label for="window">Show data for the last</label>
+        <select id="window">
+          <option value="7">7 days</option>
+          <option value="14">14 days</option>
+          <option value="30" selected>30 days</option>
+          <option value="90">90 days</option>
         </select>
       </div>
     </div>
 
     <div class="stats-row" id="stats" aria-live="polite"></div>
 
+    <section class="meta-section" aria-labelledby="metagame-heading">
+    <h2 class="section-title" id="metagame-heading">Metagame Breakdown</h2>
     <div class="table-wrap" id="table-wrap">
       <table class="meta-table" aria-label="Archetype meta table">
         <thead>
           <tr>
             <th scope="col">Archetype</th>
-            <th scope="col" class="num">Share</th>
-            <th scope="col" class="num">Win rate</th>
-            <th scope="col">Trend</th>
-            <th scope="col" class="num" aria-hidden="true"></th>
+            <th scope="col" class="num" aria-sort="descending">
+              <button type="button" class="sort-header" data-sort="share" aria-pressed="true" aria-label="Sort by share, descending">
+                Share <span class="sort-arrow" aria-hidden="true">↓</span>
+              </button>
+            </th>
+            <th scope="col" class="num" aria-sort="none">
+              <button type="button" class="sort-header" data-sort="winRate" aria-pressed="false" aria-label="Sort by win rate">
+                Win rate <span class="sort-arrow" aria-hidden="true"></span>
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody id="archetype-body">
-          <tr><td colspan="5"><div class="empty">Loading meta data…</div></td></tr>
+          <tr><td colspan="3"><div class="empty">Loading meta data…</div></td></tr>
         </tbody>
       </table>
     </div>
+    </section>
 
-    <section class="detail" id="detail" aria-live="polite"></section>
+    <section class="matchup" id="matchup" aria-labelledby="matchup-heading">
+      <div class="matchup-head">
+        <h2 class="section-title" id="matchup-heading">Matchup grid</h2>
+        <p class="matchup-legend">
+          Each cell is the <strong>row</strong> deck's win rate against the <strong>column</strong> deck.
+          Diagonal cells are <strong>mirrors</strong>.
+          Share and Win rate sort the table and this grid together. Rows and columns use that same order. Each row label includes that deck's overall win rate.
+          <span class="matchup-demo">Sample window rates — not historical tournament results.</span>
+        </p>
+        <ul class="matchup-key" aria-label="Cell color key">
+          <li><span class="swatch wr-high"></span> 56%+ favored</li>
+          <li><span class="swatch wr-up"></span> 52–55.9%</li>
+          <li><span class="swatch wr-even"></span> 48.1–51.9% even</li>
+          <li><span class="swatch wr-down"></span> 44.1–48%</li>
+          <li><span class="swatch wr-low"></span> 44% or lower</li>
+          <li><span class="swatch mirror"></span> Mirror</li>
+        </ul>
+      </div>
+      <div class="matchup-scroll" id="matchup-scroll">
+        <div class="empty">Loading matchup grid…</div>
+      </div>
+    </section>
 
     <footer class="footer">
-      Demo stats only — not live tournament data.
+      Sample windows only — not historical tournament results. Archetype names open MTGGoldfish in a new tab. Matchup cells read row versus column.
       Run locally with <code>python3 -m http.server</code> from this folder.
     </footer>
   </div>
 
+  <script src="js/matchup.js" defer></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>

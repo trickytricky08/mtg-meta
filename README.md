@@ -1,20 +1,22 @@
 # MTG Meta
 
-Local prototype for browsing Magic: The Gathering format metas — archetypes, popularity (meta share), win rates, trends, and sample card highlights.
+Local prototype for browsing Magic: The Gathering format metas — archetype share, win rate, a row-versus-column matchup grid, and a link to each deck on MTGGoldfish.
 
-Sample data only (Standard + Modern). Not scraped from live sources.
+The numbers are **sample windows**, not historical tournament results and not a live scrape.
 
 ## Requirements
 
 - A modern browser
+- Node.js 20+ to run the tests (the page itself is static)
 - Python 3 (for a one-line local server), or any static file server
 
 > **Note:** Opening `index.html` via `file://` will fail to load `data/meta.json` in most browsers because of CORS / local file restrictions. Use a local HTTP server.
 
-## Run on this Linux box
+## Run locally
+
+From the repository root:
 
 ```bash
-cd /workspace/mtg-meta
 python3 -m http.server 8765
 ```
 
@@ -26,41 +28,67 @@ http://127.0.0.1:8765/
 
 Stop the server with `Ctrl+C`.
 
-### Alternate ports / servers
+### Tests
 
 ```bash
-# Another port
-python3 -m http.server 8000
-
-# If you prefer npx (Node installed)
-npx --yes serve -l 8765
+node --test
+# or
+npm test
 ```
 
 ## Features
 
-1. **Format picker** — Standard and Modern
-2. **Meta overview** — archetype name, share %, win rate, trend
-3. **Archetype detail** — description, maindeck highlights, sideboard notes
-4. **Search** — filter by archetype name
-5. **Sort** — by popularity, win rate, or name
+1. **Format picker** — Standard, Modern, and Pioneer
+2. **Trailing window** — “Show data for the last” 7, 14, 30, or 90 days, aligned to the right of the controls row. The default is 30 days. Changing the window updates the archetype table and the matchup grid together. The same window is kept when you switch formats.
+3. **Metagame Breakdown** — archetype name, share, and win rate. Names are plain text links. The Share and Win rate headers sort this table and the matchup grid together. Only one header is active. Repeated clicks cycle that header through descending, ascending, then cleared. Clearing falls back to share, high to low, and hides both arrows. Only the active header shows ↓ or ↑. Choosing the other header clears the first and starts at descending. The page loads with Share descending. There is no separate sort menu, search box, trend column, color pips, or deck summary.
+4. **Share cutoff** — a deck is included only when its sample share is at least 1.2%. At most 15 decks are included, the largest shares first. Header sorting reorders that set; it does not change which decks qualify.
+5. **Matchup grid** — each cell is the **row** deck's sample win rate against the **column** deck. Diagonal cells are mirrors. Rows and columns use the same order as the table. Each row label shows the deck name and that deck's overall win rate for the selected window.
+6. **MTGGoldfish links** — each archetype name opens that deck's Goldfish archetype or decklist page in a new tab.
 
 ## Project layout
 
 ```
-/workspace/mtg-meta/
-  index.html       # App shell
-  css/styles.css   # Dark Magic-inspired UI
-  js/app.js        # Format/filter/sort/detail logic
-  data/meta.json   # Sample meta dataset
-  README.md        # This file
+index.html         # App shell
+css/styles.css     # Dark Magic-inspired UI
+js/app.js          # Format, trailing window, and shared sort
+js/matchup.js      # Share cutoff, ordering, table rows, matchup grid
+data/meta.json     # Sample windows
+tests/meta.test.js # Data integrity, cutoff, and grid tests
+README.md          # This file
 ```
 
-## Editing sample data
+## Sample windows
 
-Edit `data/meta.json`. Each format has an `archetypes` array with fields like `name`, `share`, `winRate`, `trend` (`up` | `down` | `stable`), `colors`, `highlights`, and `sideboardNotes`. Refresh the browser after saving.
+`data/meta.json` is shaped so a later live refresh can replace `formats[].windows` without changing the page. `display` holds the shared rules: `minShare` (1.2), `maxArchetypes` (15), `defaultWindowDays` (30), and `windowDays`.
+
+Each format has a `windows` array. A window has:
+
+- `days` — 7, 14, 30, or 90
+- `sampleSize` — invented deck count inside that trailing window, dated through `asOf` (`2026-11-05`)
+- `archetypes` — every deck considered for that window, including ones under 1.2% that the page hides
+
+Each archetype has `id`, `name`, `share`, `winRate`, `goldfishUrl`, and `matchups`. `matchups` is keyed by the other archetype ids in that window. The value is **this deck's** win rate against that opponent. The two directions of a pair add up to 100 in this sample set. Real events include draws and are not represented here.
+
+The four windows are different on purpose. A short window is a small, top-heavy sample: fewer decks clear 1.2%, and the leader's share is higher. A longer window is a larger sample: more decks clear 1.2%, shares spread out, and the 90-day window has 17 decks at or above 1.2% so the page keeps only the top 15. Matchup rates also move as the window widens. Which deck leads changes with the window.
+
+### Goldfish links
+
+`goldfishUrl` is a checked `https://www.mtggoldfish.com/archetype/...` page. Two archetype roots redirect away, so those links use the working decklist URL:
+
+- Modern Rakdos Scam → `/archetype/modern-rakdos-scam/decks`
+- Pioneer Amalia Combo → `/archetype/pioneer-abzan-amalia-combo/decks` (Goldfish's name is Abzan Amalia Combo)
+
+Goldfish uses a different public name for a few decks:
+
+- Standard Domain Ramp → `/archetype/standard-domain-dmu` (titled Domain)
+- Pioneer Mono-Green Devotion → `/archetype/pioneer-nykthos-ramp` (titled Nykthos Ramp)
+- Modern Izzet Wizard Control → `/archetype/modern-izzet-control` (titled Izzet Control)
+
+The short `/archetype/izzet-phoenix` page is not Pioneer. `/archetype/domain` is Penny Dreadful. Neither is used. Additional decks in the wider windows are the archetype pages linked from that format's Goldfish metagame.
 
 ## Assumptions
 
-- Stats and card lists are invented for a plausible late-2025 / 2026 meta feel; card legality may not match a specific tournament week.
+- Shares, win rates, matchups, and sample sizes are invented. A wider window is modeled as a larger trailing sample ending on the same as-of date, not as a separate historical event.
+- Only the Goldfish links were checked against the live site.
 - Single-page app; no backend or build step.
-- Designed primarily for desktop; mobile layout stacks the table into cards and keeps the detail panel readable.
+- The archetype table stacks into cards on a narrow screen. The matchup grid scrolls sideways, with the row names kept in view.

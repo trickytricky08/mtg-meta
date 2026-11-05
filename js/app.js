@@ -1,6 +1,10 @@
 /**
- * MTG Meta â€” client-side meta browser
- * Loads data/meta.json, filters/sorts archetypes, shows detail panel.
+ * MTG Meta — client-side meta browser
+ * Loads data/meta.json and shows one trailing sample window at a time.
+ * Archetype names link out to MTGGoldfish. The table and matchup grid use
+ * the same decks: meta share of at least the configured minimum, capped
+ * at the configured maximum. Share and Win rate headers order both the
+ * table and the matchup grid. Default order is share, high to low.
  */
 
 (() => {
@@ -9,21 +13,21 @@
   const state = {
     data: null,
     formatId: null,
-    query: "",
-    sort: "share-desc",
-    selectedId: null,
+    windowDays: 30,
+    sortKey: "share",
+    sortDir: "desc",
   };
 
   const els = {
     formatBar: document.getElementById("format-bar"),
     formatDesc: document.getElementById("format-desc"),
-    search: document.getElementById("search"),
-    sort: document.getElementById("sort"),
+    window: document.getElementById("window"),
+    windowNote: document.getElementById("window-note"),
     stats: document.getElementById("stats"),
     tbody: document.getElementById("archetype-body"),
     tableWrap: document.getElementById("table-wrap"),
-    detail: document.getElementById("detail"),
     stamp: document.getElementById("meta-stamp"),
+    matchupScroll: document.getElementById("matchup-scroll"),
   };
 
   async function init() {
@@ -35,41 +39,64 @@
       els.tableWrap.innerHTML =
         `<div class="empty">Could not load <code>data/meta.json</code>. ` +
         `Serve this folder over HTTP (see README). <br><small>${escapeHtml(String(err))}</small></div>`;
+      if (els.matchupScroll) {
+        els.matchupScroll.innerHTML =
+          `<div class="empty">Matchup grid unavailable until meta data loads.</div>`;
+      }
       return;
     }
 
-    if (els.stamp && state.data.updated) {
-      els.stamp.textContent = `Sample data Â· updated ${state.data.updated}`;
+    if (els.stamp) {
+      els.stamp.textContent = "Sample windows · not tournament results";
     }
 
     state.formatId = state.data.formats[0]?.id ?? null;
+    state.windowDays = Number(state.data.display?.defaultWindowDays ?? 30);
+    if (els.window) els.window.value = String(state.windowDays);
     renderFormatBar();
     bindControls();
     render();
   }
 
   function bindControls() {
-    els.search.addEventListener("input", () => {
-      state.query = els.search.value.trim().toLowerCase();
-      renderList();
+    els.window.addEventListener("change", () => {
+      state.windowDays = Number(els.window.value);
+      render();
     });
 
-    els.sort.addEventListener("change", () => {
-      state.sort = els.sort.value;
-      renderList();
-    });
-
-    els.detail.addEventListener("click", (e) => {
-      if (e.target.closest("[data-close-detail]")) {
-        state.selectedId = null;
-        els.detail.classList.remove("visible");
-        highlightSelected();
-      }
+    els.tableWrap.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-sort]");
+      if (!button) return;
+      const next = globalThis.MTGMetaMatchup.nextSort(
+        { key: state.sortKey, dir: state.sortDir },
+        button.dataset.sort
+      );
+      state.sortKey = next.key;
+      state.sortDir = next.dir;
+      render();
     });
   }
 
   function currentFormat() {
-    return state.data.formats.find((f) => f.id === state.formatId);
+    return state.data.formats.find((fmt) => fmt.id === state.formatId);
+  }
+
+  function currentWindow() {
+    return globalThis.MTGMetaMatchup.chooseWindow(currentFormat(), state.windowDays);
+  }
+
+  function shownArchetypes(win) {
+    const visible = globalThis.MTGMetaMatchup.visibleArchetypes(
+      win?.archetypes,
+      state.data.display
+    );
+    return globalThis.MTGMetaMatchup.orderArchetypes(
+      visible,
+      globalThis.MTGMetaMatchup.effectiveSort({
+        key: state.sortKey,
+        dir: state.sortDir,
+      })
+    );
   }
 
   function renderFormatBar() {
@@ -83,8 +110,6 @@
       btn.addEventListener("click", () => {
         if (state.formatId === fmt.id) return;
         state.formatId = fmt.id;
-        state.selectedId = null;
-        els.detail.classList.remove("visible");
         renderFormatBar();
         render();
       });
@@ -94,165 +119,79 @@
 
   function render() {
     const fmt = currentFormat();
-    if (!fmt) return;
+    const win = currentWindow();
+    if (!fmt || !win) return;
+    state.windowDays = win.days;
+    if (els.window) els.window.value = String(win.days);
     els.formatDesc.textContent = fmt.description || "";
-    renderStats(fmt);
-    renderList();
+    const shown = shownArchetypes(win);
+    renderSortHeaders();
+    renderNote(win, shown);
+    renderStats(shown);
+    renderList(shown, win);
+    renderMatchups(shown, win);
   }
 
-  function renderStats(fmt) {
-    const list = filteredSorted(fmt);
-    const totalShare = list.reduce((s, a) => s + a.share, 0);
+  function renderSortHeaders() {
+    const labels = { share: "share", winRate: "win rate" };
+    document.querySelectorAll(".sort-header").forEach((button) => {
+      const key = button.dataset.sort;
+      const active =
+        key === state.sortKey && (state.sortDir === "asc" || state.sortDir === "desc");
+      const th = button.closest("th");
+      th.setAttribute(
+        "aria-sort",
+        active ? (state.sortDir === "asc" ? "ascending" : "descending") : "none"
+      );
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+      const direction = state.sortDir === "asc" ? "ascending" : "descending";
+      button.setAttribute(
+        "aria-label",
+        active ? `Sort by ${labels[key]}, ${direction}` : `Sort by ${labels[key]}`
+      );
+      const arrow = button.querySelector(".sort-arrow");
+      if (arrow) arrow.textContent = active ? (state.sortDir === "asc" ? "↑" : "↓") : "";
+    });
+  }
+
+  function renderNote(win, shown) {
+    if (!els.windowNote) return;
+    const minShare = state.data.display?.minShare ?? 1.2;
+    const maxArchetypes = state.data.display?.maxArchetypes ?? 15;
+    const qualified = (win.archetypes || []).filter((arch) => arch.share >= minShare).length;
+    const capNote =
+      qualified > shown.length ? ` Top ${maxArchetypes} by share.` : "";
+    const decks = Number(win.sampleSize).toLocaleString("en-US");
+    const asOf = state.data.asOf ? ` through ${state.data.asOf}` : "";
+    els.windowNote.textContent =
+      `Sample window · last ${win.days} days${asOf} · ${decks} decks. ` +
+      `Decks at ${minShare}% share or more.${capNote} Not historical tournament results.`;
+  }
+
+  function renderMatchups(shown, win) {
+    if (!els.matchupScroll || !globalThis.MTGMetaMatchup) return;
+    els.matchupScroll.dataset.format = state.formatId;
+    els.matchupScroll.dataset.window = String(win.days);
+    els.matchupScroll.innerHTML = globalThis.MTGMetaMatchup.renderMatchupTable(shown);
+  }
+
+  function renderStats(shown) {
+    const totalShare = shown.reduce((sum, arch) => sum + arch.share, 0);
     const avgWr =
-      list.length === 0
+      shown.length === 0
         ? 0
-        : list.reduce((s, a) => s + a.winRate, 0) / list.length;
+        : shown.reduce((sum, arch) => sum + arch.winRate, 0) / shown.length;
 
     els.stats.innerHTML = `
-      <div class="stat-pill"><strong>${list.length}</strong> archetype${list.length === 1 ? "" : "s"} shown</div>
+      <div class="stat-pill"><strong>${shown.length}</strong> archetype${shown.length === 1 ? "" : "s"}</div>
       <div class="stat-pill">Coverage <strong>${totalShare.toFixed(1)}%</strong></div>
       <div class="stat-pill">Avg win rate <strong>${avgWr.toFixed(1)}%</strong></div>
     `;
   }
 
-  function filteredSorted(fmt) {
-    let list = [...fmt.archetypes];
-    if (state.query) {
-      list = list.filter((a) => a.name.toLowerCase().includes(state.query));
-    }
-    const [key, dir] = state.sort.split("-");
-    const mult = dir === "asc" ? 1 : -1;
-    list.sort((a, b) => {
-      if (key === "name") return mult * a.name.localeCompare(b.name);
-      return mult * (a[key] - b[key]);
-    });
-    return list;
-  }
-
-  function renderList() {
-    const fmt = currentFormat();
-    if (!fmt) return;
-
-    const list = filteredSorted(fmt);
-    renderStats(fmt);
-
-    if (list.length === 0) {
-      els.tbody.innerHTML = "";
-      const empty = document.createElement("tr");
-      empty.innerHTML = `<td colspan="5"><div class="empty">No archetypes match â€œ${escapeHtml(state.query)}â€.</div></td>`;
-      els.tbody.appendChild(empty);
-      return;
-    }
-
-    const maxShare = Math.max(...fmt.archetypes.map((a) => a.share), 1);
-
-    els.tbody.innerHTML = list
-      .map((a) => {
-        const selected = a.id === state.selectedId ? " selected" : "";
-        const wrClass =
-          a.winRate >= 53 ? " hot" : a.winRate < 51 ? " cold" : "";
-        const barPct = Math.round((a.share / maxShare) * 100);
-        return `
-          <tr class="${selected}" data-id="${escapeAttr(a.id)}" tabindex="0" role="button" aria-label="View ${escapeAttr(a.name)}">
-            <td>
-              <div class="arch-cell">
-                ${manaPips(a.colors)}
-                <span class="arch-name">${escapeHtml(a.name)}</span>
-              </div>
-            </td>
-            <td class="num" data-label="Share">
-              <div class="share-bar">
-                <div class="share-track" aria-hidden="true"><div class="share-fill" style="width:${barPct}%"></div></div>
-                <span>${a.share.toFixed(1)}%</span>
-              </div>
-            </td>
-            <td class="num" data-label="Win rate"><span class="win-rate${wrClass}">${a.winRate.toFixed(1)}%</span></td>
-            <td data-label="Trend"><span class="trend ${escapeAttr(a.trend)}">${trendIcon(a.trend)} ${escapeHtml(a.trendLabel)}</span></td>
-            <td class="num" data-label="">â†’</td>
-          </tr>
-        `;
-      })
-      .join("");
-
-    els.tbody.querySelectorAll("tr[data-id]").forEach((row) => {
-      const open = () => selectArchetype(row.dataset.id);
-      row.addEventListener("click", open);
-      row.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          open();
-        }
-      });
-    });
-  }
-
-  function selectArchetype(id) {
-    const fmt = currentFormat();
-    const arch = fmt?.archetypes.find((a) => a.id === id);
-    if (!arch) return;
-
-    state.selectedId = id;
-    highlightSelected();
-    renderDetail(arch);
-  }
-
-  function highlightSelected() {
-    els.tbody.querySelectorAll("tr[data-id]").forEach((row) => {
-      row.classList.toggle("selected", row.dataset.id === state.selectedId);
-    });
-  }
-
-  function renderDetail(arch) {
-    const cards = (arch.highlights || [])
-      .map(
-        (c) => `
-      <li>
-        <span class="qty">${c.count}Ã—</span>
-        <span>${escapeHtml(c.name)}</span>
-        <span class="role">${escapeHtml(c.role || "")}</span>
-      </li>`
-      )
-      .join("");
-
-    els.detail.innerHTML = `
-      <div class="detail-header">
-        <h2>${manaPips(arch.colors)} ${escapeHtml(arch.name)}</h2>
-        <div style="display:flex;align-items:center;gap:0.5rem">
-          <div class="detail-meta">
-            <span class="chip">Share <strong>${arch.share.toFixed(1)}%</strong></span>
-            <span class="chip">Win rate <strong>${arch.winRate.toFixed(1)}%</strong></span>
-            <span class="chip trend ${escapeAttr(arch.trend)}">${trendIcon(arch.trend)} ${escapeHtml(arch.trendLabel)}</span>
-          </div>
-          <button type="button" class="close-detail" data-close-detail aria-label="Close detail">Ã—</button>
-        </div>
-      </div>
-      <p class="detail-desc">${escapeHtml(arch.description)}</p>
-      <div class="detail-grid">
-        <div class="panel">
-          <h3>Maindeck highlights</h3>
-          <ul class="card-list">${cards}</ul>
-        </div>
-        <div class="panel">
-          <h3>Sideboard notes</h3>
-          <p class="sideboard-notes">${escapeHtml(arch.sideboardNotes || "â€”")}</p>
-        </div>
-      </div>
-    `;
-    els.detail.classList.add("visible");
-    els.detail.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
-
-  function manaPips(colors) {
-    if (!colors || !colors.length) return "";
-    return `<span class="mana" aria-hidden="true">${colors
-      .map((c) => `<span class="mana-pip ${escapeAttr(c)}" title="${escapeAttr(c)}"></span>`)
-      .join("")}</span>`;
-  }
-
-  function trendIcon(trend) {
-    if (trend === "up") return "â†‘";
-    if (trend === "down") return "â†“";
-    return "â†’";
+  function renderList(shown, win) {
+    els.tbody.dataset.window = String(win.days);
+    els.tbody.innerHTML = globalThis.MTGMetaMatchup.renderArchetypeRows(shown);
   }
 
   function escapeHtml(str) {
@@ -261,10 +200,6 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
-  }
-
-  function escapeAttr(str) {
-    return escapeHtml(str).replace(/'/g, "&#39;");
   }
 
   init();
