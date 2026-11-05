@@ -22,31 +22,6 @@ const indexHtml = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8")
 const appJs = fs.readFileSync(path.join(__dirname, "../js/app.js"), "utf8");
 const rules = data.display;
 
-const KEPT_LINKS = {
-  "standard/domain-ramp": "https://www.mtggoldfish.com/archetype/standard-domain-dmu",
-  "standard/azorius-control": "https://www.mtggoldfish.com/archetype/standard-azorius-control-woe",
-  "standard/boros-aggro": "https://www.mtggoldfish.com/archetype/standard-boros-aggro-woe",
-  "standard/dimir-midrange": "https://www.mtggoldfish.com/archetype/standard-dimir-midrange-woe",
-  "standard/golgari-midrange": "https://www.mtggoldfish.com/archetype/standard-golgari-midrange-woe",
-  "standard/izzet-prowess": "https://www.mtggoldfish.com/archetype/standard-izzet-prowess-woe",
-  "modern/rakdos-scam": "https://www.mtggoldfish.com/archetype/modern-rakdos-scam/decks",
-  "modern/iw-control": "https://www.mtggoldfish.com/archetype/modern-izzet-control",
-  "modern/affinity": "https://www.mtggoldfish.com/archetype/modern-affinity",
-  "modern/amulet-titan": "https://www.mtggoldfish.com/archetype/amulet-titan",
-  "modern/yawgmoth":
-    "https://www.mtggoldfish.com/archetype/modern-yawgmoth-9bd3dc9a-1da1-442e-9b88-6ef2a027e80b",
-  "modern/hammer-time": "https://www.mtggoldfish.com/archetype/modern-hammer-time",
-  "modern/living-end": "https://www.mtggoldfish.com/archetype/modern-living-end",
-  "pioneer/rakdos-midrange": "https://www.mtggoldfish.com/archetype/pioneer-rakdos-midrange",
-  "pioneer/izzet-phoenix":
-    "https://www.mtggoldfish.com/archetype/izzet-phoenix-57eb17e3-2b71-4301-99a6-45002ffcfadb",
-  "pioneer/azorius-control": "https://www.mtggoldfish.com/archetype/pioneer-azorius-control",
-  "pioneer/mono-green-devotion": "https://www.mtggoldfish.com/archetype/pioneer-nykthos-ramp",
-  "pioneer/amalia-combo":
-    "https://www.mtggoldfish.com/archetype/pioneer-abzan-amalia-combo/decks",
-  "pioneer/boros-convoke": "https://www.mtggoldfish.com/archetype/pioneer-boros-convoke",
-};
-
 function formatById(id) {
   const fmt = data.formats.find((entry) => entry.id === id);
   assert.ok(fmt, id);
@@ -70,9 +45,17 @@ function cell(grid, rowId, colId) {
   return grid.cells[row][col];
 }
 
-test("dataset is three formats of trailing sample windows", () => {
-  assert.equal(data.dataKind, "sample-windows");
-  assert.match(data.disclaimer, /not historical tournament results/i);
+test("dataset is three formats of Goldfish paper windows", () => {
+  assert.equal(data.dataKind, "goldfish-windows");
+  assert.equal(data.asOf, "2026-11-05");
+  assert.equal(data.source.name, "MTGGoldfish");
+  assert.equal(data.source.slice, "paper");
+  assert.equal(data.source.retrieved, "2026-11-05");
+  assert.equal(data.metrics.share, "mtggoldfish-paper");
+  assert.equal(data.metrics.winRate, "demo");
+  assert.equal(data.metrics.matchups, "demo");
+  assert.match(data.disclaimer, /demo estimates/i);
+  assert.match(data.disclaimer, /not tournament results/i);
   assert.equal(data.refresh.replace, "formats[].windows");
   assert.equal(rules.minShare, 1.2);
   assert.equal(rules.maxArchetypes, 15);
@@ -125,8 +108,13 @@ test("visible decks are at least 1.2% share and never more than 15", () => {
         [...visible.map((arch) => arch.share)].sort((a, b) => b - a)
       );
     }
-    assert.deepEqual(new Set(counts).size, 4, fmt.id);
+    assert.ok(new Set(counts).size >= 1, fmt.id);
   }
+  assert.equal(shown("pioneer", 7).length, 14);
+  assert.equal(shown("standard", 30).length, 15);
+  const standard30 = windowOf(formatById("standard"), 30);
+  const qualified30 = standard30.archetypes.filter((arch) => arch.share >= 1.2);
+  assert.ok(qualified30.length > 15);
 });
 
 test("the four windows show different decks and different matchup rates", () => {
@@ -156,26 +144,29 @@ test("kept Goldfish URLs stay on the same pages across windows", () => {
         ids.add(arch.id);
         assert.equal(arch.trend, undefined);
         assert.equal(arch.colors, undefined);
-        assert.match(arch.goldfishUrl, /^https:\/\/www\.mtggoldfish\.com\/archetype\/.+/);
-        const kept = KEPT_LINKS[`${fmt.id}/${arch.id}`];
-        if (kept) assert.equal(arch.goldfishUrl, kept);
+        assert.equal(arch.goldfishUrl, `https://www.mtggoldfish.com/archetype/${arch.id}`);
       }
     }
   }
 });
 
-test("matchup pairs sum to 100 inside every window", () => {
+test("demo matchup pairs among decks at 1.2% share sum to 100", () => {
   for (const fmt of data.formats) {
     for (const win of fmt.windows) {
-      const byId = new Map(win.archetypes.map((arch) => [arch.id, arch]));
-      for (const arch of win.archetypes) {
+      const qualified = win.archetypes.filter((arch) => arch.share >= rules.minShare);
+      const byId = new Map(qualified.map((arch) => [arch.id, arch]));
+      const expected = qualified.map((arch) => arch.id).sort();
+      for (const arch of qualified) {
         assert.deepEqual(
           Object.keys(arch.matchups).sort(),
-          win.archetypes.map((entry) => entry.id).filter((id) => id !== arch.id).sort()
+          expected.filter((id) => id !== arch.id)
         );
         for (const [opponentId, rate] of Object.entries(arch.matchups)) {
           assert.ok(Math.abs(rate + byId.get(opponentId).matchups[arch.id] - 100) < 1e-6);
         }
+      }
+      for (const arch of win.archetypes) {
+        if (arch.share < rules.minShare) assert.deepEqual(arch.matchups, {});
       }
     }
   }
@@ -184,7 +175,12 @@ test("matchup pairs sum to 100 inside every window", () => {
 test("chooseWindow returns the requested trailing window", () => {
   const pioneer = formatById("pioneer");
   assert.equal(chooseWindow(pioneer, 7).days, 7);
-  assert.equal(chooseWindow(pioneer, 90).sampleSize, 4420);
+  const ninety = chooseWindow(pioneer, 90);
+  assert.equal(
+    ninety.sampleSize,
+    ninety.archetypes.reduce((sum, arch) => sum + arch.deckCount, 0)
+  );
+  assert.ok(ninety.sampleSize > chooseWindow(pioneer, 7).sampleSize);
   assert.equal(chooseWindow(pioneer, 30).days, 30);
   assert.equal(chooseWindow(pioneer, 3).days, 30);
 });
@@ -192,49 +188,51 @@ test("chooseWindow returns the requested trailing window", () => {
 test("rendered rows are plain Goldfish links in share order", () => {
   const decks = shown("pioneer", 7);
   const html = renderArchetypeRows(decks);
-  assert.equal(decks[0].name, "Izzet Phoenix");
-  assert.match(
-    html,
-    /<a class="arch-name" href="https:\/\/www\.mtggoldfish\.com\/archetype\/izzet-phoenix-57eb17e3-2b71-4301-99a6-45002ffcfadb" target="_blank" rel="noopener noreferrer">Izzet Phoenix<\/a>/
-  );
+  assert.equal(decks[0].name, "Golgari Midrange");
+  assert.ok(html.includes(`href="${decks[0].goldfishUrl}" target="_blank" rel="noopener noreferrer">${decks[0].name}`));
   assert.equal(html.includes("mana-pip"), false);
   assert.equal(html.includes("trend"), false);
   assert.equal(html.includes('role="button"'), false);
-  assert.ok(html.indexOf("Izzet Phoenix") < html.indexOf(decks[1].name));
+  assert.ok(html.indexOf(`data-id="${decks[0].id}"`) < html.indexOf(`data-id="${decks[1].id}"`));
   const capped = renderArchetypeRows(shown("pioneer", 90));
   assert.equal(capped.match(/<tr /g).length, 15);
 });
 
-test("the visible grid uses row-versus-column rates for that window", () => {
-  const source = windowOf(formatById("pioneer"), 30);
-  const grid = buildMatchupGrid(shown("pioneer", 30));
-  const rakdos = source.archetypes.find((arch) => arch.id === "rakdos-midrange");
-  const phoenix = source.archetypes.find((arch) => arch.id === "izzet-phoenix");
-  assert.equal(grid.decks[0].id, "rakdos-midrange");
-  assert.equal(cell(grid, "rakdos-midrange", "izzet-phoenix").value, rakdos.matchups["izzet-phoenix"]);
-  assert.equal(cell(grid, "izzet-phoenix", "rakdos-midrange").value, phoenix.matchups["rakdos-midrange"]);
-  assert.notEqual(
-    cell(grid, "rakdos-midrange", "izzet-phoenix").value,
-    cell(grid, "izzet-phoenix", "rakdos-midrange").value
+test("stored shares include the retrieved Goldfish paper snapshot", () => {
+  const standard30 = windowOf(formatById("standard"), 30);
+  const landfall = standard30.archetypes.find((arch) => arch.id === "standard-mono-green-landfall-woe");
+  assert.equal(landfall.name, "Mono-Green Landfall");
+  assert.equal(landfall.share, 12.5);
+  assert.equal(landfall.deckCount, 454);
+  assert.equal(
+    landfall.goldfishUrl,
+    "https://www.mtggoldfish.com/archetype/standard-mono-green-landfall-woe"
   );
-  assert.equal(cell(grid, "rakdos-midrange", "rakdos-midrange").kind, "mirror");
+  assert.equal(standard30.sampleSize, 3644);
+});
 
+test("the visible grid uses row-versus-column rates for that window", () => {
+  const shown30 = shown("pioneer", 30);
+  const grid = buildMatchupGrid(shown30);
+  const source = windowOf(formatById("pioneer"), 30);
+  const first = source.archetypes.find((arch) => arch.id === shown30[0].id);
+  const second = source.archetypes.find((arch) => arch.id === shown30[1].id);
+  assert.equal(grid.decks[0].id, shown30[0].id);
+  assert.equal(cell(grid, first.id, second.id).value, first.matchups[second.id]);
+  assert.equal(cell(grid, second.id, first.id).value, second.matchups[first.id]);
+  assert.notEqual(cell(grid, first.id, second.id).value, cell(grid, second.id, first.id).value);
+  assert.equal(cell(grid, first.id, first.id).kind, "mirror");
+
+  const shown7 = shown("pioneer", 7);
+  const shared = shown7.filter((arch) => shown30.some((other) => other.id === arch.id));
+  assert.ok(shared.length >= 2);
   const weekSource = windowOf(formatById("pioneer"), 7);
-  const week = buildMatchupGrid(shown("pioneer", 7));
-  const weekPhoenix = weekSource.archetypes.find((arch) => arch.id === "izzet-phoenix");
-  const weekAzorius = weekSource.archetypes.find((arch) => arch.id === "azorius-control");
-  assert.equal(
-    cell(week, "izzet-phoenix", "azorius-control").value,
-    weekPhoenix.matchups["azorius-control"]
-  );
-  assert.notEqual(
-    weekPhoenix.matchups["azorius-control"],
-    source.archetypes.find((arch) => arch.id === "izzet-phoenix").matchups["azorius-control"]
-  );
-  assert.equal(
-    cell(week, "azorius-control", "izzet-phoenix").value,
-    weekAzorius.matchups["izzet-phoenix"]
-  );
+  const left = shared[0].id;
+  const right = shared[1].id;
+  const weekLeft = weekSource.archetypes.find((arch) => arch.id === left);
+  const monthLeft = source.archetypes.find((arch) => arch.id === left);
+  assert.notEqual(weekLeft.matchups[right], monthLeft.matchups[right]);
+  assert.notEqual(weekLeft.share, monthLeft.share);
 });
 
 test("rendered grid marks mirrors and does not include sub-1.2% decks", () => {

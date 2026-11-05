@@ -2,7 +2,7 @@
 
 Local prototype for browsing Magic: The Gathering format metas — archetype share, win rate, a row-versus-column matchup grid, and a link to each deck on MTGGoldfish.
 
-The numbers are **sample windows**, not historical tournament results and not a live scrape.
+Meta share and deck counts are from the MTGGoldfish paper metagame (last 7, 14, 30, and 90 days), retrieved 2026-11-05. Win rates and matchup cells are demo estimates. Goldfish does not publish those on the metagame pages, and they are not tournament results.
 
 ## Requirements
 
@@ -57,38 +57,34 @@ tests/meta.test.js # Data integrity, cutoff, and grid tests
 README.md          # This file
 ```
 
-## Sample windows
+## Data
 
-`data/meta.json` is shaped so a later live refresh can replace `formats[].windows` without changing the page. `display` holds the shared rules: `minShare` (1.2), `maxArchetypes` (15), `defaultWindowDays` (30), and `windowDays`.
+`data/meta.json` is a snapshot of the [MTGGoldfish paper metagame](https://www.mtggoldfish.com/metagame/) for Standard, Modern, and Pioneer. It was retrieved on 2026-11-05 by requesting each format's full deck list for the last 7, 14, 30, and 90 days (the same periods as the on-page “Show decks from the last” control). `display` still holds `minShare` (1.2), `maxArchetypes` (15), `defaultWindowDays` (30), and `windowDays`.
 
-Each format has a `windows` array. A window has:
+Each window has:
 
 - `days` — 7, 14, 30, or 90
-- `sampleSize` — invented deck count inside that trailing window, dated through `asOf` (`2026-11-05`)
-- `archetypes` — every deck considered for that window, including ones under 1.2% that the page hides
+- `sampleSize` — the sum of the deck counts Goldfish printed next to those archetypes
+- `archetypes` — every archetype Goldfish listed, including ones under 1.2% that this page hides
 
-Each archetype has `id`, `name`, `share`, `winRate`, `goldfishUrl`, and `matchups`. `matchups` is keyed by the other archetype ids in that window. The value is **this deck's** win rate against that opponent. The two directions of a pair add up to 100 in this sample set. Real events include draws and are not represented here.
+Each archetype has `id`, `name`, `share`, `deckCount`, `winRate`, `goldfishUrl`, and `matchups`.
 
-The four windows are different on purpose. A short window is a small, top-heavy sample: fewer decks clear 1.2%, and the leader's share is higher. A longer window is a larger sample: more decks clear 1.2%, shares spread out, and the 90-day window has 17 decks at or above 1.2% so the page keeps only the top 15. Matchup rates also move as the window widens. Which deck leads changes with the window.
+What is real:
 
-### Goldfish links
+- Archetype names, meta share, deck counts, and `goldfishUrl` (the archetype link from that metagame tile).
 
-`goldfishUrl` is a checked `https://www.mtggoldfish.com/archetype/...` page. Two archetype roots redirect away, so those links use the working decklist URL:
+What is still demo:
 
-- Modern Rakdos Scam → `/archetype/modern-rakdos-scam/decks`
-- Pioneer Amalia Combo → `/archetype/pioneer-abzan-amalia-combo/decks` (Goldfish's name is Abzan Amalia Combo)
+- `winRate` and every matchup cell. Those pages do not publish archetype win rates or a matchup matrix. The demo values are a stable filler so win-rate sorting and the grid still work. Pairs among decks at or above 1.2% share add up to 100. Decks under 1.2% have no matchup entries. Do not read them as measured results.
 
-Goldfish uses a different public name for a few decks:
+The four windows are Goldfish's own ranges, not one snapshot copied four times. Which decks clear 1.2%, and which 15 are shown, changes with the window. For example, Pioneer over the last 7 days has 14 decks at or above 1.2%, while Standard over 30 days has more than 15, so the page keeps the top 15.
 
-- Standard Domain Ramp → `/archetype/standard-domain-dmu` (titled Domain)
-- Pioneer Mono-Green Devotion → `/archetype/pioneer-nykthos-ramp` (titled Nykthos Ramp)
-- Modern Izzet Wizard Control → `/archetype/modern-izzet-control` (titled Izzet Control)
-
-The short `/archetype/izzet-phoenix` page is not Pioneer. `/archetype/domain` is Penny Dreadful. Neither is used. Additional decks in the wider windows are the archetype pages linked from that format's Goldfish metagame.
+`goldfishUrl` points at `https://www.mtggoldfish.com/archetype/...` with no extra hash. The header stamp and the note under the date control name the source and mark win rates and matchups as demo.
 
 ## Assumptions
 
-- Shares, win rates, matchups, and sample sizes are invented. A wider window is modeled as a larger trailing sample ending on the same as-of date, not as a separate historical event.
-- Only the Goldfish links were checked against the live site.
+- “Paper” is the tabletop metagame, not the MTGO (`online`) one.
+- Goldfish's published shares can add to a few tenths away from 100 because of rounding.
+- `sampleSize` counts the decks attached to the archetypes Goldfish listed for that window. It is not a separate tournament-count API.
 - Single-page app; no backend or build step.
 - The archetype table stacks into cards on a narrow screen. The matchup grid scrolls sideways, with the row names kept in view.

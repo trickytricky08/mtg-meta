@@ -47,7 +47,10 @@
     }
 
     if (els.stamp) {
-      els.stamp.textContent = "Sample windows · not tournament results";
+      const source = state.data.source;
+      els.stamp.textContent = source
+        ? `${source.name} ${source.slice} meta share · retrieved ${source.retrieved} · win rates & matchups are demo`
+        : "Sample windows · not tournament results";
     }
 
     state.formatId = state.data.formats[0]?.id ?? null;
@@ -162,10 +165,14 @@
     const capNote =
       qualified > shown.length ? ` Top ${maxArchetypes} by share.` : "";
     const decks = Number(win.sampleSize).toLocaleString("en-US");
-    const asOf = state.data.asOf ? ` through ${state.data.asOf}` : "";
+    const source = state.data.source;
+    const attribution = source
+      ? `${source.name} ${source.slice} · last ${win.days} days · retrieved ${source.retrieved}`
+      : `Last ${win.days} days`;
     els.windowNote.textContent =
-      `Sample window · last ${win.days} days${asOf} · ${decks} decks. ` +
-      `Decks at ${minShare}% share or more.${capNote} Not historical tournament results.`;
+      `${attribution} · ${decks} decks in this breakdown. ` +
+      `Decks at ${minShare}% share or more.${capNote} ` +
+      `Win rates and matchup cells are demo estimates, not tournament results.`;
   }
 
   function renderMatchups(shown, win) {

@@ -168,7 +168,7 @@
       .join("");
 
     return `<table class="matchup-table">
-      <caption class="visually-hidden">Win rates read as row versus column. Each value is the row archetype's win rate against the column archetype. Diagonal cells are mirror matches. Sample window rates, not historical tournament results.</caption>
+      <caption class="visually-hidden">Win rates read as row versus column. Each value is the row archetype's win rate against the column archetype. Diagonal cells are mirror matches. Matchup cells are demo estimates, not historical tournament results.</caption>
       <thead>
         <tr>
           <th scope="col" class="matchup-corner"><span class="corner-row">Row</span><span class="corner-vs">vs</span><span class="corner-col">Column</span></th>
