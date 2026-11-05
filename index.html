@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MTG Meta — Format Browser</title>
-  <meta name="description" content="Browse Magic: The Gathering format metas — archetypes, popularity, win rates, and sample lists." />
+  <meta name="description" content="Browse sample Magic: The Gathering format metas — Standard, Modern, and Pioneer archetypes, plus a row-versus-column matchup grid." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
     <header class="header">
       <div class="brand">
         <h1>MTG Meta</h1>
-        <p class="subtitle">Format archetype browser · sample prototype</p>
+        <p class="subtitle">Archetype browser and sample matchup grids · demo prototype</p>
       </div>
       <div class="meta-stamp" id="meta-stamp"></div>
     </header>
@@ -64,14 +64,38 @@
       </table>
     </div>
 
+    <section class="matchup" id="matchup" aria-labelledby="matchup-heading">
+      <div class="matchup-head">
+        <h2 id="matchup-heading">Matchup grid</h2>
+        <p class="matchup-legend">
+          Each cell is the <strong>row</strong> deck's win rate against the <strong>column</strong> deck.
+          Diagonal cells are <strong>mirrors</strong>.
+          Decks stay ordered by meta share. Search and sort apply to the table above, not this grid.
+          <span class="matchup-demo">Sample demo rates — not live tournament results.</span>
+        </p>
+        <ul class="matchup-key" aria-label="Cell color key">
+          <li><span class="swatch wr-high"></span> 56%+ favored</li>
+          <li><span class="swatch wr-up"></span> 52–55.9%</li>
+          <li><span class="swatch wr-even"></span> 48.1–51.9% even</li>
+          <li><span class="swatch wr-down"></span> 44.1–48%</li>
+          <li><span class="swatch wr-low"></span> 44% or lower</li>
+          <li><span class="swatch mirror"></span> Mirror</li>
+        </ul>
+      </div>
+      <div class="matchup-scroll" id="matchup-scroll">
+        <div class="empty">Loading matchup grid…</div>
+      </div>
+    </section>
+
     <section class="detail" id="detail" aria-live="polite"></section>
 
     <footer class="footer">
-      Demo stats only — not live tournament data.
+      Demo stats only — not live tournament data. Matchup cells read row versus column.
       Run locally with <code>python3 -m http.server</code> from this folder.
     </footer>
   </div>
 
+  <script src="js/matchup.js" defer></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>

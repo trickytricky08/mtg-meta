@@ -1,6 +1,6 @@
 /**
- * MTG Meta â€” client-side meta browser
- * Loads data/meta.json, filters/sorts archetypes, shows detail panel.
+ * MTG Meta — client-side meta browser
+ * Loads data/meta.json, filters/sorts archetypes, shows detail and matchup grid.
  */
 
 (() => {
@@ -24,6 +24,7 @@
     tableWrap: document.getElementById("table-wrap"),
     detail: document.getElementById("detail"),
     stamp: document.getElementById("meta-stamp"),
+    matchupScroll: document.getElementById("matchup-scroll"),
   };
 
   async function init() {
@@ -35,11 +36,15 @@
       els.tableWrap.innerHTML =
         `<div class="empty">Could not load <code>data/meta.json</code>. ` +
         `Serve this folder over HTTP (see README). <br><small>${escapeHtml(String(err))}</small></div>`;
+      if (els.matchupScroll) {
+        els.matchupScroll.innerHTML =
+          `<div class="empty">Matchup grid unavailable until meta data loads.</div>`;
+      }
       return;
     }
 
     if (els.stamp && state.data.updated) {
-      els.stamp.textContent = `Sample data Â· updated ${state.data.updated}`;
+      els.stamp.textContent = `Sample data · updated ${state.data.updated}`;
     }
 
     state.formatId = state.data.formats[0]?.id ?? null;
@@ -98,6 +103,13 @@
     els.formatDesc.textContent = fmt.description || "";
     renderStats(fmt);
     renderList();
+    renderMatchups(fmt);
+  }
+
+  function renderMatchups(fmt) {
+    if (!els.matchupScroll || !globalThis.MTGMetaMatchup) return;
+    els.matchupScroll.dataset.format = fmt.id;
+    els.matchupScroll.innerHTML = globalThis.MTGMetaMatchup.renderMatchupTable(fmt.archetypes);
   }
 
   function renderStats(fmt) {
@@ -139,7 +151,7 @@
     if (list.length === 0) {
       els.tbody.innerHTML = "";
       const empty = document.createElement("tr");
-      empty.innerHTML = `<td colspan="5"><div class="empty">No archetypes match â€œ${escapeHtml(state.query)}â€.</div></td>`;
+      empty.innerHTML = `<td colspan="5"><div class="empty">No archetypes match “${escapeHtml(state.query)}”.</div></td>`;
       els.tbody.appendChild(empty);
       return;
     }
@@ -168,7 +180,7 @@
             </td>
             <td class="num" data-label="Win rate"><span class="win-rate${wrClass}">${a.winRate.toFixed(1)}%</span></td>
             <td data-label="Trend"><span class="trend ${escapeAttr(a.trend)}">${trendIcon(a.trend)} ${escapeHtml(a.trendLabel)}</span></td>
-            <td class="num" data-label="">â†’</td>
+            <td class="num" data-label="">→</td>
           </tr>
         `;
       })
@@ -207,7 +219,7 @@
       .map(
         (c) => `
       <li>
-        <span class="qty">${c.count}Ã—</span>
+        <span class="qty">${c.count}×</span>
         <span>${escapeHtml(c.name)}</span>
         <span class="role">${escapeHtml(c.role || "")}</span>
       </li>`
@@ -223,7 +235,7 @@
             <span class="chip">Win rate <strong>${arch.winRate.toFixed(1)}%</strong></span>
             <span class="chip trend ${escapeAttr(arch.trend)}">${trendIcon(arch.trend)} ${escapeHtml(arch.trendLabel)}</span>
           </div>
-          <button type="button" class="close-detail" data-close-detail aria-label="Close detail">Ã—</button>
+          <button type="button" class="close-detail" data-close-detail aria-label="Close detail">×</button>
         </div>
       </div>
       <p class="detail-desc">${escapeHtml(arch.description)}</p>
@@ -234,7 +246,7 @@
         </div>
         <div class="panel">
           <h3>Sideboard notes</h3>
-          <p class="sideboard-notes">${escapeHtml(arch.sideboardNotes || "â€”")}</p>
+          <p class="sideboard-notes">${escapeHtml(arch.sideboardNotes || "—")}</p>
         </div>
       </div>
     `;
@@ -250,9 +262,9 @@
   }
 
   function trendIcon(trend) {
-    if (trend === "up") return "â†‘";
-    if (trend === "down") return "â†“";
-    return "â†’";
+    if (trend === "up") return "↑";
+    if (trend === "down") return "↓";
+    return "→";
   }
 
   function escapeHtml(str) {

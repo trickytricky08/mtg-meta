@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04",
+  "updated": "2026-11-05",
   "formats": [
     {
       "id": "standard",
@@ -23,7 +23,14 @@
             { "name": "Topiary Stomper", "count": 3, "role": "Ramp" },
             { "name": "Sunfall", "count": 2, "role": "Sweeper" }
           ],
-          "sideboardNotes": "Cut soft interaction vs. aggro; bring in more sweepers and grave hate. Keep Binding flexible against midrange."
+          "sideboardNotes": "Cut soft interaction vs. aggro; bring in more sweepers and grave hate. Keep Binding flexible against midrange.",
+          "matchups": {
+            "azorius-control": 46.5,
+            "boros-aggro": 58.0,
+            "dimir-midrange": 51.2,
+            "golgari-midrange": 54.0,
+            "izzet-prowess": 60.5
+          }
         },
         {
           "id": "azorius-control",
@@ -42,7 +49,14 @@
             { "name": "The Wandering Emperor", "count": 3, "role": "Wincon" },
             { "name": "Memory Deluge", "count": 3, "role": "Card draw" }
           ],
-          "sideboardNotes": "Heavy on Rest in Peace / Negate for combo and graveyard decks; add more early removal vs. red aggro."
+          "sideboardNotes": "Heavy on Rest in Peace / Negate for combo and graveyard decks; add more early removal vs. red aggro.",
+          "matchups": {
+            "domain-ramp": 53.5,
+            "boros-aggro": 56.8,
+            "dimir-midrange": 47.4,
+            "golgari-midrange": 52.6,
+            "izzet-prowess": 61.0
+          }
         },
         {
           "id": "boros-aggro",
@@ -61,7 +75,14 @@
             { "name": "Witchstalker Frenzy", "count": 3, "role": "Pump" },
             { "name": "Urabrask's Forge", "count": 2, "role": "Engine" }
           ],
-          "sideboardNotes": "Bring in protection and reach vs. control; add artifact/enchantment hate for Forge mirrors and lockdown decks."
+          "sideboardNotes": "Bring in protection and reach vs. control; add artifact/enchantment hate for Forge mirrors and lockdown decks.",
+          "matchups": {
+            "domain-ramp": 42.0,
+            "azorius-control": 43.2,
+            "dimir-midrange": 55.5,
+            "golgari-midrange": 57.2,
+            "izzet-prowess": 48.8
+          }
         },
         {
           "id": "dimir-midrange",
@@ -80,7 +101,14 @@
             { "name": "Cut Down", "count": 3, "role": "Removal" },
             { "name": "Faerie Mastermind", "count": 3, "role": "Value" }
           ],
-          "sideboardNotes": "Extra discard and Duress vs. control; more cheap removal vs. aggro; grave hate when Domain is popular."
+          "sideboardNotes": "Extra discard and Duress vs. control; more cheap removal vs. aggro; grave hate when Domain is popular.",
+          "matchups": {
+            "domain-ramp": 48.8,
+            "azorius-control": 52.6,
+            "boros-aggro": 44.5,
+            "golgari-midrange": 53.8,
+            "izzet-prowess": 56.4
+          }
         },
         {
           "id": "golgari-midrange",
@@ -99,7 +127,14 @@
             { "name": "Duress", "count": 3, "role": "Disruption" },
             { "name": "Tranquil Frillback", "count": 2, "role": "Hate" }
           ],
-          "sideboardNotes": "Main plan is flexible hate pieces; lean into Frillback and enchantment removal when artifact/enchantment decks spike."
+          "sideboardNotes": "Main plan is flexible hate pieces; lean into Frillback and enchantment removal when artifact/enchantment decks spike.",
+          "matchups": {
+            "domain-ramp": 46.0,
+            "azorius-control": 47.4,
+            "boros-aggro": 42.8,
+            "dimir-midrange": 46.2,
+            "izzet-prowess": 55.0
+          }
         },
         {
           "id": "izzet-prowess",
@@ -118,7 +153,14 @@
             { "name": "Lightning Strike", "count": 3, "role": "Burn" },
             { "name": "Sleight of Hand", "count": 4, "role": "Cantrip" }
           ],
-          "sideboardNotes": "Counters and protection for control matchups; more burn density vs. midrange; avoid flooding the board into Temporary Lockdown."
+          "sideboardNotes": "Counters and protection for control matchups; more burn density vs. midrange; avoid flooding the board into Temporary Lockdown.",
+          "matchups": {
+            "domain-ramp": 39.5,
+            "azorius-control": 39.0,
+            "boros-aggro": 51.2,
+            "dimir-midrange": 43.6,
+            "golgari-midrange": 45.0
+          }
         }
       ]
     },
@@ -144,7 +186,15 @@
             { "name": "Dauthi Voidwalker", "count": 3, "role": "Hate" },
             { "name": "Thoughtseize", "count": 4, "role": "Disruption" }
           ],
-          "sideboardNotes": "Extra discard and Leyline of the Void for graveyard decks; more interaction vs. combo; trim Scam density in mirror."
+          "sideboardNotes": "Extra discard and Leyline of the Void for graveyard decks; more interaction vs. combo; trim Scam density in mirror.",
+          "matchups": {
+            "iw-control": 57.5,
+            "affinity": 54.2,
+            "amulet-titan": 46.8,
+            "yawgmoth": 56.0,
+            "hammer-time": 58.4,
+            "living-end": 44.5
+          }
         },
         {
           "id": "iw-control",
@@ -163,7 +213,15 @@
             { "name": "Preordain", "count": 4, "role": "Cantrip" },
             { "name": "Spell Snare", "count": 2, "role": "Counter" }
           ],
-          "sideboardNotes": "Stack hate for combo; more burn/removal vs. creature decks; Surgical Extraction when grave strategies are high."
+          "sideboardNotes": "Stack hate for combo; more burn/removal vs. creature decks; Surgical Extraction when grave strategies are high.",
+          "matchups": {
+            "rakdos-scam": 42.5,
+            "affinity": 59.0,
+            "amulet-titan": 43.6,
+            "yawgmoth": 51.5,
+            "hammer-time": 55.8,
+            "living-end": 41.2
+          }
         },
         {
           "id": "affinity",
@@ -182,7 +240,15 @@
             { "name": "Cranial Plating", "count": 3, "role": "Finisher" },
             { "name": "Memnite", "count": 4, "role": "Threat" }
           ],
-          "sideboardNotes": "Wear // Tear and Nature's Claim from opponents hurt; side in counters and resilience; respect Stony Silence slots."
+          "sideboardNotes": "Wear // Tear and Nature's Claim from opponents hurt; side in counters and resilience; respect Stony Silence slots.",
+          "matchups": {
+            "rakdos-scam": 45.8,
+            "iw-control": 41.0,
+            "amulet-titan": 57.4,
+            "yawgmoth": 53.2,
+            "hammer-time": 49.0,
+            "living-end": 52.6
+          }
         },
         {
           "id": "amulet-titan",
@@ -201,7 +267,15 @@
             { "name": "Arboreal Grazer", "count": 4, "role": "Enabler" },
             { "name": "Cultivator Colossus", "count": 1, "role": "Finisher" }
           ],
-          "sideboardNotes": "Dismember / Endurance packages for creature mirrors; bounce and interaction vs. hate bears; keep Pact density high."
+          "sideboardNotes": "Dismember / Endurance packages for creature mirrors; bounce and interaction vs. hate bears; keep Pact density high.",
+          "matchups": {
+            "rakdos-scam": 53.2,
+            "iw-control": 56.4,
+            "affinity": 42.6,
+            "yawgmoth": 44.8,
+            "hammer-time": 51.0,
+            "living-end": 48.2
+          }
         },
         {
           "id": "yawgmoth",
@@ -220,7 +294,15 @@
             { "name": "Orcish Bowmasters", "count": 3, "role": "Hate" },
             { "name": "Endurance", "count": 2, "role": "Hate" }
           ],
-          "sideboardNotes": "Extra hate bears and Force of Vigor for artifact/enchantment strategies; trim combo pieces vs. heavy interaction."
+          "sideboardNotes": "Extra hate bears and Force of Vigor for artifact/enchantment strategies; trim combo pieces vs. heavy interaction.",
+          "matchups": {
+            "rakdos-scam": 44.0,
+            "iw-control": 48.5,
+            "affinity": 46.8,
+            "amulet-titan": 55.2,
+            "hammer-time": 47.5,
+            "living-end": 54.0
+          }
         },
         {
           "id": "hammer-time",
@@ -239,7 +321,15 @@
             { "name": "Goblin Engineer", "count": 3, "role": "Tutor" },
             { "name": "Urza's Saga", "count": 4, "role": "Engine" }
           ],
-          "sideboardNotes": "More protection and discard hate; respect Leyline of Sanctity and Stony Silence — have alternate plans ready."
+          "sideboardNotes": "More protection and discard hate; respect Leyline of Sanctity and Stony Silence — have alternate plans ready.",
+          "matchups": {
+            "rakdos-scam": 41.6,
+            "iw-control": 44.2,
+            "affinity": 51.0,
+            "amulet-titan": 49.0,
+            "yawgmoth": 52.5,
+            "living-end": 46.4
+          }
         },
         {
           "id": "living-end",
@@ -258,7 +348,178 @@
             { "name": "Grief", "count": 4, "role": "Disruption" },
             { "name": "Force of Negation", "count": 3, "role": "Protection" }
           ],
-          "sideboardNotes": "Force of Vigor and Endurance fights; bring more interaction vs. hate; keep cascade density for consistency."
+          "sideboardNotes": "Force of Vigor and Endurance fights; bring more interaction vs. hate; keep cascade density for consistency.",
+          "matchups": {
+            "rakdos-scam": 55.5,
+            "iw-control": 58.8,
+            "affinity": 47.4,
+            "amulet-titan": 51.8,
+            "yawgmoth": 46.0,
+            "hammer-time": 53.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "pioneer",
+      "name": "Pioneer",
+      "description": "Non-rotating format using cards from Return to Ravnica forward.",
+      "archetypes": [
+        {
+          "id": "rakdos-midrange",
+          "name": "Rakdos Midrange",
+          "colors": ["B", "R"],
+          "share": 17.6,
+          "winRate": 53.8,
+          "trend": "stable",
+          "trendLabel": "Stable",
+          "description": "Thoughtseize-backed midrange that trades resources early, then closes with Fable tokens and Sheoldred. A flexible fair deck that punishes clunky draws and graveyard-dependent combo.",
+          "highlights": [
+            { "name": "Thoughtseize", "count": 4, "role": "Disruption" },
+            { "name": "Fatal Push", "count": 4, "role": "Removal" },
+            { "name": "Bloodtithe Harvester", "count": 4, "role": "Threat" },
+            { "name": "Fable of the Mirror-Breaker", "count": 4, "role": "Engine" },
+            { "name": "Sheoldred, the Apocalypse", "count": 3, "role": "Finisher" },
+            { "name": "Bonecrusher Giant", "count": 4, "role": "Removal" }
+          ],
+          "sideboardNotes": "Extra grave hate and cheap removal when Phoenix and Amalia are popular. Bring Duress and hand disruption against control; trim slow threats versus Convoke.",
+          "matchups": {
+            "izzet-phoenix": 56.4,
+            "azorius-control": 51.8,
+            "mono-green-devotion": 45.2,
+            "amalia-combo": 57.0,
+            "boros-convoke": 50.6
+          }
+        },
+        {
+          "id": "izzet-phoenix",
+          "name": "Izzet Phoenix",
+          "colors": ["U", "R"],
+          "share": 14.8,
+          "winRate": 52.4,
+          "trend": "up",
+          "trendLabel": "Rising",
+          "description": "Spell-count aggro that fills the graveyard and recurs Arclight Phoenix once three spells resolve in a turn. Explosive when the graveyard stays online, and soft to graveyard hate.",
+          "highlights": [
+            { "name": "Arclight Phoenix", "count": 4, "role": "Threat" },
+            { "name": "Picklock Prankster", "count": 4, "role": "Enabler" },
+            { "name": "Consider", "count": 4, "role": "Cantrip" },
+            { "name": "Sleight of Hand", "count": 4, "role": "Cantrip" },
+            { "name": "Lightning Axe", "count": 3, "role": "Removal" },
+            { "name": "Crackling Drake", "count": 2, "role": "Finisher" }
+          ],
+          "sideboardNotes": "Mystical Dispute and spell-pierce effects against control. More removal and a faster clock versus Convoke. Respect Rest in Peace by keeping alternate threats.",
+          "matchups": {
+            "rakdos-midrange": 43.6,
+            "azorius-control": 58.2,
+            "mono-green-devotion": 48.4,
+            "amalia-combo": 47.1,
+            "boros-convoke": 53.5
+          }
+        },
+        {
+          "id": "azorius-control",
+          "name": "Azorius Control",
+          "colors": ["W", "U"],
+          "share": 12.5,
+          "winRate": 51.9,
+          "trend": "stable",
+          "trendLabel": "Stable",
+          "description": "Verdict and Teferi control that answers the board, then takes over with planeswalkers and card draw. Strong into creature combo and wide aggro, strained by uncounterable top-end and graveyard recursion.",
+          "highlights": [
+            { "name": "The Wandering Emperor", "count": 3, "role": "Wincon" },
+            { "name": "Supreme Verdict", "count": 4, "role": "Sweeper" },
+            { "name": "Teferi, Hero of Dominaria", "count": 3, "role": "Wincon" },
+            { "name": "Memory Deluge", "count": 2, "role": "Card draw" },
+            { "name": "Dovin's Veto", "count": 3, "role": "Counter" },
+            { "name": "Portable Hole", "count": 4, "role": "Removal" }
+          ],
+          "sideboardNotes": "Rest in Peace against Phoenix and Amalia. Extra early removal versus Convoke. Mystical Dispute in control mirrors.",
+          "matchups": {
+            "rakdos-midrange": 48.2,
+            "izzet-phoenix": 41.8,
+            "mono-green-devotion": 44.0,
+            "amalia-combo": 55.6,
+            "boros-convoke": 60.2
+          }
+        },
+        {
+          "id": "mono-green-devotion",
+          "name": "Mono-Green Devotion",
+          "colors": ["G"],
+          "share": 11.4,
+          "winRate": 54.1,
+          "trend": "up",
+          "trendLabel": "Rising",
+          "description": "Nykthos ramp that powers out Cavalier, Karn, and Storm the Festival ahead of schedule. Goes over fair midrange and control; the plan is slower than all-in creature combo and very wide aggro.",
+          "highlights": [
+            { "name": "Nykthos, Shrine to Nyx", "count": 4, "role": "Engine" },
+            { "name": "Elvish Mystic", "count": 4, "role": "Ramp" },
+            { "name": "Old-Growth Troll", "count": 4, "role": "Threat" },
+            { "name": "Cavalier of Thorns", "count": 4, "role": "Threat" },
+            { "name": "Karn, the Great Creator", "count": 4, "role": "Engine" },
+            { "name": "Storm the Festival", "count": 4, "role": "Tutor" }
+          ],
+          "sideboardNotes": "Karnboard artifacts such as Damping Sphere and Pithing Needle for combo and planeswalkers. More interaction when Convoke and Amalia are the pairings to beat.",
+          "matchups": {
+            "rakdos-midrange": 54.8,
+            "izzet-phoenix": 51.6,
+            "azorius-control": 56.0,
+            "amalia-combo": 43.5,
+            "boros-convoke": 46.8
+          }
+        },
+        {
+          "id": "amalia-combo",
+          "name": "Amalia Combo",
+          "colors": ["W", "B", "G"],
+          "share": 9.7,
+          "winRate": 53.2,
+          "trend": "down",
+          "trendLabel": "Falling",
+          "description": "Creature combo that grows Wildgrowth Walker and Amalia with lifegain triggers, then explores into a huge board or a combo kill. Return to the Ranks rebuilds after a sweeper if the graveyard stays online.",
+          "highlights": [
+            { "name": "Amalia Benavides Aguirre", "count": 4, "role": "Combo" },
+            { "name": "Wildgrowth Walker", "count": 4, "role": "Combo" },
+            { "name": "Prosperous Innkeeper", "count": 4, "role": "Enabler" },
+            { "name": "Collected Company", "count": 4, "role": "Tutor" },
+            { "name": "Return to the Ranks", "count": 4, "role": "Combo" },
+            { "name": "Lunarch Veteran", "count": 4, "role": "Enabler" }
+          ],
+          "sideboardNotes": "Protection and discard for Thoughtseize decks. Extra ways to fight grave hate. Against control, keep Company and a plan to play through Verdict.",
+          "matchups": {
+            "rakdos-midrange": 43.0,
+            "izzet-phoenix": 52.9,
+            "azorius-control": 44.4,
+            "mono-green-devotion": 56.5,
+            "boros-convoke": 46.2
+          }
+        },
+        {
+          "id": "boros-convoke",
+          "name": "Boros Convoke",
+          "colors": ["R", "W"],
+          "share": 8.9,
+          "winRate": 50.6,
+          "trend": "stable",
+          "trendLabel": "Stable",
+          "description": "One- and two-drop swarm that convokes Venerated Loxodon and Knight-Errant of Eos for a sudden oversized board. Wins before slow decks set up, and folds when a sweeper lines up with the first big turn.",
+          "highlights": [
+            { "name": "Novice Inspector", "count": 4, "role": "Threat" },
+            { "name": "Gleeful Demolition", "count": 4, "role": "Enabler" },
+            { "name": "Imodane's Recruiter", "count": 4, "role": "Threat" },
+            { "name": "Venerated Loxodon", "count": 4, "role": "Payoff" },
+            { "name": "Knight-Errant of Eos", "count": 4, "role": "Payoff" },
+            { "name": "Warleader's Call", "count": 3, "role": "Engine" }
+          ],
+          "sideboardNotes": "Loran's Escape and other protection against Verdict and removal. Artifact hate for Karn and Portable Hole. Trim the slowest payoffs versus decks that race harder than you.",
+          "matchups": {
+            "rakdos-midrange": 49.4,
+            "izzet-phoenix": 46.5,
+            "azorius-control": 39.8,
+            "mono-green-devotion": 53.2,
+            "amalia-combo": 53.8
+          }
         }
       ]
     }
