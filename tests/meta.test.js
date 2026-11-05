@@ -4,8 +4,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 const {
   buildMatchupGrid,
-  chooseSnapshot,
-  sortArchetypes,
+  chooseWindow,
+  visibleArchetypes,
   renderArchetypeRows,
   formatWinRate,
   rateBand,
@@ -17,22 +17,9 @@ const data = JSON.parse(
 );
 const indexHtml = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8");
 const appJs = fs.readFileSync(path.join(__dirname, "../js/app.js"), "utf8");
+const rules = data.display;
 
-const ARCH_FIELDS = [
-  "id",
-  "name",
-  "colors",
-  "share",
-  "winRate",
-  "trend",
-  "trendLabel",
-  "goldfishUrl",
-  "matchups",
-];
-const MANA = new Set(["W", "U", "B", "R", "G", "C"]);
-const TRENDS = new Set(["up", "down", "stable"]);
-
-const GOLDFISH = {
+const KEPT_LINKS = {
   "standard/domain-ramp": "https://www.mtggoldfish.com/archetype/standard-domain-dmu",
   "standard/azorius-control": "https://www.mtggoldfish.com/archetype/standard-azorius-control-woe",
   "standard/boros-aggro": "https://www.mtggoldfish.com/archetype/standard-boros-aggro-woe",
@@ -63,10 +50,14 @@ function formatById(id) {
   return fmt;
 }
 
-function snapshot(fmtId, date) {
-  const snap = formatById(fmtId).snapshots.find((entry) => entry.date === date);
-  assert.ok(snap, `${fmtId} ${date}`);
-  return snap;
+function windowOf(fmt, days) {
+  const win = fmt.windows.find((entry) => entry.days === days);
+  assert.ok(win, `${fmt.id} ${days}`);
+  return win;
+}
+
+function shown(fmtId, days) {
+  return visibleArchetypes(windowOf(formatById(fmtId), days).archetypes, rules);
 }
 
 function cell(grid, rowId, colId) {
@@ -76,242 +67,197 @@ function cell(grid, rowId, colId) {
   return grid.cells[row][col];
 }
 
-test("dataset lists Standard, Modern, and Pioneer sample snapshots", () => {
-  assert.equal(data.dataKind, "sample-snapshots");
+test("dataset is three formats of trailing sample windows", () => {
+  assert.equal(data.dataKind, "sample-windows");
   assert.match(data.disclaimer, /not historical tournament results/i);
-  assert.equal(data.refresh.mode, "sample-snapshots");
-  assert.equal(data.refresh.replace, "formats[].snapshots");
+  assert.equal(data.refresh.replace, "formats[].windows");
+  assert.equal(rules.minShare, 1.2);
+  assert.equal(rules.maxArchetypes, 15);
+  assert.equal(rules.defaultWindowDays, 30);
+  assert.deepEqual(rules.windowDays, [7, 14, 30, 90]);
   assert.deepEqual(
     data.formats.map((fmt) => fmt.id),
     ["standard", "modern", "pioneer"]
   );
-  assert.deepEqual(
-    data.formats.map((fmt) => fmt.name),
-    ["Standard", "Modern", "Pioneer"]
-  );
 });
 
-test("each format has a latest snapshot and an earlier distinct one", () => {
+test("each format has 7, 14, 30, and 90 day windows with growing samples", () => {
   for (const fmt of data.formats) {
-    assert.ok(fmt.snapshots.length >= 2, fmt.id);
-    const dates = fmt.snapshots.map((snap) => snap.date);
-    assert.deepEqual(dates, [...dates].sort((a, b) => b.localeCompare(a)));
-    assert.deepEqual(dates, ["2026-11-05", "2026-09-18"]);
-    for (const snap of fmt.snapshots) {
-      assert.match(snap.date, /^\d{4}-\d{2}-\d{2}$/);
-      assert.equal(typeof snap.sampleSize, "number");
-      assert.ok(Number.isInteger(snap.sampleSize) && snap.sampleSize > 0);
-      assert.ok(snap.archetypes.length >= 6, fmt.id);
+    assert.deepEqual(
+      fmt.windows.map((win) => win.days),
+      [7, 14, 30, 90]
+    );
+    const sizes = fmt.windows.map((win) => win.sampleSize);
+    assert.deepEqual(sizes, [...sizes].sort((a, b) => a - b));
+    assert.ok(sizes[0] < sizes[3]);
+    for (const win of fmt.windows) {
+      assert.ok(win.archetypes.length > 15, `${fmt.id} ${win.days}`);
     }
-    assert.notEqual(fmt.snapshots[0].sampleSize, fmt.snapshots[1].sampleSize);
   }
 });
 
-test("latest snapshot keeps the previous Standard and Modern archetype lists", () => {
-  assert.deepEqual(
-    snapshot("standard", "2026-11-05").archetypes.map((arch) => arch.id),
-    [
-      "domain-ramp",
-      "azorius-control",
-      "boros-aggro",
-      "dimir-midrange",
-      "golgari-midrange",
-      "izzet-prowess",
-    ]
-  );
-  assert.deepEqual(
-    snapshot("modern", "2026-11-05").archetypes.map((arch) => arch.id),
-    [
-      "rakdos-scam",
-      "iw-control",
-      "affinity",
-      "amulet-titan",
-      "yawgmoth",
-      "hammer-time",
-      "living-end",
-    ]
-  );
-  assert.deepEqual(
-    snapshot("pioneer", "2026-11-05").archetypes.map((arch) => arch.name),
-    [
-      "Rakdos Midrange",
-      "Izzet Phoenix",
-      "Azorius Control",
-      "Mono-Green Devotion",
-      "Amalia Combo",
-      "Boros Convoke",
-    ]
-  );
+test("visible decks are at least 1.2% share and never more than 15", () => {
+  for (const fmt of data.formats) {
+    const counts = [];
+    for (const days of [7, 14, 30, 90]) {
+      const win = windowOf(fmt, days);
+      const below = win.archetypes.filter((arch) => arch.share < 1.2);
+      const qualified = win.archetypes.filter((arch) => arch.share >= 1.2);
+      const visible = visibleArchetypes(win.archetypes, rules);
+      counts.push(visible.length);
+      if (days === 7) assert.ok(below.length > 0, fmt.id);
+      if (days === 90) {
+        qualified.sort((a, b) => b.share - a.share);
+        assert.ok(qualified.length > 15, fmt.id);
+        assert.equal(visible.length, 15);
+        assert.ok(qualified[15].share >= 1.2);
+        assert.equal(
+          visible.some((arch) => arch.id === qualified[15].id),
+          false
+        );
+      }
+      for (const arch of visible) assert.ok(arch.share >= 1.2);
+      assert.deepEqual(
+        visible.map((arch) => arch.share),
+        [...visible.map((arch) => arch.share)].sort((a, b) => b - a)
+      );
+    }
+    assert.deepEqual(new Set(counts).size, 4, fmt.id);
+  }
 });
 
-test("every archetype in every snapshot has stats, a Goldfish URL, and matchups", () => {
+test("the four windows show different decks and different matchup rates", () => {
   for (const fmt of data.formats) {
-    for (const snap of fmt.snapshots) {
+    const lists = [7, 14, 30, 90].map((days) =>
+      shown(fmt.id, days)
+        .map((arch) => arch.id)
+        .join("|")
+    );
+    assert.equal(new Set(lists).size, 4, fmt.id);
+    const short = windowOf(fmt, 7);
+    const mid = windowOf(fmt, 30);
+    const deck = short.archetypes[0];
+    const opponent = Object.keys(deck.matchups)[0];
+    const other = mid.archetypes.find((arch) => arch.id === deck.id);
+    assert.notEqual(deck.matchups[opponent], other.matchups[opponent]);
+    assert.notEqual(deck.share, other.share);
+  }
+});
+
+test("kept Goldfish URLs stay on the same pages across windows", () => {
+  for (const fmt of data.formats) {
+    for (const win of fmt.windows) {
       const ids = new Set();
-      for (const arch of snap.archetypes) {
-        for (const key of ARCH_FIELDS) {
-          assert.ok(arch[key] !== undefined && arch[key] !== "", `${fmt.id}/${arch.id} ${key}`);
-        }
-        assert.equal(arch.description, undefined);
-        assert.equal(arch.highlights, undefined);
-        assert.equal(arch.sideboardNotes, undefined);
-        assert.ok(!ids.has(arch.id), arch.id);
+      for (const arch of win.archetypes) {
+        assert.ok(!ids.has(arch.id));
         ids.add(arch.id);
-        for (const color of arch.colors) assert.ok(MANA.has(color), color);
-        assert.ok(arch.share > 0 && arch.share <= 100);
-        assert.ok(arch.winRate > 0 && arch.winRate < 100);
-        assert.ok(TRENDS.has(arch.trend));
+        assert.equal(arch.trend, undefined);
+        assert.equal(arch.colors, undefined);
         assert.match(arch.goldfishUrl, /^https:\/\/www\.mtggoldfish\.com\/archetype\/.+/);
-        assert.equal(arch.goldfishUrl, GOLDFISH[`${fmt.id}/${arch.id}`]);
+        const kept = KEPT_LINKS[`${fmt.id}/${arch.id}`];
+        if (kept) assert.equal(arch.goldfishUrl, kept);
       }
     }
   }
 });
 
-test("the same deck keeps its Goldfish URL across snapshots", () => {
+test("matchup pairs sum to 100 inside every window", () => {
   for (const fmt of data.formats) {
-    const [latest, earlier] = fmt.snapshots;
-    for (const arch of latest.archetypes) {
-      const previous = earlier.archetypes.find((entry) => entry.id === arch.id);
-      assert.equal(previous.goldfishUrl, arch.goldfishUrl);
-    }
-  }
-});
-
-test("matchup matrix is complete and each pair sums to 100 in every snapshot", () => {
-  for (const fmt of data.formats) {
-    for (const snap of fmt.snapshots) {
-      const ids = snap.archetypes.map((arch) => arch.id);
-      for (const arch of snap.archetypes) {
+    for (const win of fmt.windows) {
+      const byId = new Map(win.archetypes.map((arch) => [arch.id, arch]));
+      for (const arch of win.archetypes) {
         assert.deepEqual(
           Object.keys(arch.matchups).sort(),
-          ids.filter((id) => id !== arch.id).sort(),
-          `${fmt.id}/${snap.date}/${arch.id}`
+          win.archetypes.map((entry) => entry.id).filter((id) => id !== arch.id).sort()
         );
         for (const [opponentId, rate] of Object.entries(arch.matchups)) {
-          assert.equal(typeof rate, "number");
-          assert.ok(rate > 0 && rate < 100);
-          const opponent = snap.archetypes.find((entry) => entry.id === opponentId);
-          assert.ok(Math.abs(rate + opponent.matchups[arch.id] - 100) < 1e-6);
+          assert.ok(Math.abs(rate + byId.get(opponentId).matchups[arch.id] - 100) < 1e-6);
         }
       }
     }
   }
 });
 
-test("an earlier snapshot changes both table stats and matchup cells", () => {
-  const latestStd = snapshot("standard", "2026-11-05");
-  const earlierStd = snapshot("standard", "2026-09-18");
-  const latestDomain = latestStd.archetypes.find((arch) => arch.id === "domain-ramp");
-  const earlierDomain = earlierStd.archetypes.find((arch) => arch.id === "domain-ramp");
-  assert.equal(latestDomain.matchups["azorius-control"], 46.5);
-  assert.notEqual(earlierDomain.matchups["azorius-control"], 46.5);
-  assert.notEqual(earlierDomain.share, latestDomain.share);
-  const earlierLeader = [...earlierStd.archetypes].sort((a, b) => b.share - a.share)[0];
-  assert.equal(earlierLeader.id, "boros-aggro");
-
-  const latestPio = snapshot("pioneer", "2026-11-05");
-  const earlierPio = snapshot("pioneer", "2026-09-18");
-  const latestRakdos = latestPio.archetypes.find((arch) => arch.id === "rakdos-midrange");
-  const earlierRakdos = earlierPio.archetypes.find((arch) => arch.id === "rakdos-midrange");
-  assert.equal(latestRakdos.matchups["izzet-phoenix"], 56.4);
-  assert.notEqual(earlierRakdos.matchups["izzet-phoenix"], 56.4);
-  const pioneerLeader = [...earlierPio.archetypes].sort((a, b) => b.share - a.share)[0];
-  assert.equal(pioneerLeader.id, "izzet-phoenix");
-});
-
-test("chooseSnapshot prefers the requested date and otherwise the newest", () => {
+test("chooseWindow returns the requested trailing window", () => {
   const pioneer = formatById("pioneer");
-  assert.equal(chooseSnapshot(pioneer, "2026-09-18").date, "2026-09-18");
-  assert.equal(chooseSnapshot(pioneer, "2026-11-05").sampleSize, 1390);
-  assert.equal(chooseSnapshot(pioneer, "1999-01-01").date, "2026-11-05");
-  assert.equal(chooseSnapshot(pioneer, null).date, "2026-11-05");
+  assert.equal(chooseWindow(pioneer, 7).days, 7);
+  assert.equal(chooseWindow(pioneer, 90).sampleSize, 4420);
+  assert.equal(chooseWindow(pioneer, 30).days, 30);
+  assert.equal(chooseWindow(pioneer, 3).days, 30);
 });
 
-test("table sort changes row order and does not follow the matchup share order", () => {
-  const archetypes = snapshot("pioneer", "2026-09-18").archetypes;
-  const byName = sortArchetypes(archetypes, "name-asc").map((arch) => arch.name);
-  assert.equal(byName[0], "Amalia Combo");
-  assert.equal(byName[byName.length - 1], "Rakdos Midrange");
-  const byShare = sortArchetypes(archetypes, "share-desc").map((arch) => arch.id);
-  assert.equal(byShare[0], "izzet-phoenix");
-  const grid = buildMatchupGrid(archetypes);
-  assert.equal(grid.decks[0].id, "izzet-phoenix");
-});
-
-test("rendered names are Goldfish links and rows are not buttons", () => {
-  const html = renderArchetypeRows(snapshot("pioneer", "2026-11-05").archetypes, "share-desc");
+test("rendered rows are plain Goldfish links in share order", () => {
+  const decks = shown("pioneer", 7);
+  const html = renderArchetypeRows(decks);
+  assert.equal(decks[0].name, "Izzet Phoenix");
   assert.match(
     html,
-    /<a class="arch-name" href="https:\/\/www\.mtggoldfish\.com\/archetype\/pioneer-rakdos-midrange" target="_blank" rel="noopener noreferrer">Rakdos Midrange<\/a>/
+    /<a class="arch-name" href="https:\/\/www\.mtggoldfish\.com\/archetype\/izzet-phoenix-57eb17e3-2b71-4301-99a6-45002ffcfadb" target="_blank" rel="noopener noreferrer">Izzet Phoenix<\/a>/
   );
-  assert.match(
-    html,
-    /href="https:\/\/www\.mtggoldfish\.com\/archetype\/izzet-phoenix-57eb17e3-2b71-4301-99a6-45002ffcfadb"/
-  );
-  assert.match(
-    html,
-    /href="https:\/\/www\.mtggoldfish\.com\/archetype\/pioneer-abzan-amalia-combo\/decks"/
-  );
+  assert.equal(html.includes("mana-pip"), false);
+  assert.equal(html.includes("trend"), false);
   assert.equal(html.includes('role="button"'), false);
-  assert.equal(html.includes("tabindex"), false);
-  assert.match(html, /data-id="rakdos-midrange"/);
-  const sorted = renderArchetypeRows(snapshot("pioneer", "2026-09-18").archetypes, "name-asc");
-  assert.ok(sorted.indexOf("Amalia Combo") < sorted.indexOf("Boros Convoke"));
-  assert.ok(sorted.indexOf("data-id=\"amalia-combo\"") < sorted.indexOf("data-id=\"izzet-phoenix\""));
+  assert.ok(html.indexOf("Izzet Phoenix") < html.indexOf(decks[1].name));
+  const capped = renderArchetypeRows(shown("pioneer", 90));
+  assert.equal(capped.match(/<tr /g).length, 15);
 });
 
-test("grid cell is the row deck's win rate against the column deck", () => {
-  const grid = buildMatchupGrid(snapshot("standard", "2026-11-05").archetypes);
-  assert.equal(cell(grid, "domain-ramp", "azorius-control").value, 46.5);
-  assert.equal(cell(grid, "azorius-control", "domain-ramp").value, 53.5);
-  assert.equal(cell(grid, "domain-ramp", "domain-ramp").kind, "mirror");
-
-  const earlier = buildMatchupGrid(snapshot("standard", "2026-09-18").archetypes);
+test("the visible grid uses row-versus-column rates for that window", () => {
+  const source = windowOf(formatById("pioneer"), 30);
+  const grid = buildMatchupGrid(shown("pioneer", 30));
+  const rakdos = source.archetypes.find((arch) => arch.id === "rakdos-midrange");
+  const phoenix = source.archetypes.find((arch) => arch.id === "izzet-phoenix");
+  assert.equal(grid.decks[0].id, "rakdos-midrange");
+  assert.equal(cell(grid, "rakdos-midrange", "izzet-phoenix").value, rakdos.matchups["izzet-phoenix"]);
+  assert.equal(cell(grid, "izzet-phoenix", "rakdos-midrange").value, phoenix.matchups["rakdos-midrange"]);
   assert.notEqual(
-    cell(earlier, "domain-ramp", "azorius-control").value,
-    cell(grid, "domain-ramp", "azorius-control").value
+    cell(grid, "rakdos-midrange", "izzet-phoenix").value,
+    cell(grid, "izzet-phoenix", "rakdos-midrange").value
   );
-  assert.equal(cell(earlier, "domain-ramp", "domain-ramp").kind, "mirror");
+  assert.equal(cell(grid, "rakdos-midrange", "rakdos-midrange").kind, "mirror");
 
-  const pioneer = buildMatchupGrid(snapshot("pioneer", "2026-11-05").archetypes);
-  assert.equal(cell(pioneer, "rakdos-midrange", "izzet-phoenix").value, 56.4);
-  assert.equal(cell(pioneer, "izzet-phoenix", "rakdos-midrange").value, 43.6);
-
-  const modern = buildMatchupGrid(snapshot("modern", "2026-11-05").archetypes);
-  assert.equal(cell(modern, "living-end", "iw-control").value, 58.8);
-  assert.equal(cell(modern, "iw-control", "living-end").value, 41.2);
+  const weekSource = windowOf(formatById("pioneer"), 7);
+  const week = buildMatchupGrid(shown("pioneer", 7));
+  const weekPhoenix = weekSource.archetypes.find((arch) => arch.id === "izzet-phoenix");
+  const weekAzorius = weekSource.archetypes.find((arch) => arch.id === "azorius-control");
+  assert.equal(
+    cell(week, "izzet-phoenix", "azorius-control").value,
+    weekPhoenix.matchups["azorius-control"]
+  );
+  assert.notEqual(
+    weekPhoenix.matchups["azorius-control"],
+    source.archetypes.find((arch) => arch.id === "izzet-phoenix").matchups["azorius-control"]
+  );
+  assert.equal(
+    cell(week, "azorius-control", "izzet-phoenix").value,
+    weekAzorius.matchups["izzet-phoenix"]
+  );
 });
 
-test("rendered grid shows JSON percents, mirrors, and row versus column", () => {
-  const html = renderMatchupTable(snapshot("standard", "2026-11-05").archetypes);
-  assert.match(html, /class="matchup-corner"[\s\S]*Row[\s\S]*vs[\s\S]*Column/);
+test("rendered grid marks mirrors and does not include sub-1.2% decks", () => {
+  const html = renderMatchupTable(shown("standard", 90));
   assert.match(html, /row versus column/i);
   assert.match(html, /not historical tournament results/i);
-  assert.match(html, /data-row="domain-ramp" data-col="azorius-control"[^>]*>46\.5%/);
-  assert.match(html, /data-row="azorius-control" data-col="domain-ramp"[^>]*>53\.5%/);
-  assert.match(html, /data-row="domain-ramp" data-col="domain-ramp"[^>]*>Mirror</);
-
-  const earlier = renderMatchupTable(snapshot("pioneer", "2026-09-18").archetypes);
-  const phoenix = snapshot("pioneer", "2026-09-18").archetypes.find((arch) => arch.id === "izzet-phoenix");
-  const rate = phoenix.matchups["rakdos-midrange"].toFixed(1);
-  assert.match(earlier, new RegExp(`data-row="izzet-phoenix" data-col="rakdos-midrange"[^>]*>${rate}%`));
-  assert.doesNotMatch(earlier, /data-row="izzet-phoenix" data-col="rakdos-midrange"[^>]*>43\.6%/);
+  assert.equal(html.includes("mana-pip"), false);
+  assert.equal((html.match(/class="matchup-rowname"/g) || []).length, 15);
+  const hidden = windowOf(formatById("standard"), 90).archetypes.filter((arch) => arch.share >= 1.2).slice(15);
+  for (const arch of hidden) {
+    assert.equal(html.includes(`data-row="${arch.id}"`), false);
+  }
 });
 
 test("render escapes names and marks missing rates", () => {
   const html = renderMatchupTable([
-    { id: "a", name: `<A & "B">`, share: 1, colors: ["U"], matchups: { b: 60 } },
-    { id: "b", name: "Bee", share: 2, colors: ["R"], matchups: {} },
+    { id: "a", name: `<A & "B">`, share: 2, matchups: { b: 60 } },
+    { id: "b", name: "Bee", share: 1, matchups: {} },
   ]);
   assert.equal(html.includes("<A"), false);
   assert.match(html, /&lt;A &amp; &quot;B&quot;&gt;/);
-  assert.match(html, /class="matchup-cell wr-high" data-row="a" data-col="b"/);
   assert.match(html, />60\.0%</);
   assert.match(html, /data-row="b" data-col="a"[^>]*>—</);
 });
 
-test("win-rate bands and formatting match the legend", () => {
+test("win-rate bands still match the legend", () => {
   assert.equal(rateBand(56), "wr-high");
   assert.equal(rateBand(52), "wr-up");
   assert.equal(rateBand(50), "wr-even");
@@ -320,13 +266,18 @@ test("win-rate bands and formatting match the legend", () => {
   assert.equal(formatWinRate(46.5), "46.5%");
 });
 
-test("the page has a date filter and no search field or detail panel", () => {
+test("the page has a trailing-window control and no sort, trend, search, or detail", () => {
+  assert.match(indexHtml, /Show data for the last/);
+  assert.match(indexHtml, /id="window"/);
+  assert.match(indexHtml, /<option value="7">7 days<\/option>/);
+  assert.match(indexHtml, /<option value="14">14 days<\/option>/);
+  assert.match(indexHtml, /<option value="30" selected>30 days<\/option>/);
+  assert.match(indexHtml, /<option value="90">90 days<\/option>/);
+  assert.equal(indexHtml.includes('id="sort"'), false);
   assert.equal(indexHtml.includes('id="search"'), false);
   assert.equal(indexHtml.includes('id="detail"'), false);
-  assert.match(indexHtml, /id="snapshot"/);
-  assert.match(indexHtml, /Sample snapshot/);
+  assert.equal(indexHtml.includes(">Trend<"), false);
+  assert.equal(appJs.includes("state.sort"), false);
   assert.equal(appJs.includes("renderDetail"), false);
-  assert.equal(appJs.includes("state.query"), false);
-  assert.equal(appJs.includes('role="button"'), false);
-  assert.match(appJs, /snapshotDate/);
+  assert.equal(appJs.includes("windowDays"), true);
 });

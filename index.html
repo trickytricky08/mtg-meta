@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MTG Meta — Format Browser</title>
-  <meta name="description" content="Browse sample Magic: The Gathering format snapshots — Standard, Modern, and Pioneer archetypes, Goldfish links, and a row-versus-column matchup grid." />
+  <meta name="description" content="Browse sample Magic: The Gathering format windows — Standard, Modern, and Pioneer archetypes, Goldfish links, and a row-versus-column matchup grid." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
     <header class="header">
       <div class="brand">
         <h1>MTG Meta</h1>
-        <p class="subtitle">Sample format snapshots and matchup grids · demo prototype</p>
+        <p class="subtitle">Sample format windows and matchup grids · demo prototype</p>
       </div>
       <div class="meta-stamp" id="meta-stamp"></div>
     </header>
@@ -21,21 +21,16 @@
     <p class="format-desc" id="format-desc"></p>
 
     <div class="controls">
-      <div class="sort-wrap">
-        <label for="snapshot">Date</label>
-        <select id="snapshot" aria-label="Sample snapshot date"></select>
-      </div>
-      <p class="snapshot-note" id="snapshot-note">Sample snapshots — not historical tournament results.</p>
-      <div class="sort-wrap">
-        <label for="sort">Sort</label>
-        <select id="sort" aria-label="Sort archetypes">
-          <option value="share-desc">Popularity (high → low)</option>
-          <option value="share-asc">Popularity (low → high)</option>
-          <option value="winRate-desc">Win rate (high → low)</option>
-          <option value="winRate-asc">Win rate (low → high)</option>
-          <option value="name-asc">Name (A → Z)</option>
+      <div class="window-wrap">
+        <label for="window">Show data for the last</label>
+        <select id="window">
+          <option value="7">7 days</option>
+          <option value="14">14 days</option>
+          <option value="30" selected>30 days</option>
+          <option value="90">90 days</option>
         </select>
       </div>
+      <p class="window-note" id="window-note">Sample windows — not historical tournament results.</p>
     </div>
 
     <div class="stats-row" id="stats" aria-live="polite"></div>
@@ -47,11 +42,10 @@
             <th scope="col">Archetype</th>
             <th scope="col" class="num">Share</th>
             <th scope="col" class="num">Win rate</th>
-            <th scope="col">Trend</th>
           </tr>
         </thead>
         <tbody id="archetype-body">
-          <tr><td colspan="4"><div class="empty">Loading meta data…</div></td></tr>
+          <tr><td colspan="3"><div class="empty">Loading meta data…</div></td></tr>
         </tbody>
       </table>
     </div>
@@ -62,8 +56,8 @@
         <p class="matchup-legend">
           Each cell is the <strong>row</strong> deck's win rate against the <strong>column</strong> deck.
           Diagonal cells are <strong>mirrors</strong>.
-          The grid lists every deck in the selected sample snapshot, ordered by meta share. Sorting the table does not reorder the grid.
-          <span class="matchup-demo">Sample snapshot rates — not historical tournament results.</span>
+          The grid lists the same decks as the table, ordered by meta share for the selected window.
+          <span class="matchup-demo">Sample window rates — not historical tournament results.</span>
         </p>
         <ul class="matchup-key" aria-label="Cell color key">
           <li><span class="swatch wr-high"></span> 56%+ favored</li>
@@ -80,7 +74,7 @@
     </section>
 
     <footer class="footer">
-      Sample snapshots only — not historical tournament results. Archetype names open MTGGoldfish in a new tab. Matchup cells read row versus column.
+      Sample windows only — not historical tournament results. Archetype names open MTGGoldfish in a new tab. Matchup cells read row versus column.
       Run locally with <code>python3 -m http.server</code> from this folder.
     </footer>
   </div>

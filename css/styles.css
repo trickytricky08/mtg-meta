@@ -23,13 +23,6 @@
   --font: "Segoe UI", system-ui, -apple-system, sans-serif;
   --mono: "SF Mono", "Cascadia Code", ui-monospace, monospace;
 
-  /* Mana colors */
-  --mana-w: #f0e6c8;
-  --mana-u: #5b8def;
-  --mana-b: #6b5b8a;
-  --mana-r: #e06a4e;
-  --mana-g: #4caf70;
-  --mana-c: #a0a8b8;
 }
 
 *,
@@ -151,28 +144,26 @@ body {
   margin-bottom: 1.25rem;
 }
 
-.snapshot-note {
-  flex: 1 1 240px;
+.window-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.window-wrap label {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.window-note {
+  flex: 1 1 260px;
   margin: 0;
   color: var(--text-dim);
   font-size: 0.82rem;
 }
 
-.sort-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.sort-wrap label {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-#sort,
-#snapshot {
+#window {
   appearance: none;
   padding: 0.65rem 2rem 0.65rem 0.9rem;
   border-radius: var(--radius-sm);
@@ -184,8 +175,7 @@ body {
   outline: none;
 }
 
-#sort:focus,
-#snapshot:focus {
+#window:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-glow);
 }
@@ -285,27 +275,6 @@ a.arch-name:focus-visible {
   border-radius: 2px;
 }
 
-.mana {
-  display: inline-flex;
-  gap: 3px;
-  flex-shrink: 0;
-}
-
-.mana-pip {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.35);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
-}
-
-.mana-pip.W { background: var(--mana-w); }
-.mana-pip.U { background: var(--mana-u); }
-.mana-pip.B { background: var(--mana-b); }
-.mana-pip.R { background: var(--mana-r); }
-.mana-pip.G { background: var(--mana-g); }
-.mana-pip.C { background: var(--mana-c); }
-
 .share-bar {
   display: flex;
   align-items: center;
@@ -327,31 +296,6 @@ a.arch-name:focus-visible {
   background: linear-gradient(90deg, var(--accent-2), var(--accent));
 }
 
-.trend {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-}
-
-.trend.up {
-  color: var(--success);
-  background: rgba(74, 222, 128, 0.12);
-}
-
-.trend.down {
-  color: var(--danger);
-  background: rgba(248, 113, 113, 0.12);
-}
-
-.trend.stable {
-  color: var(--warn);
-  background: rgba(251, 191, 36, 0.12);
-}
-
 .win-rate.hot {
   color: var(--success);
   font-weight: 600;
@@ -369,11 +313,6 @@ a.arch-name:focus-visible {
 
 @media (max-width: 720px) {
   .share-track {
-    display: none;
-  }
-
-  .meta-table th:nth-child(4),
-  .meta-table td:nth-child(4) {
     display: none;
   }
 }
@@ -549,11 +488,6 @@ a.arch-name:focus-visible {
 .matchup-rowname {
   font-weight: 600;
   color: var(--text);
-}
-
-.matchup-rowhead .mana {
-  margin-right: 0.45rem;
-  vertical-align: -2px;
 }
 
 .matchup-cell {

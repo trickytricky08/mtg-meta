@@ -16,8 +16,6 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
 
-  const MANA = new Set(["W", "U", "B", "R", "G", "C"]);
-
   function buildMatchupGrid(archetypes) {
     const decks = [...(archetypes || [])].sort((a, b) => {
       const shareDelta = Number(b.share || 0) - Number(a.share || 0);
@@ -48,29 +46,34 @@
     return { decks, cells };
   }
 
-  function chooseSnapshot(format, date) {
-    const snaps = [...(format?.snapshots || [])].sort((a, b) =>
-      String(b.date).localeCompare(String(a.date))
+  function chooseWindow(format, days) {
+    const windows = format?.windows || [];
+    const wanted = Number(days);
+    return (
+      windows.find((win) => win.days === wanted) ||
+      windows.find((win) => win.days === 30) ||
+      windows[0] ||
+      null
     );
-    if (!snaps.length) return null;
-    return snaps.find((snap) => snap.date === date) || snaps[0];
   }
 
-  function sortArchetypes(archetypes, sortValue) {
-    const list = [...(archetypes || [])];
-    const [key, dir] = String(sortValue || "share-desc").split("-");
-    const mult = dir === "asc" ? 1 : -1;
-    list.sort((a, b) => {
-      if (key === "name") return mult * String(a.name).localeCompare(String(b.name));
-      return mult * (Number(a[key]) - Number(b[key]));
-    });
-    return list;
+  function visibleArchetypes(archetypes, rules) {
+    const minShare = Number(rules?.minShare ?? 1.2);
+    const maxArchetypes = Number(rules?.maxArchetypes ?? 15);
+    return [...(archetypes || [])]
+      .filter((arch) => Number(arch.share) >= minShare)
+      .sort(
+        (a, b) =>
+          Number(b.share) - Number(a.share) ||
+          String(a.name).localeCompare(String(b.name))
+      )
+      .slice(0, maxArchetypes);
   }
 
-  function renderArchetypeRows(archetypes, sortValue) {
-    const list = sortArchetypes(archetypes, sortValue);
+  function renderArchetypeRows(archetypes) {
+    const list = archetypes || [];
     if (list.length === 0) {
-      return '<tr><td colspan="4"><div class="empty">No archetypes in this snapshot.</div></td></tr>';
+      return '<tr><td colspan="3"><div class="empty">No archetypes in this window.</div></td></tr>';
     }
     const maxShare = Math.max(...list.map((arch) => arch.share), 1);
     return list
@@ -82,10 +85,7 @@
           : `<span class="arch-name">${escapeHtml(arch.name)}</span>`;
         return `<tr data-id="${escapeAttr(arch.id)}">
             <td>
-              <div class="arch-cell">
-                ${manaPips(arch.colors)}
-                ${name}
-              </div>
+              <div class="arch-cell">${name}</div>
             </td>
             <td class="num" data-label="Share">
               <div class="share-bar">
@@ -94,16 +94,9 @@
               </div>
             </td>
             <td class="num" data-label="Win rate"><span class="win-rate${wrClass}">${Number(arch.winRate).toFixed(1)}%</span></td>
-            <td data-label="Trend"><span class="trend ${escapeAttr(arch.trend)}">${trendIcon(arch.trend)} ${escapeHtml(arch.trendLabel)}</span></td>
           </tr>`;
       })
       .join("");
-  }
-
-  function trendIcon(trend) {
-    if (trend === "up") return "↑";
-    if (trend === "down") return "↓";
-    return "→";
   }
 
   function formatWinRate(value) {
@@ -137,14 +130,14 @@
         const deck = decks[index];
         const cellsHtml = row.map(renderCell).join("");
         return `<tr>
-          <th scope="row" class="matchup-rowhead">${manaPips(deck.colors)}<span class="matchup-rowname">${escapeHtml(deck.name)}</span></th>
+          <th scope="row" class="matchup-rowhead"><span class="matchup-rowname">${escapeHtml(deck.name)}</span></th>
           ${cellsHtml}
         </tr>`;
       })
       .join("");
 
     return `<table class="matchup-table">
-      <caption class="visually-hidden">Win rates read as row versus column. Each value is the row archetype's win rate against the column archetype. Diagonal cells are mirror matches. Sample snapshot rates, not historical tournament results.</caption>
+      <caption class="visually-hidden">Win rates read as row versus column. Each value is the row archetype's win rate against the column archetype. Diagonal cells are mirror matches. Sample window rates, not historical tournament results.</caption>
       <thead>
         <tr>
           <th scope="col" class="matchup-corner"><span class="corner-row">Row</span><span class="corner-vs">vs</span><span class="corner-col">Column</span></th>
@@ -170,16 +163,6 @@
     return `<td class="matchup-cell ${rateBand(cell.value)}" ${attrs} title="${escapeAttr(title)}">${text}</td>`;
   }
 
-  function manaPips(colors) {
-    if (!Array.isArray(colors) || colors.length === 0) return "";
-    const pips = colors
-      .filter((color) => MANA.has(color))
-      .map((color) => `<span class="mana-pip ${color}" title="${color}"></span>`)
-      .join("");
-    if (!pips) return "";
-    return `<span class="mana" aria-hidden="true">${pips}</span>`;
-  }
-
   function escapeHtml(str) {
     return String(str)
       .replace(/&/g, "&amp;")
@@ -194,8 +177,8 @@
 
   return {
     buildMatchupGrid,
-    chooseSnapshot,
-    sortArchetypes,
+    chooseWindow,
+    visibleArchetypes,
     renderArchetypeRows,
     formatWinRate,
     rateBand,

@@ -1,27 +1,25 @@
 /**
  * MTG Meta — client-side meta browser
- * Loads data/meta.json, switches format and sample snapshot, sorts the table,
- * and draws the matchup grid. Archetype names link out to MTGGoldfish.
+ * Loads data/meta.json and shows one trailing sample window at a time.
+ * Archetype names link out to MTGGoldfish. The table and matchup grid use
+ * the same decks: meta share of at least the configured minimum, capped
+ * at the configured maximum, ordered by share.
  */
 
 (() => {
   "use strict";
 
-  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
   const state = {
     data: null,
     formatId: null,
-    snapshotDate: null,
-    sort: "share-desc",
+    windowDays: 30,
   };
 
   const els = {
     formatBar: document.getElementById("format-bar"),
     formatDesc: document.getElementById("format-desc"),
-    snapshot: document.getElementById("snapshot"),
-    snapshotNote: document.getElementById("snapshot-note"),
-    sort: document.getElementById("sort"),
+    window: document.getElementById("window"),
+    windowNote: document.getElementById("window-note"),
     stats: document.getElementById("stats"),
     tbody: document.getElementById("archetype-body"),
     tableWrap: document.getElementById("table-wrap"),
@@ -46,24 +44,20 @@
     }
 
     if (els.stamp) {
-      els.stamp.textContent = "Sample snapshots · not tournament results";
+      els.stamp.textContent = "Sample windows · not tournament results";
     }
 
     state.formatId = state.data.formats[0]?.id ?? null;
-    state.snapshotDate = currentSnapshot()?.date ?? null;
+    state.windowDays = Number(state.data.display?.defaultWindowDays ?? 30);
+    if (els.window) els.window.value = String(state.windowDays);
     renderFormatBar();
     bindControls();
     render();
   }
 
   function bindControls() {
-    els.sort.addEventListener("change", () => {
-      state.sort = els.sort.value;
-      renderList();
-    });
-
-    els.snapshot.addEventListener("change", () => {
-      state.snapshotDate = els.snapshot.value;
+    els.window.addEventListener("change", () => {
+      state.windowDays = Number(els.window.value);
       render();
     });
   }
@@ -72,13 +66,15 @@
     return state.data.formats.find((fmt) => fmt.id === state.formatId);
   }
 
-  function currentSnapshot() {
-    return globalThis.MTGMetaMatchup.chooseSnapshot(currentFormat(), state.snapshotDate);
+  function currentWindow() {
+    return globalThis.MTGMetaMatchup.chooseWindow(currentFormat(), state.windowDays);
   }
 
-  function formatSnapshotDate(iso) {
-    const [year, month, day] = String(iso).split("-").map(Number);
-    return `${MONTHS[month - 1]} ${day}, ${year}`;
+  function shownArchetypes(win) {
+    return globalThis.MTGMetaMatchup.visibleArchetypes(
+      win?.archetypes,
+      state.data.display
+    );
   }
 
   function renderFormatBar() {
@@ -92,7 +88,6 @@
       btn.addEventListener("click", () => {
         if (state.formatId === fmt.id) return;
         state.formatId = fmt.id;
-        state.snapshotDate = currentSnapshot()?.date ?? null;
         renderFormatBar();
         render();
       });
@@ -100,62 +95,58 @@
     }
   }
 
-  function renderSnapshotSelect(fmt, snap) {
-    const snaps = [...fmt.snapshots].sort((a, b) => b.date.localeCompare(a.date));
-    const latest = snaps[0]?.date;
-    els.snapshot.innerHTML = snaps
-      .map((entry) => {
-        const suffix = entry.date === latest ? " · latest" : "";
-        return `<option value="${escapeAttr(entry.date)}">${escapeHtml(formatSnapshotDate(entry.date) + suffix)}</option>`;
-      })
-      .join("");
-    els.snapshot.value = snap.date;
-  }
-
   function render() {
     const fmt = currentFormat();
-    const snap = currentSnapshot();
-    if (!fmt || !snap) return;
-    state.snapshotDate = snap.date;
+    const win = currentWindow();
+    if (!fmt || !win) return;
+    state.windowDays = win.days;
+    if (els.window) els.window.value = String(win.days);
     els.formatDesc.textContent = fmt.description || "";
-    renderSnapshotSelect(fmt, snap);
-    if (els.snapshotNote) {
-      const decks = Number(snap.sampleSize).toLocaleString("en-US");
-      els.snapshotNote.textContent =
-        `Sample snapshot · ${formatSnapshotDate(snap.date)} · ${decks} decks. Not historical tournament results.`;
-    }
-    renderStats(snap);
-    renderList();
-    renderMatchups(snap);
+    const shown = shownArchetypes(win);
+    renderNote(win, shown);
+    renderStats(shown);
+    renderList(shown, win);
+    renderMatchups(shown, win);
   }
 
-  function renderMatchups(snap) {
+  function renderNote(win, shown) {
+    if (!els.windowNote) return;
+    const minShare = state.data.display?.minShare ?? 1.2;
+    const maxArchetypes = state.data.display?.maxArchetypes ?? 15;
+    const qualified = (win.archetypes || []).filter((arch) => arch.share >= minShare).length;
+    const capNote =
+      qualified > shown.length ? ` Top ${maxArchetypes} by share.` : "";
+    const decks = Number(win.sampleSize).toLocaleString("en-US");
+    const asOf = state.data.asOf ? ` through ${state.data.asOf}` : "";
+    els.windowNote.textContent =
+      `Sample window · last ${win.days} days${asOf} · ${decks} decks. ` +
+      `Decks at ${minShare}% share or more.${capNote} Not historical tournament results.`;
+  }
+
+  function renderMatchups(shown, win) {
     if (!els.matchupScroll || !globalThis.MTGMetaMatchup) return;
     els.matchupScroll.dataset.format = state.formatId;
-    els.matchupScroll.dataset.snapshot = snap.date;
-    els.matchupScroll.innerHTML = globalThis.MTGMetaMatchup.renderMatchupTable(snap.archetypes);
+    els.matchupScroll.dataset.window = String(win.days);
+    els.matchupScroll.innerHTML = globalThis.MTGMetaMatchup.renderMatchupTable(shown);
   }
 
-  function renderStats(snap) {
-    const list = snap.archetypes;
-    const totalShare = list.reduce((sum, arch) => sum + arch.share, 0);
+  function renderStats(shown) {
+    const totalShare = shown.reduce((sum, arch) => sum + arch.share, 0);
     const avgWr =
-      list.length === 0
+      shown.length === 0
         ? 0
-        : list.reduce((sum, arch) => sum + arch.winRate, 0) / list.length;
+        : shown.reduce((sum, arch) => sum + arch.winRate, 0) / shown.length;
 
     els.stats.innerHTML = `
-      <div class="stat-pill"><strong>${list.length}</strong> archetype${list.length === 1 ? "" : "s"}</div>
+      <div class="stat-pill"><strong>${shown.length}</strong> archetype${shown.length === 1 ? "" : "s"}</div>
       <div class="stat-pill">Coverage <strong>${totalShare.toFixed(1)}%</strong></div>
       <div class="stat-pill">Avg win rate <strong>${avgWr.toFixed(1)}%</strong></div>
     `;
   }
 
-  function renderList() {
-    const snap = currentSnapshot();
-    if (!snap) return;
-    els.tbody.dataset.snapshot = snap.date;
-    els.tbody.innerHTML = globalThis.MTGMetaMatchup.renderArchetypeRows(snap.archetypes, state.sort);
+  function renderList(shown, win) {
+    els.tbody.dataset.window = String(win.days);
+    els.tbody.innerHTML = globalThis.MTGMetaMatchup.renderArchetypeRows(shown);
   }
 
   function escapeHtml(str) {
@@ -164,10 +155,6 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
-  }
-
-  function escapeAttr(str) {
-    return escapeHtml(str).replace(/'/g, "&#39;");
   }
 
   init();
