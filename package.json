@@ -3,6 +3,7 @@
   "private": true,
   "description": "Sample Magic: The Gathering format meta browser",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "scrape": "node scripts/goldfish/scrape.mjs"
   }
 }

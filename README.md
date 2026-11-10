@@ -2,7 +2,7 @@
 
 Local prototype for browsing Magic: The Gathering format metas — archetype share, win rate, a row-versus-column matchup grid, and a link to each deck on MTGGoldfish.
 
-Meta share and deck counts are from the MTGGoldfish paper metagame (last 7, 14, 30, and 90 days), retrieved 2026-11-05. Win rates and matchup cells are demo estimates. Goldfish does not publish those on the metagame pages, and they are not tournament results.
+Meta share and deck counts are from the MTGGoldfish paper metagame (last 7, 14, 30, and 90 days). The snapshot date is `source.retrieved` in `data/meta.json`. Win rates and matchup cells are demo estimates. Goldfish does not publish those on the metagame pages, and they are not tournament results. Recent tournament results live in `data/tournaments.json`, separate from this page.
 
 ## Requirements
 
@@ -52,14 +52,18 @@ index.html         # App shell
 css/styles.css     # Dark Magic-inspired UI
 js/app.js          # Format, trailing window, and shared sort
 js/matchup.js      # Share cutoff, ordering, table rows, matchup grid
-data/meta.json     # Sample windows
+data/meta.json     # Paper metagame windows
+data/tournaments.json # Recent Goldfish tournament results
+scripts/goldfish/  # Metagame and tournament scraper
+.github/workflows/goldfish-data.yml # Weekly refresh
 tests/meta.test.js # Data integrity, cutoff, and grid tests
+tests/goldfish-parse.test.mjs # Scraper parsing tests
 README.md          # This file
 ```
 
 ## Data
 
-`data/meta.json` is a snapshot of the [MTGGoldfish paper metagame](https://www.mtggoldfish.com/metagame/) for Standard, Modern, and Pioneer. It was retrieved on 2026-11-05 by requesting each format's full deck list for the last 7, 14, 30, and 90 days (the same periods as the on-page “Show decks from the last” control). `display` still holds `minShare` (1.2), `maxArchetypes` (15), `defaultWindowDays` (30), and `windowDays`.
+`data/meta.json` is a snapshot of the [MTGGoldfish paper metagame](https://www.mtggoldfish.com/metagame/) for Standard, Modern, and Pioneer. A refresh requests each format's full deck list for the last 7, 14, 30, and 90 days (the same periods as the on-page “Show decks from the last” control) and stamps `asOf` and `source.retrieved` with that UTC date. `display` still holds `minShare` (1.2), `maxArchetypes` (15), `defaultWindowDays` (30), and `windowDays`.
 
 Each window has:
 
@@ -77,9 +81,17 @@ What is still demo:
 
 - `winRate` and every matchup cell. Those pages do not publish archetype win rates or a matchup matrix. The demo values are a stable filler so win-rate sorting and the grid still work. Pairs among decks at or above 1.2% share add up to 100. Decks under 1.2% have no matchup entries. Do not read them as measured results.
 
-The four windows are Goldfish's own ranges, not one snapshot copied four times. Which decks clear 1.2%, and which 15 are shown, changes with the window. For example, Pioneer over the last 7 days has 14 decks at or above 1.2%, while Standard over 30 days has more than 15, so the page keeps the top 15.
+The four windows are Goldfish's own ranges, not one snapshot copied four times. Which decks clear 1.2%, and which 15 are shown, changes with the window. A short window can list fewer than 15 decks at or above 1.2%. A longer window can list more than 15, and the page then keeps the top 15.
 
 `goldfishUrl` points at `https://www.mtggoldfish.com/archetype/...` with no extra hash. The header stamp and the note under the date control name the source and mark win rates and matchups as demo.
+
+## Tournament results
+
+`data/tournaments.json` is the recent Standard, Modern, and Pioneer events from the MTGGoldfish tournament lists. Each event has the name, format, and date Goldfish printed, a `top8` list (shorter when the page lists fewer than eight decks), and an `archetypeBreakdown` counted from those deck labels. `winner` is set only when Goldfish marks a deck `1st`, and includes the player when that column is present. League pages usually show records such as `5 - 0` for several players and no single winner, so `winner` is omitted there. Deck labels are copied as printed, including color codes such as `UB`. `goldfishUrl` points at the tournament or deck page Goldfish linked.
+
+## Weekly refresh
+
+`.github/workflows/goldfish-data.yml` runs at 06:17 UTC every Sunday (`17 6 * * 0`) and can be started by hand with `workflow_dispatch`. It refreshes `data/meta.json` and `data/tournaments.json`, then commits only when one of those files changed. The job has `contents: write` and no other permission. GitHub runs scheduled workflows only from the default branch, so the Sunday run starts after this workflow is on `main`.
 
 ## Assumptions
 
