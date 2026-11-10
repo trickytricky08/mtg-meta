@@ -193,8 +193,10 @@ test("the weekly workflow scrapes both datasets and commits only when data chang
   assert.match(workflow, /data\/meta\.json data\/tournaments\.json/);
   assert.equal(workflow.includes("pull-requests:"), false);
   const index = fs.readFileSync(path.join(root, "index.html"), "utf8");
-  assert.equal(index.includes("tournaments.html"), false);
-  assert.equal(index.includes('href="tournaments'), false);
+  assert.match(index, /class="site-nav"/);
+  assert.match(index, /href="tournaments.html"/);
+  assert.equal(index.includes("data/tournaments.json"), false);
+  assert.equal(index.includes("js/tournaments"), false);
 });
 
 test("seeded tournament file matches the scraper schema", () => {

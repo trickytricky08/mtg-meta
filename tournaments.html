@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MTG Meta — Tournaments</title>
+  <meta name="description" content="Recent Standard, Pioneer, and Modern tournament results from MTGGoldfish, with top 8s and brackets when the data includes them." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <nav class="site-nav" aria-label="Site">
+        <a href="index.html">Meta</a>
+        <a href="tournaments.html" aria-current="page">Tournaments</a>
+      </nav>
+      <div class="brand">
+        <h1>MTG Meta</h1>
+        <p class="subtitle">Recent tournament results</p>
+      </div>
+      <div class="meta-stamp" id="meta-stamp"></div>
+    </header>
+
+    <nav class="format-bar" id="format-bar" aria-label="Formats"></nav>
+    <p class="format-desc" id="format-desc"></p>
+
+    <div class="controls tournament-filters">
+      <div class="date-range">
+        <label class="date-field" for="date-from">From
+          <input type="date" id="date-from" />
+        </label>
+        <label class="date-field" for="date-to">To
+          <input type="date" id="date-to" />
+        </label>
+      </div>
+      <div class="window-wrap">
+        <label for="event-type">Event type</label>
+        <select id="event-type">
+          <option value="">All types</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="fixture-note" id="fixture-note" hidden>Bracket preview is a dev fixture mixed into this view. It is not part of the weekly results.</p>
+    <p class="result-count" id="result-count" aria-live="polite"></p>
+
+    <div class="table-wrap" id="table-wrap">
+      <table class="events-table" id="events-table" aria-label="Tournaments">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Event</th>
+            <th scope="col">Type</th>
+            <th scope="col">Winner</th>
+            <th scope="col" class="num players-col">Players</th>
+          </tr>
+        </thead>
+        <tbody id="event-body">
+          <tr><td colspan="5"><div class="empty">Loading tournaments…</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="footer">
+      Events are the recent lists in <code>data/tournaments.json</code>. Archetype names open MTGGoldfish in a new tab. A bracket is shown only when that event includes one.
+    </footer>
+  </div>
+
+  <div class="drawer-root" id="drawer-root" hidden>
+    <button type="button" class="drawer-backdrop" id="drawer-backdrop" tabindex="-1" aria-label="Close event details"></button>
+    <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1"></aside>
+  </div>
+
+  <script src="js/tournaments.js" defer></script>
+  <script src="js/tournaments-page.js" defer></script>
+</body>
+</html>
