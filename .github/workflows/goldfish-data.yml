@@ -1,0 +1,46 @@
+# Weekly MTGGoldfish refresh for the static dataset GitHub Pages serves.
+# GitHub runs schedule events only from the default branch, so this cron
+# starts firing after the workflow is merged to main.
+name: Refresh Goldfish data
+
+on:
+  schedule:
+    - cron: "17 6 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Google Chrome
+        run: |
+          wget -q -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get update
+          sudo apt-get install -y /tmp/chrome.deb
+
+      - name: Scrape MTGGoldfish
+        run: node scripts/goldfish/scrape.mjs
+
+      - name: Commit data if it changed
+        run: |
+          git add data/meta.json data/tournaments.json
+          if git diff --cached --quiet; then
+            echo "Goldfish data is unchanged. Not committing."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update MTGGoldfish metagame and tournament snapshots."
+          git push
