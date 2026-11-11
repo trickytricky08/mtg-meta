@@ -737,6 +737,14 @@ a.arch-name:focus-visible {
   border-radius: 2px;
 }
 
+.last-updated {
+  flex: 1 0 100%;
+  margin: -0.35rem 0 0.75rem;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
 /* —— Tournaments —— */
 .tournament-filters .date-range {
   display: flex;

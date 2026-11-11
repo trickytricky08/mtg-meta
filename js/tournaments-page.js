@@ -78,12 +78,7 @@
     }
 
     state.events = Array.isArray(file.events) ? file.events.slice() : [];
-    if (els.stamp) {
-      const retrieved = file.source?.retrieved || file.retrieved || "";
-      els.stamp.textContent = retrieved
-        ? `MTGGoldfish tournaments · retrieved ${retrieved}`
-        : "MTGGoldfish tournaments";
-    }
+    if (els.stamp) els.stamp.textContent = "MTGGoldfish tournaments";
 
     if (state.fixture) await loadFixture();
     bind();

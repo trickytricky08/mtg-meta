@@ -49,8 +49,8 @@
     if (els.stamp) {
       const source = state.data.source;
       els.stamp.textContent = source
-        ? `${source.name} ${source.slice} meta share · retrieved ${source.retrieved} · win rates & matchups are demo`
-        : "Sample windows · not tournament results";
+        ? `${source.name} ${source.slice} meta share · win rates & matchups are demo`
+        : "Win rates and matchups are demo";
     }
 
     state.formatId = state.data.formats[0]?.id ?? null;
@@ -167,7 +167,7 @@
     const decks = Number(win.sampleSize).toLocaleString("en-US");
     const source = state.data.source;
     const attribution = source
-      ? `${source.name} ${source.slice} · last ${win.days} days · retrieved ${source.retrieved}`
+      ? `${source.name} ${source.slice} · last ${win.days} days`
       : `Last ${win.days} days`;
     els.windowNote.textContent =
       `${attribution} · ${decks} decks in this breakdown. ` +

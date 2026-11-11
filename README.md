@@ -53,13 +53,16 @@ tournaments.html   # Tournament list and detail drawer
 css/styles.css     # Dark Magic-inspired UI
 js/app.js          # Format, trailing window, and shared sort
 js/matchup.js      # Share cutoff, ordering, table rows, matchup grid
+js/updated.js      # Shared data-updated label
 js/tournaments.js  # Tournament filters, place order, bracket markup
 js/tournaments-page.js # Tournaments page controller
 data/meta.json     # Paper metagame windows
 data/tournaments.json # Recent Goldfish tournament results
+data/updated.json  # One updatedAt for both datasets
 scripts/goldfish/  # Metagame and tournament scraper
 .github/workflows/goldfish-data.yml # Weekly refresh
 tests/meta.test.js # Data integrity, cutoff, and grid tests
+tests/updated.test.js # Shared last-updated label
 tests/tournaments.test.js # Tournament list and bracket shaping
 tests/fixtures/bracket-event.json # Dev-only bracket, not loaded by default
 tests/goldfish-parse.test.mjs # Scraper parsing tests
@@ -88,7 +91,17 @@ What is still demo:
 
 The four windows are Goldfish's own ranges, not one snapshot copied four times. Which decks clear 1.2%, and which 15 are shown, changes with the window. A short window can list fewer than 15 decks at or above 1.2%. A longer window can list more than 15, and the page then keeps the top 15.
 
-`goldfishUrl` points at `https://www.mtggoldfish.com/archetype/...` with no extra hash. The header stamp and the note under the date control name the source and mark win rates and matchups as demo.
+`goldfishUrl` points at `https://www.mtggoldfish.com/archetype/...` with no extra hash. The header stamp and the note under the date control name the source and mark win rates and matchups as demo. They do not repeat a calendar date. The only "data updated" time on the Meta page and the Tournaments page is the shared stamp below.
+
+## When the data was updated
+
+`data/updated.json` is one timestamp for both datasets:
+
+```json
+{ "updatedAt": "2026-11-10T01:19:30.000Z" }
+```
+
+`updatedAt` is the UTC time the refresh generated `data/meta.json` and `data/tournaments.json`. The current value is the commit time of that snapshot (`2026-11-10T01:19:30Z`), not a later edit. The weekly script writes this file once per run. The timestamp stays put when both datasets are unchanged, so a no-op run does not commit. Both pages show it in the header, under the Meta / Tournaments nav, in the viewer's local time with a timezone abbreviation. If `updatedAt` is missing, the page uses the file's `Last-Modified` header. If neither is usable, the label is hidden. `asOf` and `source.retrieved` stay on the metagame snapshot as the UTC calendar date of that pull. They are not shown next to this timestamp.
 
 ## Tournament results
 
@@ -129,7 +142,7 @@ Place text is shown as printed. Ordering understands exact places (`1st`, `2`), 
 
 ## Weekly refresh
 
-`.github/workflows/goldfish-data.yml` runs at 06:17 UTC every Sunday (`17 6 * * 0`) and can be started by hand with `workflow_dispatch`. It refreshes `data/meta.json` and `data/tournaments.json`, then commits only when one of those files changed. The job has `contents: write` and no other permission. GitHub runs scheduled workflows only from the default branch, so the Sunday run starts after this workflow is on `main`.
+`.github/workflows/goldfish-data.yml` runs at 06:17 UTC every Sunday (`17 6 * * 0`) and can be started by hand with `workflow_dispatch`. It refreshes `data/meta.json` and `data/tournaments.json`, writes `data/updated.json` when either dataset changed, then commits only when one of those files changed. The job has `contents: write` and no other permission. GitHub runs scheduled workflows only from the default branch, so the Sunday run starts after this workflow is on `main`.
 
 ## Assumptions
 

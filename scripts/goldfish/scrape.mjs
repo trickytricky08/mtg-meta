@@ -14,6 +14,10 @@
  * event page's Place / Deck / Pilot table. At most 10 events per format.
  *
  * Requests are sequential, with a pause between them.
+ *
+ * After both files are built, data/updated.json gets one shared updatedAt.
+ * The stamp moves only when meta.json or tournaments.json actually changes,
+ * so a no-op run does not pretend the datasets were regenerated.
  */
 
 import { readFileSync, writeFileSync, renameSync } from "node:fs";
@@ -28,6 +32,7 @@ import {
   parseTournamentIndex,
   parseTournamentPage,
   refreshMeta,
+  resolveUpdatedStamp,
   toTournamentEvent,
 } from "./parse.mjs";
 
@@ -107,8 +112,20 @@ async function readWindow(page, format, days) {
   return window;
 }
 
+function serialize(value) {
+  return `${JSON.stringify(value, null, 2)}\n`;
+}
+
+function readText(file) {
+  try {
+    return readFileSync(file, "utf8");
+  } catch {
+    return null;
+  }
+}
+
 function writeJson(file, value) {
-  const text = `${JSON.stringify(value, null, 2)}\n`;
+  const text = serialize(value);
   const temporary = `${file}.tmp`;
   writeFileSync(temporary, text);
   renameSync(temporary, file);
@@ -165,10 +182,26 @@ async function main() {
 
   const meta = refreshMeta(existing, windowsByFormat, retrieved);
   const tournaments = buildTournamentFile(events, retrieved);
-  writeJson(join(root, "data/meta.json"), meta);
-  writeJson(join(root, "data/tournaments.json"), tournaments);
+  const metaPath = join(root, "data/meta.json");
+  const tournamentsPath = join(root, "data/tournaments.json");
+  const updatedPath = join(root, "data/updated.json");
+  const dataChanged = readText(metaPath) !== serialize(meta) || readText(tournamentsPath) !== serialize(tournaments);
+  let existingUpdated = null;
+  try {
+    existingUpdated = JSON.parse(readText(updatedPath) || "null");
+  } catch {
+    existingUpdated = null;
+  }
+  const stamp = resolveUpdatedStamp({
+    existing: existingUpdated,
+    dataChanged,
+    now: new Date().toISOString(),
+  });
+  writeJson(metaPath, meta);
+  writeJson(tournamentsPath, tournaments);
+  writeJson(updatedPath, stamp);
   console.log(
-    `Wrote meta.json (${retrieved}) and ${tournaments.events.length} tournaments.`
+    `Wrote meta.json (${retrieved}), ${tournaments.events.length} tournaments, updatedAt ${stamp.updatedAt}${dataChanged ? "" : " (datasets unchanged)"}.`
   );
 }
 
