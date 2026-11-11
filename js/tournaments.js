@@ -306,10 +306,11 @@
     return '<span class="muted">—</span>';
   }
 
-  function renderEventRows(events, openId) {
+  function renderEventRows(events, openId, emptyMessage) {
     const rows = events || [];
     if (!rows.length) {
-      return `<tr class="event-empty"><td colspan="5"><div class="empty">No events in this range.</div></td></tr>`;
+      const message = emptyMessage || "No events in this range.";
+      return `<tr class="event-empty"><td colspan="5"><div class="empty">${escapeHtml(message)}</div></td></tr>`;
     }
     const open = openId == null ? "" : String(openId);
     return rows.map((event) => {

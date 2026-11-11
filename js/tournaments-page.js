@@ -1,6 +1,7 @@
 /**
  * Tournaments page controller. Reads data/tournaments.json on each load.
- * ?format=standard|pioneer|modern selects the tab. ?fixture=bracket mixes in
+ * ?format= selects the tab. ?days= or ?from=&to= selects the window.
+ * ?fixture=bracket mixes in
  * tests/fixtures/bracket-event.json so the bracket drawer can be checked.
  * That fixture is not part of the weekly data file.
  */
@@ -8,12 +9,15 @@
   "use strict";
 
   const T = globalThis.MTGTournaments;
-  if (!T) return;
+  const W = globalThis.MTGWindow;
+  if (!T || !W) return;
 
   const els = {
     stamp: document.getElementById("meta-stamp"),
     formatBar: document.getElementById("format-bar"),
     formatDesc: document.getElementById("format-desc"),
+    window: document.getElementById("window"),
+    custom: document.getElementById("custom-range"),
     from: document.getElementById("date-from"),
     to: document.getElementById("date-to"),
     type: document.getElementById("event-type"),
@@ -31,8 +35,11 @@
     events: [],
     formatId: "standard",
     type: "",
+    mode: "preset",
+    days: W.DEFAULT_DAYS,
     from: "",
     to: "",
+    bounds: null,
     openId: null,
     fixture: false,
   };
@@ -41,24 +48,71 @@
     const params = new URLSearchParams(location.search);
     state.formatId = T.normalizeFormat(params.get("format"));
     state.type = params.get("type") || "";
-    state.from = T.validDate(params.get("from"));
-    state.to = T.validDate(params.get("to"));
     state.openId = params.get("event") || null;
     state.fixture = params.get("fixture") === "bracket";
+    if (state.events.length || state.bounds) {
+      applyResolvedWindow(W.resolveWindow({
+        search: location.search,
+        storedDays: W.readStoredDays(localStorage),
+      }));
+    }
+  }
+
+  function applyResolvedWindow(resolved) {
+    const today = W.todayISO();
+    const realDates = state.events.filter((event) => !event.devFixture).map((event) => event.date);
+    state.bounds = W.pickerBounds(realDates, today);
+    if (resolved.mode === "custom") {
+      const range = W.clampRange(resolved.from, resolved.to, state.bounds);
+      if (!range.from || !range.to || range.from > range.to) {
+        state.mode = "preset";
+        state.days = W.DEFAULT_DAYS;
+        const preset = W.presetRange(state.days, today);
+        state.from = preset.from;
+        state.to = preset.to;
+        W.writeStoredDays(localStorage, state.days);
+        return;
+      }
+      state.mode = "custom";
+      state.from = range.from;
+      state.to = range.to;
+      state.days = W.nearestPreset(range.from, range.to);
+      return;
+    }
+    state.mode = "preset";
+    state.days = resolved.days;
+    const preset = W.presetRange(state.days, today);
+    state.from = preset.from;
+    state.to = preset.to;
+    W.writeStoredDays(localStorage, state.days);
   }
 
   function writeQuery() {
     const params = new URLSearchParams();
     params.set("format", state.formatId);
     if (state.type) params.set("type", state.type);
-    if (state.from) params.set("from", state.from);
-    if (state.to) params.set("to", state.to);
+    if (state.mode === "custom") {
+      params.set("from", state.from);
+      params.set("to", state.to);
+    } else {
+      params.set("days", String(state.days));
+    }
     if (state.openId) params.set("event", state.openId);
     if (state.fixture) params.set("fixture", "bracket");
     const next = `${location.pathname}?${params.toString()}`;
     if (`${location.pathname}${location.search}` !== next) {
       history.replaceState(null, "", next);
     }
+    W.decorateNav(document, {
+      mode: state.mode,
+      days: state.days,
+      from: state.from,
+      to: state.to,
+      format: state.formatId,
+      type: state.type,
+      event: state.openId,
+      fixture: state.fixture,
+    });
   }
 
   async function init() {
@@ -81,6 +135,10 @@
     if (els.stamp) els.stamp.textContent = "MTGGoldfish tournaments";
 
     if (state.fixture) await loadFixture();
+    applyResolvedWindow(W.resolveWindow({
+      search: location.search,
+      storedDays: W.readStoredDays(localStorage),
+    }));
     bind();
     render();
     if (state.openId) openDrawer(state.openId, { skipFocus: false, fromQuery: true });
@@ -120,13 +178,38 @@
       render();
     });
 
+    els.window.addEventListener("change", () => {
+      if (els.window.value === "custom") {
+        if (state.mode !== "custom") {
+          const today = W.todayISO();
+          const preset = W.presetRange(state.days, today);
+          const range = W.clampRange(preset.from, preset.to, state.bounds);
+          state.from = range.from;
+          state.to = range.to;
+        }
+        state.mode = "custom";
+      } else {
+        state.mode = "preset";
+        state.days = W.presetDays(els.window.value) || W.DEFAULT_DAYS;
+        const preset = W.presetRange(state.days, W.todayISO());
+        state.from = preset.from;
+        state.to = preset.to;
+        W.writeStoredDays(localStorage, state.days);
+      }
+      render();
+    });
+
     els.from.addEventListener("change", () => {
-      state.from = T.validDate(els.from.value);
+      state.mode = "custom";
+      state.from = W.clampDate(els.from.value, state.bounds);
+      if (state.from && state.to && state.from > state.to) state.to = state.from;
       render();
     });
 
     els.to.addEventListener("change", () => {
-      state.to = T.validDate(els.to.value);
+      state.mode = "custom";
+      state.to = W.clampDate(els.to.value, state.bounds);
+      if (state.from && state.to && state.from > state.to) state.from = state.to;
       render();
     });
 
@@ -197,8 +280,18 @@
     const { types, rows } = visibleEvents();
     renderFormats();
     renderTypeOptions(types);
-    if (els.from) els.from.value = state.from;
-    if (els.to) els.to.value = state.to;
+    if (els.window) els.window.value = state.mode === "custom" ? "custom" : String(state.days);
+    if (els.custom) els.custom.hidden = state.mode !== "custom";
+    if (els.from && els.to) {
+      if (state.bounds) {
+        els.from.min = state.bounds.min;
+        els.from.max = state.to || state.bounds.max;
+        els.to.min = state.from || state.bounds.min;
+        els.to.max = state.bounds.max;
+      }
+      els.from.value = state.mode === "custom" ? state.from : "";
+      els.to.value = state.mode === "custom" ? state.to : "";
+    }
     const format = T.FORMATS.find((entry) => entry.id === state.formatId);
     if (els.formatDesc) {
       els.formatDesc.textContent = format
@@ -207,14 +300,18 @@
     }
     const showPlayers = rows.some((event) => T.knownPlayerCount(event) != null);
     if (els.table) els.table.classList.toggle("hide-players", !showPlayers);
+    const windowState = state.mode === "custom"
+      ? { mode: "custom", from: state.from, to: state.to }
+      : { mode: "preset", days: state.days };
     if (els.count) {
-      if (state.from && state.to && state.from > state.to) {
-        els.count.textContent = "The start date is after the end date.";
-      } else {
-        els.count.textContent = `${rows.length} event${rows.length === 1 ? "" : "s"}`;
-      }
+      els.count.hidden = rows.length === 0;
+      els.count.textContent = rows.length
+        ? `${rows.length} event${rows.length === 1 ? "" : "s"}`
+        : "";
     }
-    if (els.tbody) els.tbody.innerHTML = T.renderEventRows(rows, state.openId);
+    if (els.tbody) {
+      els.tbody.innerHTML = T.renderEventRows(rows, state.openId, W.emptyWindowMessage(windowState));
+    }
     writeQuery();
   }
 

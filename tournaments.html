@@ -25,21 +25,31 @@
     <nav class="format-bar" id="format-bar" aria-label="Formats"></nav>
     <p class="format-desc" id="format-desc"></p>
 
-    <div class="controls tournament-filters">
-      <div class="date-range">
-        <label class="date-field" for="date-from">From
-          <input type="date" id="date-from" />
-        </label>
-        <label class="date-field" for="date-to">To
-          <input type="date" id="date-to" />
-        </label>
-      </div>
-      <div class="window-wrap">
+    <div class="controls">
+      <div class="type-wrap">
         <label for="event-type">Event type</label>
         <select id="event-type">
           <option value="">All types</option>
         </select>
       </div>
+      <div class="window-wrap">
+        <label for="window">Show data for the last</label>
+        <select id="window">
+          <option value="7">7 days</option>
+          <option value="14">14 days</option>
+          <option value="30" selected>30 days</option>
+          <option value="90">90 days</option>
+          <option value="custom">Custom…</option>
+        </select>
+      </div>
+    </div>
+    <div class="date-range custom-range" id="custom-range" hidden>
+      <label class="date-field" for="date-from">From
+        <input type="date" id="date-from" />
+      </label>
+      <label class="date-field" for="date-to">To
+        <input type="date" id="date-to" />
+      </label>
     </div>
 
     <p class="fixture-note" id="fixture-note" hidden>Bracket preview is a dev fixture mixed into this view. It is not part of the weekly results.</p>
@@ -72,6 +82,7 @@
     <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1"></aside>
   </div>
 
+  <script src="js/window.js" defer></script>
   <script src="js/tournaments.js" defer></script>
   <script src="js/tournaments-page.js" defer></script>
   <script src="js/updated.js" defer></script>
