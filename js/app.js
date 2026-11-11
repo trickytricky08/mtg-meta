@@ -49,21 +49,49 @@
     if (els.stamp) {
       const source = state.data.source;
       els.stamp.textContent = source
-        ? `${source.name} ${source.slice} meta share · retrieved ${source.retrieved} · win rates & matchups are demo`
-        : "Sample windows · not tournament results";
+        ? `${source.name} ${source.slice} meta share · win rates & matchups are demo`
+        : "Win rates and matchups are demo";
     }
 
     state.formatId = state.data.formats[0]?.id ?? null;
-    state.windowDays = Number(state.data.display?.defaultWindowDays ?? 30);
-    if (els.window) els.window.value = String(state.windowDays);
+    const fallback = Number(state.data.display?.defaultWindowDays ?? 30);
+    const days = globalThis.MTGWindow
+      ? globalThis.MTGWindow.metaDays({
+          search: location.search,
+          storedDays: globalThis.MTGWindow.readStoredDays(localStorage),
+          defaultDays: fallback,
+        })
+      : fallback;
+    applyWindow(days, { writeUrl: windowParamInUrl() });
     renderFormatBar();
     bindControls();
     render();
   }
 
+  function windowParamInUrl() {
+    const params = new URLSearchParams(location.search);
+    return params.has("days") || params.has("from") || params.has("to");
+  }
+
+  function applyWindow(days, options) {
+    const preset = globalThis.MTGWindow
+      ? globalThis.MTGWindow.presetDays(days) || globalThis.MTGWindow.DEFAULT_DAYS
+      : Number(days) || 30;
+    state.windowDays = preset;
+    if (els.window) els.window.value = String(preset);
+    if (globalThis.MTGWindow) {
+      globalThis.MTGWindow.writeStoredDays(localStorage, preset);
+      globalThis.MTGWindow.decorateNav(document, { mode: "preset", days: preset });
+    }
+    if (options?.writeUrl) {
+      const next = `?days=${preset}`;
+      if (location.search !== next) history.replaceState(null, "", next);
+    }
+  }
+
   function bindControls() {
     els.window.addEventListener("change", () => {
-      state.windowDays = Number(els.window.value);
+      applyWindow(Number(els.window.value), { writeUrl: true });
       render();
     });
 
@@ -167,7 +195,7 @@
     const decks = Number(win.sampleSize).toLocaleString("en-US");
     const source = state.data.source;
     const attribution = source
-      ? `${source.name} ${source.slice} · last ${win.days} days · retrieved ${source.retrieved}`
+      ? `${source.name} ${source.slice} · last ${win.days} days`
       : `Last ${win.days} days`;
     els.windowNote.textContent =
       `${attribution} · ${decks} decks in this breakdown. ` +

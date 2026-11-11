@@ -48,15 +48,23 @@ npm test
 ## Project layout
 
 ```
-index.html         # App shell
+index.html         # Metagame page
+tournaments.html   # Tournament list and detail drawer
 css/styles.css     # Dark Magic-inspired UI
 js/app.js          # Format, trailing window, and shared sort
 js/matchup.js      # Share cutoff, ordering, table rows, matchup grid
+js/updated.js      # Shared data-updated label
+js/tournaments.js  # Tournament filters, place order, bracket markup
+js/tournaments-page.js # Tournaments page controller
 data/meta.json     # Paper metagame windows
 data/tournaments.json # Recent Goldfish tournament results
+data/updated.json  # One updatedAt for both datasets
 scripts/goldfish/  # Metagame and tournament scraper
 .github/workflows/goldfish-data.yml # Weekly refresh
 tests/meta.test.js # Data integrity, cutoff, and grid tests
+tests/updated.test.js # Shared last-updated label
+tests/tournaments.test.js # Tournament list and bracket shaping
+tests/fixtures/bracket-event.json # Dev-only bracket, not loaded by default
 tests/goldfish-parse.test.mjs # Scraper parsing tests
 README.md          # This file
 ```
@@ -83,20 +91,63 @@ What is still demo:
 
 The four windows are Goldfish's own ranges, not one snapshot copied four times. Which decks clear 1.2%, and which 15 are shown, changes with the window. A short window can list fewer than 15 decks at or above 1.2%. A longer window can list more than 15, and the page then keeps the top 15.
 
-`goldfishUrl` points at `https://www.mtggoldfish.com/archetype/...` with no extra hash. The header stamp and the note under the date control name the source and mark win rates and matchups as demo.
+`goldfishUrl` points at `https://www.mtggoldfish.com/archetype/...` with no extra hash. The header stamp and the note under the date control name the source and mark win rates and matchups as demo. They do not repeat a calendar date. The only "data updated" time on the Meta page and the Tournaments page is the shared stamp below.
+
+## When the data was updated
+
+`data/updated.json` is one timestamp for both datasets:
+
+```json
+{ "updatedAt": "2026-11-10T01:19:30.000Z" }
+```
+
+`updatedAt` is the UTC time the refresh generated `data/meta.json` and `data/tournaments.json`. The current value is the commit time of that snapshot (`2026-11-10T01:19:30Z`), not a later edit. The weekly script writes this file once per run. The timestamp stays put when both datasets are unchanged, so a no-op run does not commit. Both pages show it in the header, under the Meta / Tournaments nav, in the viewer's local time with a timezone abbreviation. If `updatedAt` is missing, the page uses the file's `Last-Modified` header. If neither is usable, the label is hidden. `asOf` and `source.retrieved` stay on the metagame snapshot as the UTC calendar date of that pull. They are not shown next to this timestamp.
 
 ## Tournament results
 
-`data/tournaments.json` is the recent Standard, Modern, and Pioneer events from the MTGGoldfish tournament lists. Each event has the name, format, and date Goldfish printed, a `top8` list (shorter when the page lists fewer than eight decks), and an `archetypeBreakdown` counted from those deck labels. `winner` is set only when Goldfish marks a deck `1st`, and includes the player when that column is present. League pages usually show records such as `5 - 0` for several players and no single winner, so `winner` is omitted there. Deck labels are copied as printed, including color codes such as `UB`. `goldfishUrl` points at the tournament or deck page Goldfish linked.
+`data/tournaments.json` is the recent Standard, Modern, and Pioneer events from the MTGGoldfish tournament lists. `tournaments.html` reads that file on each load. A later refresh does not need a UI change. The homepage and this page share a Meta / Tournaments nav. Format tabs are Standard, Pioneer, and Modern, and `?format=` selects one (`standard`, `pioneer`, or `modern`).
+
+The list is one row per event, newest first. The window control matches the Meta page: “Show data for the last” 7, 14, 30, or 90 days, default 30. Custom… opens From and To dates bounded by the earliest event and the later of the latest event and today. `?days=` or `?from=` and `?to=` reproduce the view. The same preset is kept when you move between Meta and Tournaments. A custom range stays on Tournaments; Meta uses the nearest preset. Event type is still derived from the name (Challenge, League, Qualifier, Preliminary, Showcase, or Other). Columns are date, event name, event type, and winner archetype. A Players column is added when any event in the current list has `playerCount`. A Bracket chip is shown only on rows that include bracket data. Clicking a row opens a drawer with the top 8 in finishing order, each archetype linked to its Goldfish deck in a new tab, the player, a link to the event on Goldfish, and a source link when `sourceUrl` is present.
+
+Each event has the name, format, and date Goldfish printed, a `top8` list (shorter when the page lists fewer than eight decks), and an `archetypeBreakdown` counted from those deck labels. `winner` is set only when Goldfish marks a deck `1st`, and includes the player when that column is present. League pages usually show records such as `5 - 0` for several players and no single winner, so `winner` is omitted there. Deck labels are copied as printed, including color codes such as `UB`. `goldfishUrl` points at the tournament or deck page Goldfish linked. Fields Goldfish did not show are omitted.
+
+`playerCount` is optional. It is a non-negative integer, the size of the event when a source states it. The page shows an em dash when it is absent. It is not inferred from names such as "Challenge 32".
+
+`bracket` is optional and omitted when no bracket was published. The drawer then says "Bracket not available for this event". When it is present, the drawer shows quarterfinals, semifinals, and the final: who beat whom, with game scores. No events in the weekly file have a bracket yet. `tests/fixtures/bracket-event.json` is a dev-only example used by the tests and, only when the page is opened with `?fixture=bracket`, by the drawer. It is not written into `data/tournaments.json`.
+
+```json
+{
+  "bracket": {
+    "rounds": [
+      {
+        "round": "QF",
+        "matches": [
+          {
+            "players": [
+              { "player": "Ada", "archetype": "Dimir Midrange", "wins": 2, "losses": 0 },
+              { "player": "Bea", "archetype": "Living End", "wins": 1, "losses": 2 }
+            ],
+            "winner": "Ada"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+`round` is `QF`, `SF`, or `F`. Each match has exactly two players. `wins` and `losses` are game counts. `winner` is the `player` string of the player who won that match. A round with no matches is omitted. The page also accepts the long names (`quarterfinals`, `semifinals`, `final`) and, when `winner` is missing, treats the player with more wins as the winner.
+
+Place text is shown as printed. Ordering understands exact places (`1st`, `2`), place bands (`3rd-4th`, `5th-8th`), and league records (`5 - 0`). The same record keeps the source order.
 
 ## Weekly refresh
 
-`.github/workflows/goldfish-data.yml` runs at 06:17 UTC every Sunday (`17 6 * * 0`) and can be started by hand with `workflow_dispatch`. It refreshes `data/meta.json` and `data/tournaments.json`, then commits only when one of those files changed. The job has `contents: write` and no other permission. GitHub runs scheduled workflows only from the default branch, so the Sunday run starts after this workflow is on `main`.
+`.github/workflows/goldfish-data.yml` runs at 06:17 UTC every Sunday (`17 6 * * 0`) and can be started by hand with `workflow_dispatch`. It refreshes `data/meta.json` and `data/tournaments.json`, writes `data/updated.json` when either dataset changed, then commits only when one of those files changed. The job has `contents: write` and no other permission. GitHub runs scheduled workflows only from the default branch, so the Sunday run starts after this workflow is on `main`.
 
 ## Assumptions
 
 - “Paper” is the tabletop metagame, not the MTGO (`online`) one.
 - Goldfish's published shares can add to a few tenths away from 100 because of rounding.
 - `sampleSize` counts the decks attached to the archetypes Goldfish listed for that window. It is not a separate tournament-count API.
-- Single-page app; no backend or build step.
+- Static pages; no backend or build step. The tournaments page is `tournaments.html`.
 - The archetype table stacks into cards on a narrow screen. The matchup grid scrolls sideways, with the row names kept in view.

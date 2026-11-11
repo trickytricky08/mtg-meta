@@ -11,6 +11,7 @@ import {
   parseTournamentIndex,
   parseTournamentPage,
   refreshMeta,
+  resolveUpdatedStamp,
   toTournamentEvent,
 } from "../scripts/goldfish/parse.mjs";
 
@@ -193,8 +194,10 @@ test("the weekly workflow scrapes both datasets and commits only when data chang
   assert.match(workflow, /data\/meta\.json data\/tournaments\.json/);
   assert.equal(workflow.includes("pull-requests:"), false);
   const index = fs.readFileSync(path.join(root, "index.html"), "utf8");
-  assert.equal(index.includes("tournaments.html"), false);
-  assert.equal(index.includes('href="tournaments'), false);
+  assert.match(index, /class="site-nav"/);
+  assert.match(index, /href="tournaments.html"/);
+  assert.equal(index.includes("data/tournaments.json"), false);
+  assert.equal(index.includes("js/tournaments"), false);
 });
 
 test("seeded tournament file matches the scraper schema", () => {
@@ -237,4 +240,32 @@ test("seeded tournament file matches the scraper schema", () => {
   }
   const file = buildTournamentFile(data.events, data.retrieved);
   assert.equal(file.notes, data.notes);
+});
+
+test("the shared updated stamp moves only when a dataset changes", () => {
+  const kept = { updatedAt: "2026-11-10T01:19:30.000Z" };
+  const now = "2026-11-16T06:17:00.000Z";
+  assert.deepEqual(resolveUpdatedStamp({ existing: kept, dataChanged: false, now }), kept);
+  assert.deepEqual(
+    resolveUpdatedStamp({ existing: kept, dataChanged: true, now }),
+    { updatedAt: now }
+  );
+  assert.deepEqual(
+    resolveUpdatedStamp({ existing: null, dataChanged: false, now }),
+    { updatedAt: now }
+  );
+  assert.deepEqual(
+    resolveUpdatedStamp({ existing: { updatedAt: "2026-11-10" }, dataChanged: false, now }),
+    { updatedAt: now }
+  );
+  assert.throws(
+    () => resolveUpdatedStamp({ existing: null, dataChanged: true, now: "today" }),
+    /UTC ISO timestamp/
+  );
+  const workflow = fs.readFileSync(path.join(root, ".github/workflows/goldfish-data.yml"), "utf8");
+  const scrape = fs.readFileSync(path.join(root, "scripts/goldfish/scrape.mjs"), "utf8");
+  assert.match(workflow, /data\/updated\.json/);
+  assert.match(workflow, /cron:\s*"17 6 \* \* 0"/);
+  assert.match(scrape, /resolveUpdatedStamp/);
+  assert.match(scrape, /data\/updated\.json/);
 });

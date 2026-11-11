@@ -1,0 +1,134 @@
+{
+  "id": "dev-bracket",
+  "devFixture": true,
+  "name": "Dev fixture — Modern Challenge bracket",
+  "format": "modern",
+  "date": "2026-11-09",
+  "playerCount": 32,
+  "goldfishUrl": "https://www.mtggoldfish.com/tournament/67907",
+  "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-0912857704",
+  "winner": {
+    "place": "1st",
+    "archetype": "Dimir Midrange",
+    "player": "storti",
+    "goldfishUrl": "https://www.mtggoldfish.com/deck/8036440"
+  },
+  "top8": [
+    {
+      "place": "1st",
+      "archetype": "Dimir Midrange",
+      "player": "storti",
+      "goldfishUrl": "https://www.mtggoldfish.com/deck/8036440"
+    },
+    {
+      "place": "2nd",
+      "archetype": "Living End",
+      "player": "niuwaid001",
+      "goldfishUrl": "https://www.mtggoldfish.com/deck/8036426"
+    },
+    {
+      "place": "3rd-4th",
+      "archetype": "BR",
+      "player": "kasa",
+      "goldfishUrl": "https://www.mtggoldfish.com/deck/8036420"
+    },
+    {
+      "place": "3rd-4th",
+      "archetype": "WU",
+      "player": "nahuel10",
+      "goldfishUrl": "https://www.mtggoldfish.com/deck/8036423"
+    },
+    {
+      "place": "5th-8th",
+      "archetype": "Neobrand",
+      "player": "Sarlanga",
+      "goldfishUrl": "https://www.mtggoldfish.com/deck/8036416"
+    },
+    {
+      "place": "5th-8th",
+      "archetype": "Neobrand",
+      "player": "bcs8995",
+      "goldfishUrl": "https://www.mtggoldfish.com/deck/8036422"
+    },
+    {
+      "place": "5th-8th",
+      "archetype": "Rakdos Midrange",
+      "player": "MC_amp2267",
+      "goldfishUrl": "https://www.mtggoldfish.com/deck/8036434"
+    },
+    {
+      "place": "5th-8th",
+      "archetype": "Eldrazi Ramp",
+      "player": "Kollslaw",
+      "goldfishUrl": "https://www.mtggoldfish.com/deck/8036442"
+    }
+  ],
+  "bracket": {
+    "rounds": [
+      {
+        "round": "QF",
+        "matches": [
+          {
+            "players": [
+              { "player": "storti", "archetype": "Dimir Midrange", "wins": 2, "losses": 0 },
+              { "player": "Sarlanga", "archetype": "Neobrand", "wins": 0, "losses": 2 }
+            ],
+            "winner": "storti"
+          },
+          {
+            "players": [
+              { "player": "niuwaid001", "archetype": "Living End", "wins": 2, "losses": 1 },
+              { "player": "bcs8995", "archetype": "Neobrand", "wins": 1, "losses": 2 }
+            ],
+            "winner": "niuwaid001"
+          },
+          {
+            "players": [
+              { "player": "kasa", "archetype": "BR", "wins": 2, "losses": 1 },
+              { "player": "MC_amp2267", "archetype": "Rakdos Midrange", "wins": 1, "losses": 2 }
+            ],
+            "winner": "kasa"
+          },
+          {
+            "players": [
+              { "player": "nahuel10", "archetype": "WU", "wins": 2, "losses": 0 },
+              { "player": "Kollslaw", "archetype": "Eldrazi Ramp", "wins": 0, "losses": 2 }
+            ],
+            "winner": "nahuel10"
+          }
+        ]
+      },
+      {
+        "round": "SF",
+        "matches": [
+          {
+            "players": [
+              { "player": "storti", "archetype": "Dimir Midrange", "wins": 2, "losses": 1 },
+              { "player": "kasa", "archetype": "BR", "wins": 1, "losses": 2 }
+            ],
+            "winner": "storti"
+          },
+          {
+            "players": [
+              { "player": "niuwaid001", "archetype": "Living End", "wins": 2, "losses": 1 },
+              { "player": "nahuel10", "archetype": "WU", "wins": 1, "losses": 2 }
+            ],
+            "winner": "niuwaid001"
+          }
+        ]
+      },
+      {
+        "round": "F",
+        "matches": [
+          {
+            "players": [
+              { "player": "storti", "archetype": "Dimir Midrange", "wins": 2, "losses": 1 },
+              { "player": "niuwaid001", "archetype": "Living End", "wins": 1, "losses": 2 }
+            ],
+            "winner": "storti"
+          }
+        ]
+      }
+    ]
+  }
+}

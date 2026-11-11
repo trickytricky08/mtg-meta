@@ -240,6 +240,19 @@ export function toTournamentEvent(page, id) {
 export const TOURNAMENT_NOTES =
   "Events are the recent Standard, Modern, and Pioneer tournaments linked from MTGGoldfish's format tournament lists. top8 is the first eight decks in the order Goldfish printed them, and it is shorter when the page lists fewer than eight. place is the Place cell text. winner is present only when a row is marked 1st. League pages usually show records such as 5 - 0 for several players and no 1st, so those events omit winner. archetype is the deck label on that row; Goldfish sometimes prints a color code such as UB instead of an archetype title, and those labels are kept as printed. archetypeBreakdown counts those labels inside top8. goldfishUrl is the deck or tournament page Goldfish linked. Fields Goldfish did not show are omitted. This file is not the paper metagame snapshot in meta.json.";
 
+const ISO_STAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/;
+
+export function resolveUpdatedStamp({ existing, dataChanged, now }) {
+  const current = typeof existing?.updatedAt === "string" && ISO_STAMP.test(existing.updatedAt)
+    ? existing.updatedAt
+    : "";
+  if (!dataChanged && current) return { updatedAt: current };
+  if (!ISO_STAMP.test(String(now || ""))) {
+    throw new Error(`Generation time must be a UTC ISO timestamp, got ${now}`);
+  }
+  return { updatedAt: now };
+}
+
 export function buildTournamentFile(events, retrieved) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(retrieved)) {
     throw new Error(`Retrieval date must be YYYY-MM-DD, got ${retrieved}`);
