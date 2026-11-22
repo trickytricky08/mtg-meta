@@ -1,9 +1,9 @@
 {
   "dataKind": "goldfish-tournaments",
-  "retrieved": "2026-11-15",
+  "retrieved": "2026-11-22",
   "source": {
     "name": "MTGGoldfish",
-    "retrieved": "2026-11-15",
+    "retrieved": "2026-11-22",
     "pages": [
       "https://www.mtggoldfish.com/tournaments/standard",
       "https://www.mtggoldfish.com/tournaments/modern",
@@ -13,367 +13,395 @@
   "notes": "Events are the recent Standard, Modern, and Pioneer tournaments linked from MTGGoldfish's format tournament lists. top8 is the first eight decks in the order Goldfish printed them, and it is shorter when the page lists fewer than eight. place is the Place cell text. winner is present only when a row is marked 1st. League pages usually show records such as 5 - 0 for several players and no 1st, so those events omit winner. archetype is the deck label on that row; Goldfish sometimes prints a color code such as UB instead of an archetype title, and those labels are kept as printed. archetypeBreakdown counts those labels inside top8. goldfishUrl is the deck or tournament page Goldfish linked. Fields Goldfish did not show are omitted. This file is not the paper metagame snapshot in meta.json.",
   "events": [
     {
-      "id": "68036",
-      "name": "Modern League 2026-11-15",
+      "id": "68199",
+      "name": "Modern League 2026-11-22",
       "format": "modern",
-      "date": "2026-11-15",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68036",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-league-2026-11-1511337",
+      "date": "2026-11-22",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68199",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-league-2026-11-2211337",
       "top8": [
         {
           "place": "5 - 0",
-          "archetype": "UG",
-          "player": "CesarMerjan",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042847"
+          "archetype": "Yawgmoth",
+          "player": "Gartxot",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050285"
         },
         {
           "place": "5 - 0",
-          "archetype": "Ruby Storm",
-          "player": "merfolkgod",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042752"
+          "archetype": "Living End",
+          "player": "IL_COSCA",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050294"
         },
         {
           "place": "5 - 0",
-          "archetype": "Goryo's Vengeance",
-          "player": "Rvng",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042846"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Rakdos Death's Shadow",
-          "player": "Tarmofaeries",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042751"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "RG",
-          "player": "Zoza",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042753"
+          "archetype": "Boros Burn",
+          "player": "Redhii",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050343"
         }
       ],
       "archetypeBreakdown": [
         {
-          "archetype": "Goryo's Vengeance",
+          "archetype": "Boros Burn",
           "count": 1
         },
         {
-          "archetype": "Rakdos Death's Shadow",
+          "archetype": "Living End",
           "count": 1
         },
         {
-          "archetype": "RG",
-          "count": 1
-        },
-        {
-          "archetype": "Ruby Storm",
-          "count": 1
-        },
-        {
-          "archetype": "UG",
+          "archetype": "Yawgmoth",
           "count": 1
         }
       ]
     },
     {
-      "id": "68040",
-      "name": "Standard League 2026-11-15",
-      "format": "standard",
-      "date": "2026-11-15",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68040",
-      "sourceUrl": "https://www.mtgo.com/decklist/standard-league-2026-11-1511361",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "Izzet Prowess",
-          "player": "Bosseidon",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042923"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "UR",
-          "player": "hips_dont_lijah",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042845"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Selesnya Aggro",
-          "player": "moreno13",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042924"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Izzet Prowess",
-          "count": 1
-        },
-        {
-          "archetype": "Selesnya Aggro",
-          "count": 1
-        },
-        {
-          "archetype": "UR",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68022",
-      "name": "Modern Challenge 16 2026-11-14",
+      "id": "68187",
+      "name": "Modern Challenge 16 2026-11-21",
       "format": "modern",
-      "date": "2026-11-14",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68022",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-16-2026-11-1412858104",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68187",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-16-2026-11-2112858934",
       "winner": {
         "place": "1st",
-        "archetype": "Affinity",
-        "player": "SFDK",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8042039"
+        "archetype": "Amulet Titan",
+        "player": "Lord_of_The_Wastes",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8049689"
       },
       "top8": [
         {
           "place": "1st",
-          "archetype": "Affinity",
+          "archetype": "Amulet Titan",
+          "player": "Lord_of_The_Wastes",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049689"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Tron",
+          "player": "narca",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049686"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Eldrazi Ramp",
+          "player": "Rarian",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049674"
+        },
+        {
+          "place": "4th",
+          "archetype": "Eldrazi Ramp",
+          "player": "Venom01",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049697"
+        },
+        {
+          "place": "5th",
+          "archetype": "Boros Energy",
           "player": "SFDK",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042039"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Boros Energy",
-          "player": "DemianDesposito10",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042031"
-        },
-        {
-          "place": "3rd",
-          "archetype": "Eldrazi Tron",
-          "player": "Bradykiesling13",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042023"
-        },
-        {
-          "place": "4th",
-          "archetype": "Lantern",
-          "player": "Taddy_99",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042036"
-        },
-        {
-          "place": "5th",
-          "archetype": "Affinity",
-          "player": "Raistlin_Majere1981",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042016"
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049695"
         },
         {
           "place": "6th",
-          "archetype": "Affinity",
-          "player": "sioutis_kk",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042038"
+          "archetype": "Amulet Titan",
+          "player": "HouseOfManaMTG",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049682"
         },
         {
           "place": "7th",
-          "archetype": "Eldrazi Ramp",
-          "player": "E_Kaminuma",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042030"
+          "archetype": "Golgari Basking Broodscale Combo",
+          "player": "Zlatan1044",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049688"
         },
         {
           "place": "8th",
-          "archetype": "WU",
-          "player": "mlex",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042025"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Affinity",
-          "count": 3
-        },
-        {
-          "archetype": "Boros Energy",
-          "count": 1
-        },
-        {
-          "archetype": "Eldrazi Ramp",
-          "count": 1
-        },
-        {
-          "archetype": "Eldrazi Tron",
-          "count": 1
-        },
-        {
-          "archetype": "Lantern",
-          "count": 1
-        },
-        {
-          "archetype": "WU",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68020",
-      "name": "Modern Challenge 32 2026-11-14",
-      "format": "modern",
-      "date": "2026-11-14",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68020",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-1412858103",
-      "winner": {
-        "place": "1st",
-        "archetype": "Eldrazi Tron",
-        "player": "Bradykiesling13",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8041901"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Eldrazi Tron",
-          "player": "Bradykiesling13",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041901"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Amulet Titan",
-          "player": "Capriccioso",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041893"
-        },
-        {
-          "place": "3rd",
-          "archetype": "WU",
-          "player": "nahuel10",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041899"
-        },
-        {
-          "place": "4th",
-          "archetype": "Affinity",
-          "player": "xfile",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041910"
-        },
-        {
-          "place": "5th",
-          "archetype": "Rakdos Midrange",
-          "player": "gazmon48",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041896"
-        },
-        {
-          "place": "6th",
-          "archetype": "Eldrazi Ramp",
-          "player": "caquaa",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041890"
-        },
-        {
-          "place": "7th",
-          "archetype": "Esper Reanimator",
-          "player": "WestvalePreacher",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041898"
-        },
-        {
-          "place": "8th",
-          "archetype": "BR",
-          "player": "DragonFodder",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041892"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Affinity",
-          "count": 1
-        },
-        {
-          "archetype": "Amulet Titan",
-          "count": 1
-        },
-        {
-          "archetype": "BR",
-          "count": 1
-        },
-        {
-          "archetype": "Eldrazi Ramp",
-          "count": 1
-        },
-        {
-          "archetype": "Eldrazi Tron",
-          "count": 1
-        },
-        {
-          "archetype": "Esper Reanimator",
-          "count": 1
-        },
-        {
-          "archetype": "Rakdos Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "WU",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68039",
-      "name": "Modern Challenge 32 2026-11-14 (1)",
-      "format": "modern",
-      "date": "2026-11-14",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68039",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-1412858108",
-      "winner": {
-        "place": "1st",
-        "archetype": "Jeskai Energy",
-        "player": "r0cknati0n",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8042794"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Jeskai Energy",
-          "player": "r0cknati0n",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042794"
-        },
-        {
-          "place": "2nd",
           "archetype": "Temur Prowess",
-          "player": "O_danielakos",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042793"
-        },
-        {
-          "place": "3rd",
-          "archetype": "WU",
-          "player": "nahuel10",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042798"
-        },
-        {
-          "place": "4th",
-          "archetype": "Belcher",
-          "player": "TooPoorToPlay",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042813"
-        },
-        {
-          "place": "5th",
-          "archetype": "Affinity",
-          "player": "sioutis_kk",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042818"
-        },
-        {
-          "place": "6th",
-          "archetype": "Boros Energy",
-          "player": "Mikebrav",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042792"
-        },
-        {
-          "place": "7th",
-          "archetype": "Eldrazi Ramp",
-          "player": "caquaa",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042788"
-        },
-        {
-          "place": "8th",
-          "archetype": "Eldrazi Ramp",
-          "player": "Fransadness",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042811"
+          "player": "sedotwc",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049698"
         }
       ],
       "archetypeBreakdown": [
+        {
+          "archetype": "Amulet Titan",
+          "count": 2
+        },
         {
           "archetype": "Eldrazi Ramp",
           "count": 2
         },
         {
+          "archetype": "Boros Energy",
+          "count": 1
+        },
+        {
+          "archetype": "Golgari Basking Broodscale Combo",
+          "count": 1
+        },
+        {
+          "archetype": "Temur Prowess",
+          "count": 1
+        },
+        {
+          "archetype": "Tron",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68180",
+      "name": "Modern Challenge 32 2026-11-21",
+      "format": "modern",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68180",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-2112858933",
+      "winner": {
+        "place": "1st",
+        "archetype": "Eldrazi Ramp",
+        "player": "Redman1034",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8049514"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Eldrazi Ramp",
+          "player": "Redman1034",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049514"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Indomitable Creativity",
+          "player": "Gullit_Careca",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049515"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Tron",
+          "player": "cthibert",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049492"
+        },
+        {
+          "place": "4th",
+          "archetype": "BR",
+          "player": "yolad",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049513"
+        },
+        {
+          "place": "5th",
+          "archetype": "Esper Blink",
+          "player": "HelpfulHobo",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049498"
+        },
+        {
+          "place": "6th",
+          "archetype": "Ruby Storm",
+          "player": "auzzie51",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049493"
+        },
+        {
+          "place": "7th",
+          "archetype": "Ruby Storm",
+          "player": "mlex",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049500"
+        },
+        {
+          "place": "8th",
+          "archetype": "Amulet Titan",
+          "player": "Chef_Chuy",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049510"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Ruby Storm",
+          "count": 2
+        },
+        {
+          "archetype": "Amulet Titan",
+          "count": 1
+        },
+        {
+          "archetype": "BR",
+          "count": 1
+        },
+        {
+          "archetype": "Eldrazi Ramp",
+          "count": 1
+        },
+        {
+          "archetype": "Esper Blink",
+          "count": 1
+        },
+        {
+          "archetype": "Indomitable Creativity",
+          "count": 1
+        },
+        {
+          "archetype": "Tron",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68184",
+      "name": "Modern Challenge 32 2026-11-21 (1)",
+      "format": "modern",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68184",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-0712858933",
+      "winner": {
+        "place": "1st",
+        "archetype": "Eldrazi Ramp",
+        "player": "Redman1034",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8049594"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Eldrazi Ramp",
+          "player": "Redman1034",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049594"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Indomitable Creativity",
+          "player": "Gullit_Careca",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049595"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Tron",
+          "player": "cthibert",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049572"
+        },
+        {
+          "place": "4th",
+          "archetype": "BR",
+          "player": "yolad",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049593"
+        },
+        {
+          "place": "5th",
+          "archetype": "Esper Blink",
+          "player": "HelpfulHobo",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049578"
+        },
+        {
+          "place": "6th",
+          "archetype": "Ruby Storm",
+          "player": "auzzie51",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049573"
+        },
+        {
+          "place": "7th",
+          "archetype": "Ruby Storm",
+          "player": "mlex",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049580"
+        },
+        {
+          "place": "8th",
+          "archetype": "Amulet Titan",
+          "player": "Chef_Chuy",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049590"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Ruby Storm",
+          "count": 2
+        },
+        {
+          "archetype": "Amulet Titan",
+          "count": 1
+        },
+        {
+          "archetype": "BR",
+          "count": 1
+        },
+        {
+          "archetype": "Eldrazi Ramp",
+          "count": 1
+        },
+        {
+          "archetype": "Esper Blink",
+          "count": 1
+        },
+        {
+          "archetype": "Indomitable Creativity",
+          "count": 1
+        },
+        {
+          "archetype": "Tron",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68197",
+      "name": "Modern Challenge 32 2026-11-21 (1)",
+      "format": "modern",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68197",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-2112858938",
+      "winner": {
+        "place": "1st",
+        "archetype": "Belcher",
+        "player": "E90_DeliveryBoy",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8050252"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Belcher",
+          "player": "E90_DeliveryBoy",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050252"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Amulet Titan",
+          "player": "mERAZED",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050253"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Temur Prowess",
+          "player": "sedotwc",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050257"
+        },
+        {
+          "place": "4th",
+          "archetype": "Boros Energy",
+          "player": "_Elfkid_",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050245"
+        },
+        {
+          "place": "5th",
+          "archetype": "Goryo's Vengeance",
+          "player": "IkeanWarlord",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050249"
+        },
+        {
+          "place": "6th",
+          "archetype": "Rakdos Midrange",
+          "player": "Strongmind",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050254"
+        },
+        {
+          "place": "7th",
           "archetype": "Affinity",
+          "player": "Player44",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050241"
+        },
+        {
+          "place": "8th",
+          "archetype": "Izzet Steel-Cutter",
+          "player": "hxlfnxxsx",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050239"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Affinity",
+          "count": 1
+        },
+        {
+          "archetype": "Amulet Titan",
           "count": 1
         },
         {
@@ -385,74 +413,172 @@
           "count": 1
         },
         {
-          "archetype": "Jeskai Energy",
+          "archetype": "Goryo's Vengeance",
+          "count": 1
+        },
+        {
+          "archetype": "Izzet Steel-Cutter",
+          "count": 1
+        },
+        {
+          "archetype": "Rakdos Midrange",
           "count": 1
         },
         {
           "archetype": "Temur Prowess",
           "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68202",
+      "name": "Modern Challenge 32 2026-11-21 (1)",
+      "format": "modern",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68202",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-1412858933",
+      "winner": {
+        "place": "1st",
+        "archetype": "Eldrazi Ramp",
+        "player": "Redman1034",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8050370"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Eldrazi Ramp",
+          "player": "Redman1034",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050370"
         },
         {
-          "archetype": "WU",
+          "place": "2nd",
+          "archetype": "Indomitable Creativity",
+          "player": "Gullit_Careca",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050371"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Tron",
+          "player": "cthibert",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050348"
+        },
+        {
+          "place": "4th",
+          "archetype": "BR",
+          "player": "yolad",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050369"
+        },
+        {
+          "place": "5th",
+          "archetype": "Esper Blink",
+          "player": "HelpfulHobo",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050354"
+        },
+        {
+          "place": "6th",
+          "archetype": "Ruby Storm",
+          "player": "auzzie51",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050349"
+        },
+        {
+          "place": "7th",
+          "archetype": "Ruby Storm",
+          "player": "mlex",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050356"
+        },
+        {
+          "place": "8th",
+          "archetype": "Amulet Titan",
+          "player": "Chef_Chuy",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050366"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Ruby Storm",
+          "count": 2
+        },
+        {
+          "archetype": "Amulet Titan",
+          "count": 1
+        },
+        {
+          "archetype": "BR",
+          "count": 1
+        },
+        {
+          "archetype": "Eldrazi Ramp",
+          "count": 1
+        },
+        {
+          "archetype": "Esper Blink",
+          "count": 1
+        },
+        {
+          "archetype": "Indomitable Creativity",
+          "count": 1
+        },
+        {
+          "archetype": "Tron",
           "count": 1
         }
       ]
     },
     {
-      "id": "68010",
-      "name": "Modern League 2026-11-14",
+      "id": "68181",
+      "name": "Modern League 2026-11-21",
       "format": "modern",
-      "date": "2026-11-14",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68010",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-league-2026-11-1411337",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68181",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-league-2026-11-2111337",
       "top8": [
+        {
+          "place": "5 - 0",
+          "archetype": "Dimir Midrange",
+          "player": "-=Alfa=-",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049959"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Amulet Titan",
+          "player": "AlexDBn1",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050197"
+        },
         {
           "place": "5 - 0",
           "archetype": "Amulet Titan",
           "player": "aljce",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041686"
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049524"
         },
         {
           "place": "5 - 0",
-          "archetype": "Miracles",
-          "player": "Argentorum",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041660"
+          "archetype": "W",
+          "player": "andresambiaze",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049521"
         },
         {
           "place": "5 - 0",
-          "archetype": "Azorius Blink",
-          "player": "Athenani",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041978"
+          "archetype": "Devoted Combo",
+          "player": "AVC_MTG",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049847"
         },
         {
           "place": "5 - 0",
-          "archetype": "Amulet Titan",
-          "player": "axelino",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041495"
+          "archetype": "Sam Combo",
+          "player": "Baushido",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050198"
         },
         {
           "place": "5 - 0",
           "archetype": "Eldrazi Ramp",
-          "player": "Bazaar_mati",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041606"
+          "player": "Bobone",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050079"
         },
         {
           "place": "5 - 0",
-          "archetype": "UBRG",
-          "player": "c00kie_monster",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041659"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Living End",
-          "player": "darikun",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041979"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Grixis Midrange",
-          "player": "DurtyDan",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042996"
+          "archetype": "Bant Midrange",
+          "player": "cathjues",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050080"
         }
       ],
       "archetypeBreakdown": [
@@ -461,257 +587,11 @@
           "count": 2
         },
         {
-          "archetype": "Azorius Blink",
+          "archetype": "Bant Midrange",
           "count": 1
         },
         {
-          "archetype": "Eldrazi Ramp",
-          "count": 1
-        },
-        {
-          "archetype": "Grixis Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "Living End",
-          "count": 1
-        },
-        {
-          "archetype": "Miracles",
-          "count": 1
-        },
-        {
-          "archetype": "UBRG",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68041",
-      "name": "Pioneer Challenge 16 2026-11-14",
-      "format": "pioneer",
-      "date": "2026-11-14",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68041",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-challenge-16-2026-11-1412858111",
-      "winner": {
-        "place": "1st",
-        "archetype": "WR",
-        "player": "Tree42o",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8042932"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "WR",
-          "player": "Tree42o",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042932"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Golgari Midrange",
-          "player": "Arianne",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042931"
-        },
-        {
-          "place": "3rd",
-          "archetype": "UR",
-          "player": "Univerce",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042948"
-        },
-        {
-          "place": "4th",
-          "archetype": "4c Scapeshift",
-          "player": "Moniz0801",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042937"
-        },
-        {
-          "place": "5th",
-          "archetype": "UR",
-          "player": "VitorCarvalho01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042952"
-        },
-        {
-          "place": "6th",
-          "archetype": "UR",
-          "player": "WestvalePreacher",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042935"
-        },
-        {
-          "place": "7th",
-          "archetype": "Temur Lessons",
-          "player": "ejk",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042938"
-        },
-        {
-          "place": "8th",
-          "archetype": "Azorius Control",
-          "player": "capellomauro",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042942"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "UR",
-          "count": 3
-        },
-        {
-          "archetype": "4c Scapeshift",
-          "count": 1
-        },
-        {
-          "archetype": "Azorius Control",
-          "count": 1
-        },
-        {
-          "archetype": "Golgari Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "Temur Lessons",
-          "count": 1
-        },
-        {
-          "archetype": "WR",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68015",
-      "name": "Pioneer League 2026-11-14",
-      "format": "pioneer",
-      "date": "2026-11-14",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68015",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-1411353",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "Temur Lessons",
-          "player": "darg24",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042615"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Mono-Red Prowess",
-          "player": "EmiroVV",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042267"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Azorius Control",
-          "player": "Javierr",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042114"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "UR",
-          "player": "OafMcNamara",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042889"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "WG",
-          "player": "Strongmind",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041611"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Azorius Control",
-          "count": 1
-        },
-        {
-          "archetype": "Mono-Red Prowess",
-          "count": 1
-        },
-        {
-          "archetype": "Temur Lessons",
-          "count": 1
-        },
-        {
-          "archetype": "UR",
-          "count": 1
-        },
-        {
-          "archetype": "WG",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68035",
-      "name": "Standard Challenge 16 2026-11-14",
-      "format": "standard",
-      "date": "2026-11-14",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68035",
-      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-16-2026-11-1412858107",
-      "winner": {
-        "place": "1st",
-        "archetype": "Lifegain",
-        "player": "NAP_DARKMAGE_MJM",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8042557"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Lifegain",
-          "player": "NAP_DARKMAGE_MJM",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042557"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Azorius Momo",
-          "player": "pokerswizard",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042543"
-        },
-        {
-          "place": "3rd",
-          "archetype": "BR",
-          "player": "ajifly",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042558"
-        },
-        {
-          "place": "4th",
-          "archetype": "UR",
-          "player": "LucasG1ggs",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042544"
-        },
-        {
-          "place": "5th",
-          "archetype": "Dimir Midrange",
-          "player": "Venom01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042572"
-        },
-        {
-          "place": "6th",
-          "archetype": "Selesnya Aggro",
-          "player": "unagieel",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042545"
-        },
-        {
-          "place": "7th",
-          "archetype": "UB",
-          "player": "VitorCarvalho01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042567"
-        },
-        {
-          "place": "8th",
-          "archetype": "Azorius Control",
-          "player": "_must_be_nice",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042549"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Azorius Control",
-          "count": 1
-        },
-        {
-          "archetype": "Azorius Momo",
-          "count": 1
-        },
-        {
-          "archetype": "BR",
+          "archetype": "Devoted Combo",
           "count": 1
         },
         {
@@ -719,627 +599,93 @@
           "count": 1
         },
         {
-          "archetype": "Lifegain",
-          "count": 1
-        },
-        {
-          "archetype": "Selesnya Aggro",
-          "count": 1
-        },
-        {
-          "archetype": "UB",
-          "count": 1
-        },
-        {
-          "archetype": "UR",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68014",
-      "name": "Standard League 2026-11-14",
-      "format": "standard",
-      "date": "2026-11-14",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68014",
-      "sourceUrl": "https://www.mtgo.com/decklist/standard-league-2026-11-1411361",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "Azorius Control",
-          "player": "Dioferreira",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041608"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Rakdos Discard",
-          "player": "GanYanCHN",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042041"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Jund Sacrifice",
-          "player": "J_Dub",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042723"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Azorius Control",
-          "player": "Kritik",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041939"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Azorius Control",
-          "player": "Magicisfuntodo",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041609"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "UR",
-          "player": "Makoobi",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042486"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "4c Control",
-          "player": "MangledMeta",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042578"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Selesnya Aggro",
-          "player": "YourDoom25",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042724"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Azorius Control",
-          "count": 3
-        },
-        {
-          "archetype": "4c Control",
-          "count": 1
-        },
-        {
-          "archetype": "Jund Sacrifice",
-          "count": 1
-        },
-        {
-          "archetype": "Rakdos Discard",
-          "count": 1
-        },
-        {
-          "archetype": "Selesnya Aggro",
-          "count": 1
-        },
-        {
-          "archetype": "UR",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68024",
-      "name": "Standard RC Qualifier 2026-11-14",
-      "format": "standard",
-      "date": "2026-11-14",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68024",
-      "sourceUrl": "https://www.mtgo.com/decklist/standard-rc-qualifier-2026-11-1412858074",
-      "winner": {
-        "place": "1st",
-        "archetype": "Izzet Leyline Aggro",
-        "player": "bugzbugs",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8042262"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Izzet Leyline Aggro",
-          "player": "bugzbugs",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042262"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Selesnya Aggro",
-          "player": "yolad",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042259"
-        },
-        {
-          "place": "3rd",
-          "archetype": "Boros Momo",
-          "player": "fireflymylove",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042258"
-        },
-        {
-          "place": "4th",
-          "archetype": "Dimir Midrange",
-          "player": "Arianne",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042237"
-        },
-        {
-          "place": "5th",
-          "archetype": "Dimir Control",
-          "player": "peter780108",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042240"
-        },
-        {
-          "place": "6th",
-          "archetype": "Azorius Momo",
-          "player": "azatoyellow",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042243"
-        },
-        {
-          "place": "7th",
-          "archetype": "Selesnya Gearhulk",
-          "player": "Capriccioso",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042234"
-        },
-        {
-          "place": "8th",
-          "archetype": "Dimir Midrange",
-          "player": "Venom01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8042263"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Dimir Midrange",
-          "count": 2
-        },
-        {
-          "archetype": "Azorius Momo",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Momo",
-          "count": 1
-        },
-        {
-          "archetype": "Dimir Control",
-          "count": 1
-        },
-        {
-          "archetype": "Izzet Leyline Aggro",
-          "count": 1
-        },
-        {
-          "archetype": "Selesnya Aggro",
-          "count": 1
-        },
-        {
-          "archetype": "Selesnya Gearhulk",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68004",
-      "name": "Modern Challenge 32 2026-11-13",
-      "format": "modern",
-      "date": "2026-11-13",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68004",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-1312858098",
-      "winner": {
-        "place": "1st",
-        "archetype": "Temur Prowess",
-        "player": "O_danielakos",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8041226"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Temur Prowess",
-          "player": "O_danielakos",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041226"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Rakdos Midrange",
-          "player": "MisterTwin",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041246"
-        },
-        {
-          "place": "3rd",
-          "archetype": "Eldrazi Ramp",
-          "player": "Capitano_CL",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041224"
-        },
-        {
-          "place": "4th",
-          "archetype": "Affinity",
-          "player": "Walker735",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041241"
-        },
-        {
-          "place": "5th",
-          "archetype": "Goryo's Vengeance",
-          "player": "tA326_",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041229"
-        },
-        {
-          "place": "6th",
-          "archetype": "Amulet Titan",
-          "player": "Mistakenn",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041234"
-        },
-        {
-          "place": "7th",
-          "archetype": "Ruby Storm",
-          "player": "hugofreitas1",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041233"
-        },
-        {
-          "place": "8th",
-          "archetype": "Boros Energy",
-          "player": "jdenora",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041247"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Affinity",
-          "count": 1
-        },
-        {
-          "archetype": "Amulet Titan",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Energy",
-          "count": 1
-        },
-        {
           "archetype": "Eldrazi Ramp",
           "count": 1
         },
         {
-          "archetype": "Goryo's Vengeance",
-          "count": 1
-        },
-        {
-          "archetype": "Rakdos Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "Ruby Storm",
-          "count": 1
-        },
-        {
-          "archetype": "Temur Prowess",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68005",
-      "name": "Modern Challenge 32 2026-11-13 (1)",
-      "format": "modern",
-      "date": "2026-11-13",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68005",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-0412858098",
-      "winner": {
-        "place": "1st",
-        "archetype": "Temur Prowess",
-        "player": "O_danielakos",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8041317"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Temur Prowess",
-          "player": "O_danielakos",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041317"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Rakdos Midrange",
-          "player": "MisterTwin",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041337"
-        },
-        {
-          "place": "3rd",
-          "archetype": "Eldrazi Ramp",
-          "player": "Capitano_CL",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041315"
-        },
-        {
-          "place": "4th",
-          "archetype": "Affinity",
-          "player": "Walker735",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041332"
-        },
-        {
-          "place": "5th",
-          "archetype": "Goryo's Vengeance",
-          "player": "tA326_",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041320"
-        },
-        {
-          "place": "6th",
-          "archetype": "Amulet Titan",
-          "player": "Mistakenn",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041325"
-        },
-        {
-          "place": "7th",
-          "archetype": "Ruby Storm",
-          "player": "hugofreitas1",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041324"
-        },
-        {
-          "place": "8th",
-          "archetype": "Boros Energy",
-          "player": "jdenora",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041338"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Affinity",
-          "count": 1
-        },
-        {
-          "archetype": "Amulet Titan",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Energy",
-          "count": 1
-        },
-        {
-          "archetype": "Eldrazi Ramp",
-          "count": 1
-        },
-        {
-          "archetype": "Goryo's Vengeance",
-          "count": 1
-        },
-        {
-          "archetype": "Rakdos Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "Ruby Storm",
-          "count": 1
-        },
-        {
-          "archetype": "Temur Prowess",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68007",
-      "name": "Modern Challenge 32 2026-11-13 (1)",
-      "format": "modern",
-      "date": "2026-11-13",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68007",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-1012858098",
-      "winner": {
-        "place": "1st",
-        "archetype": "Temur Prowess",
-        "player": "O_danielakos",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8041404"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Temur Prowess",
-          "player": "O_danielakos",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041404"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Rakdos Midrange",
-          "player": "MisterTwin",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041424"
-        },
-        {
-          "place": "3rd",
-          "archetype": "Eldrazi Ramp",
-          "player": "Capitano_CL",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041402"
-        },
-        {
-          "place": "4th",
-          "archetype": "Affinity",
-          "player": "Walker735",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041419"
-        },
-        {
-          "place": "5th",
-          "archetype": "Goryo's Vengeance",
-          "player": "tA326_",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041407"
-        },
-        {
-          "place": "6th",
-          "archetype": "Amulet Titan",
-          "player": "Mistakenn",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041412"
-        },
-        {
-          "place": "7th",
-          "archetype": "Ruby Storm",
-          "player": "hugofreitas1",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041411"
-        },
-        {
-          "place": "8th",
-          "archetype": "Boros Energy",
-          "player": "jdenora",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041425"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Affinity",
-          "count": 1
-        },
-        {
-          "archetype": "Amulet Titan",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Energy",
-          "count": 1
-        },
-        {
-          "archetype": "Eldrazi Ramp",
-          "count": 1
-        },
-        {
-          "archetype": "Goryo's Vengeance",
-          "count": 1
-        },
-        {
-          "archetype": "Rakdos Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "Ruby Storm",
-          "count": 1
-        },
-        {
-          "archetype": "Temur Prowess",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67976",
-      "name": "Modern League 2026-11-13",
-      "format": "modern",
-      "date": "2026-11-13",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67976",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-league-2026-11-1311337",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "W",
-          "player": "absolutnicco",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040242"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Jeskai Prowess",
-          "player": "AguiarEdijo",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041185"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Boros Energy",
-          "player": "Ceddy",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041186"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Amulet Titan",
-          "player": "Chef_Chuy",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039859"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "BR",
-          "player": "darikun",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040274"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Jeskai Energy",
-          "player": "Dasikk",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039807"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Living End",
-          "player": "Dopedafi",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040241"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "WU",
-          "player": "EMG70679",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040244"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Amulet Titan",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Energy",
-          "count": 1
-        },
-        {
-          "archetype": "BR",
-          "count": 1
-        },
-        {
-          "archetype": "Jeskai Energy",
-          "count": 1
-        },
-        {
-          "archetype": "Jeskai Prowess",
-          "count": 1
-        },
-        {
-          "archetype": "Living End",
+          "archetype": "Sam Combo",
           "count": 1
         },
         {
           "archetype": "W",
           "count": 1
-        },
-        {
-          "archetype": "WU",
-          "count": 1
         }
       ]
     },
     {
-      "id": "67981",
-      "name": "Pioneer League 2026-11-13",
+      "id": "68204",
+      "name": "Pioneer Challenge 16 2026-11-21",
       "format": "pioneer",
-      "date": "2026-11-13",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67981",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-1311353",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68204",
+      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-challenge-16-2026-11-2112858941",
+      "winner": {
+        "place": "1st",
+        "archetype": "WG",
+        "player": "GieralK",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8050479"
+      },
       "top8": [
         {
-          "place": "5 - 0",
-          "archetype": "Mono-Red Prowess",
-          "player": "Ar3nitas",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040009"
+          "place": "1st",
+          "archetype": "WG",
+          "player": "GieralK",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050479"
         },
         {
-          "place": "5 - 0",
-          "archetype": "Golgari Midrange",
-          "player": "d20epicfail",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039860"
+          "place": "2nd",
+          "archetype": "Abzan Greasefang",
+          "player": "rosici0700",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050465"
         },
         {
-          "place": "5 - 0",
-          "archetype": "Temur Prowess",
-          "player": "Fink64",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039910"
+          "place": "3rd",
+          "archetype": "UR",
+          "player": "Jonii",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050478"
         },
         {
-          "place": "5 - 0",
+          "place": "4th",
+          "archetype": "UB",
+          "player": "MyrRetriever",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050473"
+        },
+        {
+          "place": "5th",
           "archetype": "Mono-White Humans",
-          "player": "_Cygnus",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041570"
+          "player": "Ploop102",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050475"
+        },
+        {
+          "place": "6th",
+          "archetype": "UB",
+          "player": "RNicoF",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050470"
+        },
+        {
+          "place": "7th",
+          "archetype": "UB",
+          "player": "Beicodegeia",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050461"
+        },
+        {
+          "place": "8th",
+          "archetype": "Izzet Aggro",
+          "player": "Kingokarado",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050483"
         }
       ],
       "archetypeBreakdown": [
         {
-          "archetype": "Golgari Midrange",
+          "archetype": "UB",
+          "count": 3
+        },
+        {
+          "archetype": "Abzan Greasefang",
           "count": 1
         },
         {
-          "archetype": "Mono-Red Prowess",
+          "archetype": "Izzet Aggro",
           "count": 1
         },
         {
@@ -1347,930 +693,6 @@
           "count": 1
         },
         {
-          "archetype": "Temur Prowess",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68018",
-      "name": "Magic World Championship 32",
-      "format": "standard",
-      "date": "2026-11-13",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68018",
-      "sourceUrl": "https://magic.gg/decklists/magic-world-championship-32-standard-decklists-a-l",
-      "top8": [
-        {
-          "place": "8th",
-          "archetype": "Jund Sacrifice",
-          "player": "Abe Schnake",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041801"
-        },
-        {
-          "place": "8th",
-          "archetype": "Azorius Control",
-          "player": "Arne Huschenbeth",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041747"
-        },
-        {
-          "place": "8th",
-          "archetype": "Izzet Prowess",
-          "player": "Charis Kikidis",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041754"
-        },
-        {
-          "place": "8th",
-          "archetype": "Selesnya Michelangelo",
-          "player": "Eduardo Sajgalik",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041796"
-        },
-        {
-          "place": "8th",
-          "archetype": "Selesnya Landfall",
-          "player": "James Drake",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041729"
-        },
-        {
-          "place": "8th",
-          "archetype": "Boros Pixie",
-          "player": "Kellen Pastore",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041784"
-        },
-        {
-          "place": "8th",
-          "archetype": "Azorius Momo",
-          "player": "Shuhei Nakamura",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041775"
-        },
-        {
-          "place": "8th",
-          "archetype": "Izzet Mission",
-          "player": "Stefan Schütz",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041802"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Azorius Control",
-          "count": 1
-        },
-        {
-          "archetype": "Azorius Momo",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Pixie",
-          "count": 1
-        },
-        {
-          "archetype": "Izzet Mission",
-          "count": 1
-        },
-        {
-          "archetype": "Izzet Prowess",
-          "count": 1
-        },
-        {
-          "archetype": "Jund Sacrifice",
-          "count": 1
-        },
-        {
-          "archetype": "Selesnya Landfall",
-          "count": 1
-        },
-        {
-          "archetype": "Selesnya Michelangelo",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68013",
-      "name": "Standard Challenge 32 2026-11-13",
-      "format": "standard",
-      "date": "2026-11-13",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68013",
-      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-32-2026-11-1312858100",
-      "winner": {
-        "place": "1st",
-        "archetype": "Dimir Control",
-        "player": "SoulStrong",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8041531"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Dimir Control",
-          "player": "SoulStrong",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041531"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Boros Momo",
-          "player": "PNascimento",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041547"
-        },
-        {
-          "place": "3rd",
-          "archetype": "Boros Momo",
-          "player": "tabunghasisi",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041525"
-        },
-        {
-          "place": "4th",
-          "archetype": "Dimir Control",
-          "player": "cool95",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041530"
-        },
-        {
-          "place": "5th",
-          "archetype": "Dimir Midrange",
-          "player": "Arianne",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041527"
-        },
-        {
-          "place": "6th",
-          "archetype": "Azorius Control",
-          "player": "Dioferreira",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041533"
-        },
-        {
-          "place": "7th",
-          "archetype": "Azorius Momo",
-          "player": "MJK7",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041553"
-        },
-        {
-          "place": "8th",
-          "archetype": "UB",
-          "player": "VitorCarvalho01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041546"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Boros Momo",
-          "count": 2
-        },
-        {
-          "archetype": "Dimir Control",
-          "count": 2
-        },
-        {
-          "archetype": "Azorius Control",
-          "count": 1
-        },
-        {
-          "archetype": "Azorius Momo",
-          "count": 1
-        },
-        {
-          "archetype": "Dimir Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "UB",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67977",
-      "name": "Standard League 2026-11-13",
-      "format": "standard",
-      "date": "2026-11-13",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67977",
-      "sourceUrl": "https://www.mtgo.com/decklist/standard-league-2026-11-1311361",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "Izzet Prowess",
-          "player": "Bl4ckdragon",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040193"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Dimir Control",
-          "player": "Black_72",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040179"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Boros Momo",
-          "player": "fireflymylove",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041103"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Lifegain",
-          "player": "Gxs3v3n",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040245"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Lifegain",
-          "player": "Hemsley",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039808"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Lifegain",
-          "player": "ilsecco14",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041127"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Izzet Maestro",
-          "player": "LegacyGrinder",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039911"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Azorius Momo",
-          "player": "padreterno",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040077"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Lifegain",
-          "count": 3
-        },
-        {
-          "archetype": "Azorius Momo",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Momo",
-          "count": 1
-        },
-        {
-          "archetype": "Dimir Control",
-          "count": 1
-        },
-        {
-          "archetype": "Izzet Maestro",
-          "count": 1
-        },
-        {
-          "archetype": "Izzet Prowess",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67958",
-      "name": "Modern League 2026-11-12",
-      "format": "modern",
-      "date": "2026-11-12",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67958",
-      "sourceUrl": "https://www.mtgo.com/decklist/modern-league-2026-11-1211337",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "Living End",
-          "player": "abbadon55",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039761"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "RG",
-          "player": "apriolo1",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039410"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Mono-Green Hardened Scales",
-          "player": "Asuteka114",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039211"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Amulet Titan",
-          "player": "axelino",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039375"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Eldrazi Ramp",
-          "player": "cdiegor",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8038881"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Izzet Prowess",
-          "player": "daceris",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039179"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Izzet Prowess",
-          "player": "EthanBird",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8038980"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Boros Ponza",
-          "player": "GingerGuy83",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039411"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Izzet Prowess",
-          "count": 2
-        },
-        {
-          "archetype": "Amulet Titan",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Ponza",
-          "count": 1
-        },
-        {
-          "archetype": "Eldrazi Ramp",
-          "count": 1
-        },
-        {
-          "archetype": "Living End",
-          "count": 1
-        },
-        {
-          "archetype": "Mono-Green Hardened Scales",
-          "count": 1
-        },
-        {
-          "archetype": "RG",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67983",
-      "name": "Pioneer Challenge 16 2026-11-12",
-      "format": "pioneer",
-      "date": "2026-11-12",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67983",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-challenge-16-2026-11-1212858391",
-      "winner": {
-        "place": "1st",
-        "archetype": "Temur Lessons",
-        "player": "peter780108",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8039959"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Temur Lessons",
-          "player": "peter780108",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039959"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Temur Lessons",
-          "player": "jtl005",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039966"
-        },
-        {
-          "place": "3rd",
-          "archetype": "UBR",
-          "player": "Venom01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039973"
-        },
-        {
-          "place": "4th",
-          "archetype": "WG",
-          "player": "Strongmind",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039972"
-        },
-        {
-          "place": "5th",
-          "archetype": "Golgari Midrange",
-          "player": "Arianne",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039954"
-        },
-        {
-          "place": "6th",
-          "archetype": "UR",
-          "player": "VitorCarvalho01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039971"
-        },
-        {
-          "place": "7th",
-          "archetype": "UR",
-          "player": "Mirozel1",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039960"
-        },
-        {
-          "place": "8th",
-          "archetype": "Abzan Greasefang",
-          "player": "rosici0700",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039964"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Temur Lessons",
-          "count": 2
-        },
-        {
-          "archetype": "UR",
-          "count": 2
-        },
-        {
-          "archetype": "Abzan Greasefang",
-          "count": 1
-        },
-        {
-          "archetype": "Golgari Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "UBR",
-          "count": 1
-        },
-        {
-          "archetype": "WG",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "68009",
-      "name": "Pioneer Challenge 16 2026-11-12 (1)",
-      "format": "pioneer",
-      "date": "2026-11-12",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68009",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-challenge-16-2026-11-0912858391",
-      "winner": {
-        "place": "1st",
-        "archetype": "Temur Lessons",
-        "player": "peter780108",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8041475"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Temur Lessons",
-          "player": "peter780108",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041475"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Temur Lessons",
-          "player": "jtl005",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041482"
-        },
-        {
-          "place": "3rd",
-          "archetype": "UBR",
-          "player": "Venom01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041489"
-        },
-        {
-          "place": "4th",
-          "archetype": "WG",
-          "player": "Strongmind",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041488"
-        },
-        {
-          "place": "5th",
-          "archetype": "Golgari Midrange",
-          "player": "Arianne",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041470"
-        },
-        {
-          "place": "6th",
-          "archetype": "UR",
-          "player": "VitorCarvalho01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041487"
-        },
-        {
-          "place": "7th",
-          "archetype": "UR",
-          "player": "Mirozel1",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041476"
-        },
-        {
-          "place": "8th",
-          "archetype": "Abzan Greasefang",
-          "player": "rosici0700",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8041480"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Temur Lessons",
-          "count": 2
-        },
-        {
-          "archetype": "UR",
-          "count": 2
-        },
-        {
-          "archetype": "Abzan Greasefang",
-          "count": 1
-        },
-        {
-          "archetype": "Golgari Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "UBR",
-          "count": 1
-        },
-        {
-          "archetype": "WG",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67965",
-      "name": "Pioneer League 2026-11-12",
-      "format": "pioneer",
-      "date": "2026-11-12",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67965",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-1211353",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "Mono-White Legends",
-          "player": "EnderW",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039126"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "UR",
-          "player": "Paul16",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039690"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Mono-White Legends",
-          "count": 1
-        },
-        {
-          "archetype": "UR",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67966",
-      "name": "Standard Challenge 16 2026-11-12",
-      "format": "standard",
-      "date": "2026-11-12",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67966",
-      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-16-2026-11-1212858085",
-      "winner": {
-        "place": "1st",
-        "archetype": "4c Kona",
-        "player": "JonyLamborgini",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8039155"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "4c Kona",
-          "player": "JonyLamborgini",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039155"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Lifegain",
-          "player": "ChuChuMTFKR",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039162"
-        },
-        {
-          "place": "3rd",
-          "archetype": "Jund Sacrifice",
-          "player": "duanceyao",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039152"
-        },
-        {
-          "place": "4th",
-          "archetype": "Lifegain",
-          "player": "xfile",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039158"
-        },
-        {
-          "place": "5th",
-          "archetype": "Dimir Midrange",
-          "player": "Venom01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039174"
-        },
-        {
-          "place": "6th",
-          "archetype": "Izzet Prowess",
-          "player": "Denisevich",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039171"
-        },
-        {
-          "place": "7th",
-          "archetype": "Azorius Momo",
-          "player": "JonDaBill",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039169"
-        },
-        {
-          "place": "8th",
-          "archetype": "Boros Tokens",
-          "player": "manohito",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039163"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Lifegain",
-          "count": 2
-        },
-        {
-          "archetype": "4c Kona",
-          "count": 1
-        },
-        {
-          "archetype": "Azorius Momo",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Tokens",
-          "count": 1
-        },
-        {
-          "archetype": "Dimir Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "Izzet Prowess",
-          "count": 1
-        },
-        {
-          "archetype": "Jund Sacrifice",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67986",
-      "name": "Standard Challenge 16 2026-11-12 (1)",
-      "format": "standard",
-      "date": "2026-11-12",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67986",
-      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-16-2026-11-1012858087",
-      "winner": {
-        "place": "1st",
-        "archetype": "4c Control",
-        "player": "GWT",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8040140"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "4c Control",
-          "player": "GWT",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040140"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Azorius Momo",
-          "player": "_Elfkid_",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040128"
-        },
-        {
-          "place": "3rd",
-          "archetype": "Dimir Control",
-          "player": "TrueHero",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040126"
-        },
-        {
-          "place": "4th",
-          "archetype": "Azorius Momo",
-          "player": "ThePixelNomadX",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040139"
-        },
-        {
-          "place": "5th",
-          "archetype": "Boros Momo",
-          "player": "manohito",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040134"
-        },
-        {
-          "place": "6th",
-          "archetype": "Dimir Midrange",
-          "player": "marcofabrizi",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040116"
-        },
-        {
-          "place": "7th",
-          "archetype": "Jund Sacrifice",
-          "player": "_Stream",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040115"
-        },
-        {
-          "place": "8th",
-          "archetype": "Dimir Control",
-          "player": "Scappie",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8040113"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Azorius Momo",
-          "count": 2
-        },
-        {
-          "archetype": "Dimir Control",
-          "count": 2
-        },
-        {
-          "archetype": "4c Control",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Momo",
-          "count": 1
-        },
-        {
-          "archetype": "Dimir Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "Jund Sacrifice",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67961",
-      "name": "Standard League 2026-11-12",
-      "format": "standard",
-      "date": "2026-11-12",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67961",
-      "sourceUrl": "https://www.mtgo.com/decklist/standard-league-2026-11-1211361",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "Dimir Midrange",
-          "player": "claudioh",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039374"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Izzet Looting",
-          "player": "DB_Rebell",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8038942"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Boros Momo",
-          "player": "DB_turn4omnath",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039020"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Izzet Looting",
-          "player": "fazparte",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8038978"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Izzet Looting",
-          "player": "Gxs3v3n",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039408"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "4c Control",
-          "player": "Ignotus97",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039756"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Izzet Maestro",
-          "player": "jbl2311",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8039757"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Azorius Control",
-          "player": "KingCapivara",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8038977"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Izzet Looting",
-          "count": 3
-        },
-        {
-          "archetype": "4c Control",
-          "count": 1
-        },
-        {
-          "archetype": "Azorius Control",
-          "count": 1
-        },
-        {
-          "archetype": "Boros Momo",
-          "count": 1
-        },
-        {
-          "archetype": "Dimir Midrange",
-          "count": 1
-        },
-        {
-          "archetype": "Izzet Maestro",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67926",
-      "name": "Pioneer Challenge 32 2026-11-10",
-      "format": "pioneer",
-      "date": "2026-11-10",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67926",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-challenge-32-2026-11-1012857710",
-      "winner": {
-        "place": "1st",
-        "archetype": "Temur Lessons",
-        "player": "jtl005",
-        "goldfishUrl": "https://www.mtggoldfish.com/deck/8037338"
-      },
-      "top8": [
-        {
-          "place": "1st",
-          "archetype": "Temur Lessons",
-          "player": "jtl005",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037338"
-        },
-        {
-          "place": "2nd",
-          "archetype": "Golgari Midrange",
-          "player": "itstime",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037344"
-        },
-        {
-          "place": "3rd",
-          "archetype": "WG",
-          "player": "secr3tm0de",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037347"
-        },
-        {
-          "place": "4th",
-          "archetype": "UBR",
-          "player": "Venom01",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037352"
-        },
-        {
-          "place": "5th",
-          "archetype": "Boros Heroic",
-          "player": "makaaaa",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037346"
-        },
-        {
-          "place": "6th",
-          "archetype": "Golgari Midrange",
-          "player": "moon11",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037329"
-        },
-        {
-          "place": "7th",
-          "archetype": "Jund Sacrifice",
-          "player": "Cake363",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037328"
-        },
-        {
-          "place": "8th",
-          "archetype": "UR",
-          "player": "ShadowTitan1",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037333"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Golgari Midrange",
-          "count": 2
-        },
-        {
-          "archetype": "Boros Heroic",
-          "count": 1
-        },
-        {
-          "archetype": "Jund Sacrifice",
-          "count": 1
-        },
-        {
-          "archetype": "Temur Lessons",
-          "count": 1
-        },
-        {
-          "archetype": "UBR",
-          "count": 1
-        },
-        {
           "archetype": "UR",
           "count": 1
         },
@@ -2281,138 +703,694 @@
       ]
     },
     {
-      "id": "67922",
-      "name": "Pioneer League 2026-11-10",
+      "id": "68175",
+      "name": "Pioneer League 2026-11-21",
       "format": "pioneer",
-      "date": "2026-11-10",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67922",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-1011137",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "Mono-Red Prowess",
-          "player": "Ar3nitas",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8038005"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "UR",
-          "player": "arturcosta",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037833"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Orzhov Greasefang",
-          "player": "driftingcool",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037194"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Orzhov Greasefang",
-          "player": "driftingcool",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037834"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Orzhov Greasefang",
-          "player": "haimu",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037567"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Azorius Flash",
-          "player": "LeoGuedez",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8038006"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "UBR",
-          "player": "Magicisfuntodo",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037193"
-        },
-        {
-          "place": "5 - 0",
-          "archetype": "Orzhov Greasefang",
-          "player": "Renderizer",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037182"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Orzhov Greasefang",
-          "count": 4
-        },
-        {
-          "archetype": "Azorius Flash",
-          "count": 1
-        },
-        {
-          "archetype": "Mono-Red Prowess",
-          "count": 1
-        },
-        {
-          "archetype": "UBR",
-          "count": 1
-        },
-        {
-          "archetype": "UR",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67942",
-      "name": "Pioneer League 2026-11-10 (1)",
-      "format": "pioneer",
-      "date": "2026-11-10",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67942",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-1011353",
-      "top8": [
-        {
-          "place": "5 - 0",
-          "archetype": "Abzan Greasefang",
-          "player": "tyreel04",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8037964"
-        }
-      ],
-      "archetypeBreakdown": [
-        {
-          "archetype": "Abzan Greasefang",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "67900",
-      "name": "Pioneer League 2026-11-09",
-      "format": "pioneer",
-      "date": "2026-11-09",
-      "goldfishUrl": "https://www.mtggoldfish.com/tournament/67900",
-      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-0911137",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68175",
+      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-2111353",
       "top8": [
         {
           "place": "5 - 0",
           "archetype": "Mono-Red Prowess",
           "player": "brozacG",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8036194"
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049671"
         },
         {
           "place": "5 - 0",
-          "archetype": "Jund Sacrifice",
-          "player": "PankuiX",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8036584"
+          "archetype": "Temur Lessons",
+          "player": "CHILLEDADED",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050141"
         },
         {
           "place": "5 - 0",
           "archetype": "Orzhov Greasefang",
-          "player": "Renderizer",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8036193"
+          "player": "driftingcool",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049669"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Golgari Midrange",
+          "player": "Jacktastic_oo1",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049286"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Izzet Aggro",
+          "player": "Kingokarado",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049672"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Orzhov Greasefang",
+          "player": "LVGS",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049221"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Mono-Red Prowess",
+          "player": "Rabadonforus",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049670"
         },
         {
           "place": "5 - 0",
           "archetype": "Orzhov Greasefang",
           "player": "roarmen",
-          "goldfishUrl": "https://www.mtggoldfish.com/deck/8036192"
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049668"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Orzhov Greasefang",
+          "count": 3
+        },
+        {
+          "archetype": "Mono-Red Prowess",
+          "count": 2
+        },
+        {
+          "archetype": "Golgari Midrange",
+          "count": 1
+        },
+        {
+          "archetype": "Izzet Aggro",
+          "count": 1
+        },
+        {
+          "archetype": "Temur Lessons",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68190",
+      "name": "Pioneer Spark!! ONLINE PPP 2026 the Final Trial",
+      "format": "pioneer",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68190",
+      "sourceUrl": "https://melee.gg/Tournament/View/500722",
+      "top8": [
+        {
+          "place": "4 - 0",
+          "archetype": "Mono-White Humans",
+          "player": "Hairu3",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049866"
+        },
+        {
+          "place": "3 - 1",
+          "archetype": "Golgari Midrange",
+          "player": "Akira Hayata",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049869"
+        },
+        {
+          "place": "3 - 1",
+          "archetype": "Selesnya Hammer Time",
+          "player": "bityanko bityanko",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049868"
+        },
+        {
+          "place": "3 - 1",
+          "archetype": "Simic Lotus Field",
+          "player": "rihi",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049867"
+        },
+        {
+          "place": "2 - 2",
+          "archetype": "Izzet Hidden Strings",
+          "player": "HRMR",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049870"
+        },
+        {
+          "place": "2 - 2",
+          "archetype": "Orzhov Midrange",
+          "player": "kanara",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049873"
+        },
+        {
+          "place": "2 - 2",
+          "archetype": "Izzet Control",
+          "player": "karo0815",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049872"
+        },
+        {
+          "place": "2 - 2",
+          "archetype": "Abzan Midrange",
+          "player": "kerobo",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049871"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Abzan Midrange",
+          "count": 1
+        },
+        {
+          "archetype": "Golgari Midrange",
+          "count": 1
+        },
+        {
+          "archetype": "Izzet Control",
+          "count": 1
+        },
+        {
+          "archetype": "Izzet Hidden Strings",
+          "count": 1
+        },
+        {
+          "archetype": "Mono-White Humans",
+          "count": 1
+        },
+        {
+          "archetype": "Orzhov Midrange",
+          "count": 1
+        },
+        {
+          "archetype": "Selesnya Hammer Time",
+          "count": 1
+        },
+        {
+          "archetype": "Simic Lotus Field",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68182",
+      "name": "Standard League 2026-11-21",
+      "format": "standard",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68182",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-league-2026-11-2111361",
+      "top8": [
+        {
+          "place": "5 - 0",
+          "archetype": "4c Control",
+          "player": "ardroz",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049529"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Izzet Spellementals",
+          "player": "CptNixon",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049750"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Azorius Momo",
+          "player": "Craigpuncher",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049530"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Dimir Reanimator",
+          "player": "indianpancake",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049528"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Selesnya Aggro",
+          "player": "itstime",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050203"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Grixis Reanimator",
+          "player": "Kritik",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049751"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "UR",
+          "player": "Manuel_Danninger",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049825"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "4c Aggro",
+          "player": "M_y_t_h",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050265"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "4c Aggro",
+          "count": 1
+        },
+        {
+          "archetype": "4c Control",
+          "count": 1
+        },
+        {
+          "archetype": "Azorius Momo",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Reanimator",
+          "count": 1
+        },
+        {
+          "archetype": "Grixis Reanimator",
+          "count": 1
+        },
+        {
+          "archetype": "Izzet Spellementals",
+          "count": 1
+        },
+        {
+          "archetype": "Selesnya Aggro",
+          "count": 1
+        },
+        {
+          "archetype": "UR",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68196",
+      "name": "Standard Showcase Challenge 2026-11-21",
+      "format": "standard",
+      "date": "2026-11-21",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68196",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-showcase-challenge-2026-11-2112858912",
+      "winner": {
+        "place": "1st",
+        "archetype": "4c Control",
+        "player": "badgods",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8050183"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "4c Control",
+          "player": "badgods",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050183"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Dimir Midrange",
+          "player": "kobayui",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050171"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Mono-Green Landfall",
+          "player": "HouseOfManaMTG",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050177"
+        },
+        {
+          "place": "4th",
+          "archetype": "Jund Sacrifice",
+          "player": "ultrasuperbob",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050173"
+        },
+        {
+          "place": "5th",
+          "archetype": "Izzet Spellementals",
+          "player": "rushi_00",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050172"
+        },
+        {
+          "place": "6th",
+          "archetype": "Dimir Reanimator",
+          "player": "Arianne",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050167"
+        },
+        {
+          "place": "7th",
+          "archetype": "Selesnya Landfall",
+          "player": "Ouranos139",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050175"
+        },
+        {
+          "place": "8th",
+          "archetype": "Dimir Midrange",
+          "player": "eneges",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8050174"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Dimir Midrange",
+          "count": 2
+        },
+        {
+          "archetype": "4c Control",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Reanimator",
+          "count": 1
+        },
+        {
+          "archetype": "Izzet Spellementals",
+          "count": 1
+        },
+        {
+          "archetype": "Jund Sacrifice",
+          "count": 1
+        },
+        {
+          "archetype": "Mono-Green Landfall",
+          "count": 1
+        },
+        {
+          "archetype": "Selesnya Landfall",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68173",
+      "name": "Modern Challenge 32 2026-11-20",
+      "format": "modern",
+      "date": "2026-11-20",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68173",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-2012858928",
+      "winner": {
+        "place": "1st",
+        "archetype": "Eldrazi Ramp",
+        "player": "Misplacedginger",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8049118"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Eldrazi Ramp",
+          "player": "Misplacedginger",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049118"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Temur Prowess",
+          "player": "O_danielakos",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049120"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Esper Blink",
+          "player": "Mapletreefrog",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049125"
+        },
+        {
+          "place": "4th",
+          "archetype": "Boros Energy",
+          "player": "pepeteam",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049131"
+        },
+        {
+          "place": "5th",
+          "archetype": "Goryo's Vengeance",
+          "player": "Xwhale",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049124"
+        },
+        {
+          "place": "6th",
+          "archetype": "Neobrand",
+          "player": "JPA93",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049122"
+        },
+        {
+          "place": "7th",
+          "archetype": "Affinity",
+          "player": "sioutis_kk",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049146"
+        },
+        {
+          "place": "8th",
+          "archetype": "WBRG",
+          "player": "Thunus",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049136"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Affinity",
+          "count": 1
+        },
+        {
+          "archetype": "Boros Energy",
+          "count": 1
+        },
+        {
+          "archetype": "Eldrazi Ramp",
+          "count": 1
+        },
+        {
+          "archetype": "Esper Blink",
+          "count": 1
+        },
+        {
+          "archetype": "Goryo's Vengeance",
+          "count": 1
+        },
+        {
+          "archetype": "Neobrand",
+          "count": 1
+        },
+        {
+          "archetype": "Temur Prowess",
+          "count": 1
+        },
+        {
+          "archetype": "WBRG",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68186",
+      "name": "Modern Challenge 32 2026-11-20 (1)",
+      "format": "modern",
+      "date": "2026-11-20",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68186",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-challenge-32-2026-11-0512858928",
+      "winner": {
+        "place": "1st",
+        "archetype": "Eldrazi Ramp",
+        "player": "Misplacedginger",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8049611"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Eldrazi Ramp",
+          "player": "Misplacedginger",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049611"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Temur Prowess",
+          "player": "O_danielakos",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049613"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Esper Blink",
+          "player": "Mapletreefrog",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049618"
+        },
+        {
+          "place": "4th",
+          "archetype": "Boros Energy",
+          "player": "pepeteam",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049624"
+        },
+        {
+          "place": "5th",
+          "archetype": "Goryo's Vengeance",
+          "player": "Xwhale",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049617"
+        },
+        {
+          "place": "6th",
+          "archetype": "Neobrand",
+          "player": "JPA93",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049615"
+        },
+        {
+          "place": "7th",
+          "archetype": "Affinity",
+          "player": "sioutis_kk",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049639"
+        },
+        {
+          "place": "8th",
+          "archetype": "WBRG",
+          "player": "Thunus",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049629"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Affinity",
+          "count": 1
+        },
+        {
+          "archetype": "Boros Energy",
+          "count": 1
+        },
+        {
+          "archetype": "Eldrazi Ramp",
+          "count": 1
+        },
+        {
+          "archetype": "Esper Blink",
+          "count": 1
+        },
+        {
+          "archetype": "Goryo's Vengeance",
+          "count": 1
+        },
+        {
+          "archetype": "Neobrand",
+          "count": 1
+        },
+        {
+          "archetype": "Temur Prowess",
+          "count": 1
+        },
+        {
+          "archetype": "WBRG",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68154",
+      "name": "Modern League 2026-11-20",
+      "format": "modern",
+      "date": "2026-11-20",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68154",
+      "sourceUrl": "https://www.mtgo.com/decklist/modern-league-2026-11-2011337",
+      "top8": [
+        {
+          "place": "5 - 0",
+          "archetype": "Eldrazi Ramp",
+          "player": "AleDraco86",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049227"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Izzet Steel-Cutter",
+          "player": "Ancaria",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048975"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Jeskai Energy",
+          "player": "AROSALES0707",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049075"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Devoted Combo",
+          "player": "AVC_MTG",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049225"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Rakdos Midrange",
+          "player": "Ceddy",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048003"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Esper Blink",
+          "player": "Dasikk",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048041"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "BRG",
+          "player": "DB_Stanley2099",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048977"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Eldrazi",
+          "player": "Delap91",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048546"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "BRG",
+          "count": 1
+        },
+        {
+          "archetype": "Devoted Combo",
+          "count": 1
+        },
+        {
+          "archetype": "Eldrazi",
+          "count": 1
+        },
+        {
+          "archetype": "Eldrazi Ramp",
+          "count": 1
+        },
+        {
+          "archetype": "Esper Blink",
+          "count": 1
+        },
+        {
+          "archetype": "Izzet Steel-Cutter",
+          "count": 1
+        },
+        {
+          "archetype": "Jeskai Energy",
+          "count": 1
+        },
+        {
+          "archetype": "Rakdos Midrange",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68151",
+      "name": "Pioneer League 2026-11-20",
+      "format": "pioneer",
+      "date": "2026-11-20",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68151",
+      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-2011353",
+      "top8": [
+        {
+          "place": "5 - 0",
+          "archetype": "Orzhov Greasefang",
+          "player": "driftingcool",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048069"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Jund Sacrifice",
+          "player": "PankuiX",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048548"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Bant Scapeshift",
+          "player": "Xul_Daem0n",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049018"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Nykthos Ramp",
+          "player": "YourDoom25",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047956"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Orzhov Greasefang",
+          "player": "zacardys",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048332"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Mono-White Humans",
+          "player": "_Cygnus",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049307"
         }
       ],
       "archetypeBreakdown": [
@@ -2421,11 +1399,1143 @@
           "count": 2
         },
         {
+          "archetype": "Bant Scapeshift",
+          "count": 1
+        },
+        {
           "archetype": "Jund Sacrifice",
           "count": 1
         },
         {
+          "archetype": "Mono-White Humans",
+          "count": 1
+        },
+        {
+          "archetype": "Nykthos Ramp",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68162",
+      "name": "Standard Challenge 32 2026-11-20",
+      "format": "standard",
+      "date": "2026-11-20",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68162",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-32-2026-11-2012858925",
+      "winner": {
+        "place": "1st",
+        "archetype": "Jund Sacrifice",
+        "player": "duanceyao",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8048306"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Jund Sacrifice",
+          "player": "duanceyao",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048306"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Dimir Control",
+          "player": "parasisnotcool",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048320"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Azorius Control",
+          "player": "frekinsmart",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048319"
+        },
+        {
+          "place": "4th",
+          "archetype": "4c Control",
+          "player": "VampireDiaries",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048313"
+        },
+        {
+          "place": "5th",
+          "archetype": "Dimir Reanimator",
+          "player": "Arianne",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048300"
+        },
+        {
+          "place": "6th",
+          "archetype": "Dimir Reanimator",
+          "player": "J4K3ST3R02",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048303"
+        },
+        {
+          "place": "7th",
+          "archetype": "Izzet Prowess",
+          "player": "tim96",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048310"
+        },
+        {
+          "place": "8th",
+          "archetype": "Azorius Control",
+          "player": "fate_kuro",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048304"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Azorius Control",
+          "count": 2
+        },
+        {
+          "archetype": "Dimir Reanimator",
+          "count": 2
+        },
+        {
+          "archetype": "4c Control",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Control",
+          "count": 1
+        },
+        {
+          "archetype": "Izzet Prowess",
+          "count": 1
+        },
+        {
+          "archetype": "Jund Sacrifice",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68176",
+      "name": "Standard Challenge 32 2026-11-20 (1)",
+      "format": "standard",
+      "date": "2026-11-20",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68176",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-32-2026-11-2012858930",
+      "winner": {
+        "place": "1st",
+        "archetype": "4c Control",
+        "player": "kasa",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8049261"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "4c Control",
+          "player": "kasa",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049261"
+        },
+        {
+          "place": "2nd",
+          "archetype": "UR",
+          "player": "jtl005",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049267"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Izzet Spellementals",
+          "player": "ShadowTitan1",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049265"
+        },
+        {
+          "place": "4th",
+          "archetype": "Selesnya Aggro",
+          "player": "HyPPeR",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049260"
+        },
+        {
+          "place": "5th",
+          "archetype": "Izzet Spellementals",
+          "player": "pepeteam",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049266"
+        },
+        {
+          "place": "6th",
+          "archetype": "Selesnya Aggro",
+          "player": "pcpalhares",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049270"
+        },
+        {
+          "place": "7th",
+          "archetype": "Dimir Midrange",
+          "player": "Endrju",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049253"
+        },
+        {
+          "place": "8th",
+          "archetype": "Dimir Reanimator",
+          "player": "Arianne",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049256"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Izzet Spellementals",
+          "count": 2
+        },
+        {
+          "archetype": "Selesnya Aggro",
+          "count": 2
+        },
+        {
+          "archetype": "4c Control",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Midrange",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Reanimator",
+          "count": 1
+        },
+        {
+          "archetype": "UR",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68177",
+      "name": "Standard Challenge 32 2026-11-20 (1)",
+      "format": "standard",
+      "date": "2026-11-20",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68177",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-32-2026-11-1012858930",
+      "winner": {
+        "place": "1st",
+        "archetype": "4c Control",
+        "player": "kasa",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8049411"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "4c Control",
+          "player": "kasa",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049411"
+        },
+        {
+          "place": "2nd",
+          "archetype": "UR",
+          "player": "jtl005",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049417"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Izzet Spellementals",
+          "player": "ShadowTitan1",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049415"
+        },
+        {
+          "place": "4th",
+          "archetype": "Selesnya Aggro",
+          "player": "HyPPeR",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049410"
+        },
+        {
+          "place": "5th",
+          "archetype": "Izzet Spellementals",
+          "player": "pepeteam",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049416"
+        },
+        {
+          "place": "6th",
+          "archetype": "Selesnya Aggro",
+          "player": "pcpalhares",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049420"
+        },
+        {
+          "place": "7th",
+          "archetype": "Dimir Midrange",
+          "player": "Endrju",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049404"
+        },
+        {
+          "place": "8th",
+          "archetype": "Dimir Reanimator",
+          "player": "Arianne",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8049407"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Izzet Spellementals",
+          "count": 2
+        },
+        {
+          "archetype": "Selesnya Aggro",
+          "count": 2
+        },
+        {
+          "archetype": "4c Control",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Midrange",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Reanimator",
+          "count": 1
+        },
+        {
+          "archetype": "UR",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68148",
+      "name": "Standard League 2026-11-20",
+      "format": "standard",
+      "date": "2026-11-20",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68148",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-league-2026-11-2011361",
+      "top8": [
+        {
+          "place": "5 - 0",
+          "archetype": "Izzet Spellementals",
+          "player": "arturcosta",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048042"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Dimir Control",
+          "player": "claudioh",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048941"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Azorius Momo",
+          "player": "dedav",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048043"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Selesnya Aggro",
+          "player": "filpin",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048070"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Dimir Reanimator",
+          "player": "Gullit_Careca",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048980"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Azorius Control",
+          "player": "KingCapivara",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048944"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Dimir Control",
+          "player": "MrCafouillette",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048940"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Selesnya Aggro",
+          "player": "nagatei",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048380"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Dimir Control",
+          "count": 2
+        },
+        {
+          "archetype": "Selesnya Aggro",
+          "count": 2
+        },
+        {
+          "archetype": "Azorius Control",
+          "count": 1
+        },
+        {
+          "archetype": "Azorius Momo",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Reanimator",
+          "count": 1
+        },
+        {
+          "archetype": "Izzet Spellementals",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68156",
+      "name": "Pioneer Challenge 32 2026-11-19",
+      "format": "pioneer",
+      "date": "2026-11-19",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68156",
+      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-challenge-32-2026-11-1912858923",
+      "winner": {
+        "place": "1st",
+        "archetype": "UB",
+        "player": "ShadowTitan1",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8048084"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "UB",
+          "player": "ShadowTitan1",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048084"
+        },
+        {
+          "place": "2nd",
+          "archetype": "WR",
+          "player": "karatedom",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048078"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Golgari Midrange",
+          "player": "_bwonsamdi_",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048092"
+        },
+        {
+          "place": "4th",
+          "archetype": "Temur Lessons",
+          "player": "peter780108",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048080"
+        },
+        {
+          "place": "5th",
+          "archetype": "Golgari Midrange",
+          "player": "SFDK",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048099"
+        },
+        {
+          "place": "6th",
+          "archetype": "Temur Lessons",
+          "player": "jtl005",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048088"
+        },
+        {
+          "place": "7th",
+          "archetype": "Golgari Midrange",
+          "player": "Capitano_CL",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048071"
+        },
+        {
+          "place": "8th",
+          "archetype": "Golgari Midrange",
+          "player": "moon11",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048079"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Golgari Midrange",
+          "count": 4
+        },
+        {
+          "archetype": "Temur Lessons",
+          "count": 2
+        },
+        {
+          "archetype": "UB",
+          "count": 1
+        },
+        {
+          "archetype": "WR",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68160",
+      "name": "Pioneer Challenge 32 2026-11-19 (1)",
+      "format": "pioneer",
+      "date": "2026-11-19",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68160",
+      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-challenge-32-2026-11-0712858923",
+      "winner": {
+        "place": "1st",
+        "archetype": "UB",
+        "player": "ShadowTitan1",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8048218"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "UB",
+          "player": "ShadowTitan1",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048218"
+        },
+        {
+          "place": "2nd",
+          "archetype": "WR",
+          "player": "karatedom",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048212"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Golgari Midrange",
+          "player": "_bwonsamdi_",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048226"
+        },
+        {
+          "place": "4th",
+          "archetype": "Temur Lessons",
+          "player": "peter780108",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048214"
+        },
+        {
+          "place": "5th",
+          "archetype": "Golgari Midrange",
+          "player": "SFDK",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048233"
+        },
+        {
+          "place": "6th",
+          "archetype": "Temur Lessons",
+          "player": "jtl005",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048222"
+        },
+        {
+          "place": "7th",
+          "archetype": "Golgari Midrange",
+          "player": "Capitano_CL",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048205"
+        },
+        {
+          "place": "8th",
+          "archetype": "Golgari Midrange",
+          "player": "moon11",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048213"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Golgari Midrange",
+          "count": 4
+        },
+        {
+          "archetype": "Temur Lessons",
+          "count": 2
+        },
+        {
+          "archetype": "UB",
+          "count": 1
+        },
+        {
+          "archetype": "WR",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68138",
+      "name": "Pioneer League 2026-11-19",
+      "format": "pioneer",
+      "date": "2026-11-19",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68138",
+      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-1911353",
+      "top8": [
+        {
+          "place": "5 - 0",
+          "archetype": "Temur Lessons",
+          "player": "darg24",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047920"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Orzhov Greasefang",
+          "player": "roarmen",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047333"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Orzhov Greasefang",
+          "count": 1
+        },
+        {
+          "archetype": "Temur Lessons",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68133",
+      "name": "Standard Challenge 16 2026-11-19",
+      "format": "standard",
+      "date": "2026-11-19",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68133",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-16-2026-11-1912858915",
+      "winner": {
+        "place": "1st",
+        "archetype": "Selesnya Aggro",
+        "player": "reidq7",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8047125"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Selesnya Aggro",
+          "player": "reidq7",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047125"
+        },
+        {
+          "place": "2nd",
+          "archetype": "4c Control",
+          "player": "Bradykiesling13",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047111"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Azorius Control",
+          "player": "Dai66s",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047105"
+        },
+        {
+          "place": "4th",
+          "archetype": "Azorius Momo",
+          "player": "Denisevich",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047129"
+        },
+        {
+          "place": "5th",
+          "archetype": "Azorius Momo",
+          "player": "manohito",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047123"
+        },
+        {
+          "place": "6th",
+          "archetype": "UR",
+          "player": "jakobpablo",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047122"
+        },
+        {
+          "place": "7th",
+          "archetype": "Selesnya Aggro",
+          "player": "TuckerMTG",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047113"
+        },
+        {
+          "place": "8th",
+          "archetype": "UR",
+          "player": "RNicoF",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047119"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Azorius Momo",
+          "count": 2
+        },
+        {
+          "archetype": "Selesnya Aggro",
+          "count": 2
+        },
+        {
+          "archetype": "UR",
+          "count": 2
+        },
+        {
+          "archetype": "4c Control",
+          "count": 1
+        },
+        {
+          "archetype": "Azorius Control",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68144",
+      "name": "Standard Challenge 16 2026-11-19 (1)",
+      "format": "standard",
+      "date": "2026-11-19",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68144",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-16-2026-11-1912858917",
+      "winner": {
+        "place": "1st",
+        "archetype": "Dimir Control",
+        "player": "McWinSauce",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8047495"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Dimir Control",
+          "player": "McWinSauce",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047495"
+        },
+        {
+          "place": "2nd",
+          "archetype": "4c Control",
+          "player": "Danker",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047494"
+        },
+        {
+          "place": "3rd",
+          "archetype": "UR",
+          "player": "TrueHero",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047508"
+        },
+        {
+          "place": "4th",
+          "archetype": "Azorius Momo",
+          "player": "Denisevich",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047520"
+        },
+        {
+          "place": "5th",
+          "archetype": "Dimir Midrange",
+          "player": "Venom01",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047522"
+        },
+        {
+          "place": "6th",
+          "archetype": "4c Control",
+          "player": "GWT",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047524"
+        },
+        {
+          "place": "7th",
+          "archetype": "Dimir Midrange",
+          "player": "Kampo",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047509"
+        },
+        {
+          "place": "8th",
+          "archetype": "Azorius Momo",
+          "player": "manohito",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047512"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "4c Control",
+          "count": 2
+        },
+        {
+          "archetype": "Azorius Momo",
+          "count": 2
+        },
+        {
+          "archetype": "Dimir Midrange",
+          "count": 2
+        },
+        {
+          "archetype": "Dimir Control",
+          "count": 1
+        },
+        {
+          "archetype": "UR",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68161",
+      "name": "Standard Challenge 16 2026-11-19 (1)",
+      "format": "standard",
+      "date": "2026-11-19",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68161",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-challenge-16-2026-11-0712858917",
+      "winner": {
+        "place": "1st",
+        "archetype": "Dimir Control",
+        "player": "McWinSauce",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8048238"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "Dimir Control",
+          "player": "McWinSauce",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048238"
+        },
+        {
+          "place": "2nd",
+          "archetype": "4c Control",
+          "player": "Danker",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048237"
+        },
+        {
+          "place": "3rd",
+          "archetype": "UR",
+          "player": "TrueHero",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048251"
+        },
+        {
+          "place": "4th",
+          "archetype": "Azorius Momo",
+          "player": "Denisevich",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048263"
+        },
+        {
+          "place": "5th",
+          "archetype": "Dimir Midrange",
+          "player": "Venom01",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048265"
+        },
+        {
+          "place": "6th",
+          "archetype": "4c Control",
+          "player": "GWT",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048267"
+        },
+        {
+          "place": "7th",
+          "archetype": "Dimir Midrange",
+          "player": "Kampo",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048252"
+        },
+        {
+          "place": "8th",
+          "archetype": "Azorius Momo",
+          "player": "manohito",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8048255"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "4c Control",
+          "count": 2
+        },
+        {
+          "archetype": "Azorius Momo",
+          "count": 2
+        },
+        {
+          "archetype": "Dimir Midrange",
+          "count": 2
+        },
+        {
+          "archetype": "Dimir Control",
+          "count": 1
+        },
+        {
+          "archetype": "UR",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68129",
+      "name": "Standard League 2026-11-19",
+      "format": "standard",
+      "date": "2026-11-19",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68129",
+      "sourceUrl": "https://www.mtgo.com/decklist/standard-league-2026-11-1911361",
+      "top8": [
+        {
+          "place": "5 - 0",
+          "archetype": "BR",
+          "player": "ajifly",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046994"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Dimir Reanimator",
+          "player": "Arianne",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046993"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Azorius Momo",
+          "player": "ChuChuMTFKR",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047922"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Selesnya Aggro",
+          "player": "CoolGuyO",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047925"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Dimir Control",
+          "player": "Deathnote1999",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047926"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Selesnya Aggro",
+          "player": "ElCucuy",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047923"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Lifegain",
+          "player": "Gxs3v3n",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8047927"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Selesnya Aggro",
+          "player": "heartattackmuffin",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046995"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Selesnya Aggro",
+          "count": 3
+        },
+        {
+          "archetype": "Azorius Momo",
+          "count": 1
+        },
+        {
+          "archetype": "BR",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Control",
+          "count": 1
+        },
+        {
+          "archetype": "Dimir Reanimator",
+          "count": 1
+        },
+        {
+          "archetype": "Lifegain",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68115",
+      "name": "Pioneer Challenge 32 2026-11-17 (1)",
+      "format": "pioneer",
+      "date": "2026-11-17",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68115",
+      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-challenge-32-2026-11-1512858131",
+      "winner": {
+        "place": "1st",
+        "archetype": "BRG",
+        "player": "Cake363",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8045909"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "BRG",
+          "player": "Cake363",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045909"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Golgari Midrange",
+          "player": "moon11",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045910"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Golgari Midrange",
+          "player": "Arianne",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045908"
+        },
+        {
+          "place": "4th",
+          "archetype": "Temur Lessons",
+          "player": "littesir095",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045925"
+        },
+        {
+          "place": "5th",
+          "archetype": "WU",
+          "player": "GenericUser48",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045927"
+        },
+        {
+          "place": "6th",
+          "archetype": "WG",
+          "player": "KeepAny7vsYou",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045923"
+        },
+        {
+          "place": "7th",
+          "archetype": "Golgari Midrange",
+          "player": "Boin",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045906"
+        },
+        {
+          "place": "8th",
+          "archetype": "Mono-Black Midrange",
+          "player": "BiggusDoggus",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045928"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Golgari Midrange",
+          "count": 3
+        },
+        {
+          "archetype": "BRG",
+          "count": 1
+        },
+        {
+          "archetype": "Mono-Black Midrange",
+          "count": 1
+        },
+        {
+          "archetype": "Temur Lessons",
+          "count": 1
+        },
+        {
+          "archetype": "WG",
+          "count": 1
+        },
+        {
+          "archetype": "WU",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68122",
+      "name": "Pioneer Challenge 32 2026-11-17 (1)",
+      "format": "pioneer",
+      "date": "2026-11-17",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68122",
+      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-challenge-32-2026-11-1212858131",
+      "winner": {
+        "place": "1st",
+        "archetype": "BRG",
+        "player": "Cake363",
+        "goldfishUrl": "https://www.mtggoldfish.com/deck/8046469"
+      },
+      "top8": [
+        {
+          "place": "1st",
+          "archetype": "BRG",
+          "player": "Cake363",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046469"
+        },
+        {
+          "place": "2nd",
+          "archetype": "Golgari Midrange",
+          "player": "moon11",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046470"
+        },
+        {
+          "place": "3rd",
+          "archetype": "Golgari Midrange",
+          "player": "Arianne",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046468"
+        },
+        {
+          "place": "4th",
+          "archetype": "Temur Lessons",
+          "player": "littesir095",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046485"
+        },
+        {
+          "place": "5th",
+          "archetype": "WU",
+          "player": "GenericUser48",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046487"
+        },
+        {
+          "place": "6th",
+          "archetype": "WG",
+          "player": "KeepAny7vsYou",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046483"
+        },
+        {
+          "place": "7th",
+          "archetype": "Golgari Midrange",
+          "player": "Boin",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046466"
+        },
+        {
+          "place": "8th",
+          "archetype": "Mono-Black Midrange",
+          "player": "BiggusDoggus",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8046488"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Golgari Midrange",
+          "count": 3
+        },
+        {
+          "archetype": "BRG",
+          "count": 1
+        },
+        {
+          "archetype": "Mono-Black Midrange",
+          "count": 1
+        },
+        {
+          "archetype": "Temur Lessons",
+          "count": 1
+        },
+        {
+          "archetype": "WG",
+          "count": 1
+        },
+        {
+          "archetype": "WU",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "68087",
+      "name": "Pioneer League 2026-11-17",
+      "format": "pioneer",
+      "date": "2026-11-17",
+      "goldfishUrl": "https://www.mtggoldfish.com/tournament/68087",
+      "sourceUrl": "https://www.mtgo.com/decklist/pioneer-league-2026-11-1711353",
+      "top8": [
+        {
+          "place": "5 - 0",
           "archetype": "Mono-Red Prowess",
+          "player": "carabinid",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045037"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Temur Lessons",
+          "player": "darg24",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045553"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Rakdos Midrange",
+          "player": "JMM",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8045373"
+        },
+        {
+          "place": "5 - 0",
+          "archetype": "Boros Land Destruction",
+          "player": "RNAPBP1",
+          "goldfishUrl": "https://www.mtggoldfish.com/deck/8044901"
+        }
+      ],
+      "archetypeBreakdown": [
+        {
+          "archetype": "Boros Land Destruction",
+          "count": 1
+        },
+        {
+          "archetype": "Mono-Red Prowess",
+          "count": 1
+        },
+        {
+          "archetype": "Rakdos Midrange",
+          "count": 1
+        },
+        {
+          "archetype": "Temur Lessons",
           "count": 1
         }
       ]
